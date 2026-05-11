@@ -126,12 +126,14 @@
 }
 
 .btn_top {
+  display: none;
   width: 46px;
   height: 46px;
   border: 1px solid transparent;
-  background-color: #0F3F71;
-  border-radius: 10px;
-  overflow: hidden;
+  background-color: transparent;
+  box-shadow: none;
+  padding: 0;
+  bottom: 200px;
 }
 
 //.load_more {

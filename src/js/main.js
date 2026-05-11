@@ -350,6 +350,34 @@ if (tabs) {
     });
 }
 
+// =========================
+// BTN TO TOP
+// =========================
+const btnToTop = document.getElementById("scrollToTopBtn");
+
+window.onscroll = function() {
+    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+       btnToTop.style.display = "block";
+    } else {
+        btnToTop.style.display = "none";
+    }
+};
+
+// Прокручування через метод Lenis
+btnToTop.addEventListener("click", function() {
+    lenis.scrollTo(0, {
+        // Тривалість анімації у секундах.
+        // Збільшуйте це число (наприклад, до 2 або 2.5), щоб зробити скрол повільнішим.
+        duration: 3.2,
+
+        // Функція згладжування (easing).
+        // Обернена кубічна функція дає дуже м'який старт і плавне сповільнення в кінці.
+        easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+
+        // Переконуємося, що анімація увімкнена
+        immediate: false
+    });
+});
 /**
  * Універсальна функція для створення анімації появи тексту по рядках
  * @param {HTMLElement|NodeList|Array|String} targets - Елементи з текстом (селектор або DOM-вузли)
@@ -416,89 +444,7 @@ function initScrollReveals() {
 // =========================
 //SECTIONS ANIM GSAP
 // =========================
-// function initHeroAnimation() {
-//     // HERO ELEMENTS
-//     const heroImage = document.querySelector(".section-banner__img");
-//     const heroImageInner = document.querySelector(".section-banner__img img");
-//     const header = document.querySelector(".header");
-//
-//     const revealElements = document.querySelectorAll('[data-reveal="lines"]');
-//     const reveals = [];
-//     revealElements.forEach((element) => {
-//         const split = new SplitText(element, {
-//             type: "lines",
-//             linesClass: "reveal-line"
-//         });
-//
-//         split.lines.forEach((line) => {
-//             const wrapper = document.createElement("div");
-//             wrapper.classList.add("reveal-mask");
-//
-//             line.parentNode.insertBefore(wrapper, line);
-//             wrapper.appendChild(line);
-//         });
-//
-//         // Сховане через CSS повертаємо у видимість перед стартом анімації ліній
-//         gsap.set(element, {
-//             autoAlpha: 1
-//         });
-//
-//         // Початковий стан для самих рядків задаємо в JS перед анімацією
-//         gsap.set(split.lines, {
-//             yPercent: 110,
-//             opacity: 0.15
-//         });
-//
-//         reveals.push({
-//             element,
-//             lines: split.lines,
-//             stagger: parseFloat(element.dataset.stagger) || 0.05,
-//             duration: parseFloat(element.dataset.duration) || 1.2,
-//             ease: element.dataset.ease || "expo.out"
-//         });
-//     });
-//
-//     const heroTL = gsap.timeline({
-//         defaults: {
-//             ease: "expo.out"
-//         }
-//     });
-//
-//     // Картинка розгортається (Залишено без змін)
-//     heroTL.fromTo(heroImage,
-//         { clipPath: "inset(50% 50% 50% 50% round 30px)" },
-//         { clipPath: "inset(0% 0% 0% 0% round 30px)", duration: 1.8, ease: "expo.inOut" }
-//     );
-//     heroTL.fromTo(heroImageInner,
-//         { scale: 1.25, opacity: 0.4 },
-//         { scale: 1, opacity: 1, duration: 2.2 },
-//         "<"
-//     );
-//
-//     // MODIFIED: Змінено на .to(), оскільки початковий стан (y: -24, opacity: 0) вже задано в CSS
-//     heroTL.to(header,
-//         {
-//             y: 0,
-//             opacity: 1,
-//             duration: 1.4
-//         },
-//         "-=1.5"
-//     );
-//
-//     // MODIFIED: Змінено на .to(), оскільки початковий стан рядків задано через gsap.set вище
-//     reveals.forEach((reveal) => {
-//         heroTL.to(reveal.lines,
-//             {
-//                 yPercent: 0,
-//                 opacity: 1,
-//                 duration: reveal.duration,
-//                 stagger: reveal.stagger,
-//                 ease: reveal.ease
-//             },
-//             "-=1.4"
-//         );
-//     });
-// }
+
 function initHeroAnimation() {
     // HERO ELEMENTS
     const heroImage = document.querySelector(".section-banner__img");
