@@ -473,7 +473,7 @@ strong {
 
 .tabs__content {
   position: relative;
-  min-height: 496px;
+  min-height: 516px;
   width: 76%;
 }
 
@@ -1295,7 +1295,7 @@ form textarea {
   backdrop-filter: blur(20px);
   background: linear-gradient(90deg, #e3ecf8 0%, #edf3f6 50%, #eff7f2 100%);
   border-radius: 30px;
-  padding: 128px 50px 20px 50px;
+  padding: 68px 50px;
   font-size: 18px;
   line-height: 1.5;
 }
