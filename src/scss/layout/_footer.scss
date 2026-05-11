@@ -1,0 +1,192 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.footer {
+  position: relative;
+  background-color: #0F3F71;
+  padding-top: 110px;
+  padding-bottom: 58px;
+  margin-top: -30px;
+  color: #FFFFFF;
+  z-index: 1;
+
+  &__grid {
+    display: grid;
+    grid-template-columns: repeat(8, 1fr);
+    grid-template-rows: auto auto;
+    gap: 0;
+  }
+
+  &__logo {
+    grid-area: 1 / 1 / 3 / 3;
+  }
+
+  &__top-row {
+    grid-area: 1 / 3 / 2 / 9;
+    justify-content: space-between;
+    .footer__part{
+      width: auto;
+    }
+  }
+
+  &__bottom-row {
+    grid-area: 2 / 3 / 3 / 9;
+    padding-top: 110px;
+    font-size: 18px;
+  }
+
+  &__part {
+    padding-left: 20px;
+    width: 33.33%;
+  }
+
+  &__logo {
+    display: inline-block;
+    max-width: 260px;
+    width: 100%;
+  }
+
+  &__logo-decor {
+    display: inline-block;
+    margin-bottom: 32px;
+    max-width: 256px;
+    width: 100%;
+    height: auto;
+  }
+
+  &__menu {
+
+  }
+
+  &__menu-item {
+    margin-bottom: 18px;
+    font-weight: 300;
+    font-size: 20px;
+    line-height: 1.2;
+
+    a {
+      display: inline-block;
+    }
+  }
+  //.btn_submit {
+  //  .btn__icon{
+  //    margin-left: 2px;
+  //  }
+  //  .btn__text-block {
+  //    display: none;
+  //  }
+  //}
+
+
+
+  /* Базові стилі для контейнера іконки (щоб ховер спрацьовував на всю кнопку) */
+  //.btn_submit {
+  //  background: transparent;
+  //  border: none;
+  //  cursor: pointer;
+  //  padding: 0;
+  //}
+  //
+  ///* Налаштування початкового стану та швидкості анімації */
+  //.btn__svg-path {
+  //  transition: d 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+  //}
+  //
+  ///* Ефект ховеру: лівий нижній кут стає рівним (вертикальним),
+  //   а правий верхній випирає та отримує плавний скіс */
+  //.btn_submit:hover .btn__svg-path {
+  //  d: path("M10 0.5H32.835C37.1684 0.699243 40.8471 3.81546 41.7216 8.10059L47.6405 37.1006C48.8422 42.9893 44.342 48.5 38.332 48.5H10C4.7533 48.5 0.5 44.2467 0.5 39V10C0.5 4.7533 4.7533 0.5 10 0.5Z");
+  //}
+  //
+  ///* Додатково: легкий ефект для стрілочки при ховері (за бажанням) */
+  //.btn__icon svg path:last-of-type {
+  //  transition: transform 0.8s ease;
+  //  transform-origin: center;
+  //}
+  //.btn_submit:hover .btn__icon svg path:last-of-type {
+  //  transform: translateX(2px);
+  //}
+
+}
+
+.form_footer {
+  color: #FFFFFF;
+  display: flex;
+
+  input, label {
+    display: block;
+  }
+
+  input {
+    padding: 13px 10px 14px 23px;
+    margin-bottom: 0;
+    border-radius: 10px;
+    margin-right: 10px;
+  }
+
+  ::placeholder {
+    color: rgba(255, 255, 255, .6);
+  }
+
+  .btn__svg-path {
+    transform-origin: center;
+    transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+    opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .path-left {
+    opacity: 1;
+    transform: scaleX(1);
+    transition-delay: 0s;
+  }
+  .path-right {
+    opacity: 0;
+    transform: scaleX(0.88);
+    transition-delay: 0.05s;
+  }
+
+  .btn_submit {
+    min-width: 0;
+    margin-left: 10px;
+    &:hover .btn__svg-path {
+      transition: transform 0.55s cubic-bezier(0.6, -0.28, 0.1, 1.35),
+      opacity 0.35s ease;
+      transition-delay: 0s;
+    }
+  }
+
+  .btn_submit:hover .path-left {
+    opacity: 0;
+    transform: scaleX(0.88);
+  }
+
+  .btn_submit:hover .path-right {
+    opacity: 1;
+    transform: scaleX(1);
+  }
+
+}
+
+@include mixins.respond-to(variables.$xl) {
+
+}
+
+@include mixins.respond-to(variables.$screen-md) {
+
+}
+
+@include mixins.respond-to(variables.$md) {
+
+}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}
+
+@include mixins.respond-to(variables.$xxs) {
+
+}

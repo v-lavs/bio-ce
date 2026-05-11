@@ -1,0 +1,131 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.btn {
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  font-weight: 300;
+  min-width: 225px;
+  font-size: 18px;
+  line-height: 1;
+  padding: 0;
+  border: none;
+
+  background-color: transparent;
+
+  &__inner {
+    display: inline-flex;
+    align-items: center;
+    gap: 0;
+    height: 46px;
+    width: 100%;
+  }
+  &__text-block {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 24px;
+    flex-grow: 1;
+  }
+
+  &__text {
+    position: relative;
+    z-index: 2;
+    font-family: sans-serif;
+    font-size: 18px;
+    font-weight: 500;
+    color: #2A2A2A;
+    white-space: nowrap;
+  }
+
+  .text-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  &__icon {
+    display: inline-flex;
+    width: 51px;
+    height: 46px;
+    position: relative;
+    z-index: 2;
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+  &__icon,
+  &__icon svg,
+  &__text-block,
+  .text-bg {
+    overflow: visible !important;
+  }
+  .text-path-main,
+  .icon-path-main {
+    shape-rendering: geometricPrecision;
+    vector-effect: non-scaling-stroke;
+  }
+
+
+  //
+  //&_outline {
+  //  background-color: transparent;
+  //  border-radius: 5px;
+  //  padding: 14px 69px 15px;
+  //  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
+  //
+  //  &:hover,
+  //  &:focus {
+  //
+  //  }
+  //}
+  //
+  //&_secondary {
+  //  border-radius: 5px;
+  //  padding-left: 60px;
+  //  padding-right: 60px;
+  //
+  //  &:hover,
+  //  &:focus {
+  //
+  //  }
+  //}
+}
+
+//.load_more {
+//  display: inline-block;
+//  width: 67px;
+//  height: 67px;
+//  border-radius: 50%;
+//  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .25);
+//  background-image: url(../assets/img/plus-green.svg);
+//  background-position: center center;
+//  background-repeat: no-repeat;
+//  background-size: 45px 45px;
+//  transition: transform .35s;
+//
+//  &:hover,
+//  &:focus {
+//    transform: scale(1.05);
+//  }
+//}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

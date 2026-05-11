@@ -1,0 +1,109 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.header {
+  position: absolute;
+  top: 60px;
+  left: 0;
+  right: 0;
+  z-index: 2;
+
+  .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__logo {
+    max-width: 323px;
+    height: auto;
+  }
+
+  transform: translateY(-24px);
+  opacity: 0;
+}
+
+
+.header__nav {
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.05);
+
+  backdrop-filter: blur(20px);
+
+  position: relative;
+  display: flex;
+  border: 1px solid variables.$light-blue;
+  background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
+  border-radius: 50px;
+  z-index: 300;
+}
+
+
+.burger {
+  display: none;
+  flex-direction: column;
+  gap: 6px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 350;
+}
+
+.burger__line {
+  display: block;
+  width: 30px;
+  height: 2px;
+  background: white;
+  transition: 0.35s;
+}
+
+.nav-overlay {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
+  backdrop-filter: blur(20px);
+  opacity: 0;
+  pointer-events: none;
+  transition: 0.3s ease;
+  z-index: 100;
+}
+
+.nav-overlay.active {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@include mixins.respond-to(variables.$md) {
+  .burger {
+    display: flex;
+  }
+
+  .nav-active-bg {
+    display: none;
+  }
+
+  .header__nav {
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(100%);
+    width: 80%;
+    height: 100vh;
+    background: #222;
+    flex-direction: column;
+    padding: 100px 40px;
+    border-radius: 0;
+    transition: right 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+  }
+
+  .header__nav.is-open {
+    transform: translateX(0);
+  }
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}
+
+@include mixins.respond-to(variables.$xxs) {
+
+}

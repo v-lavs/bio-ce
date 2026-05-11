@@ -1,0 +1,91 @@
+@use "../../utils/mixins";
+@use "../../utils/variables";
+
+.section-banner {
+  height: 100vh;
+  padding: 18px 16px 0;
+  display: flex;
+  align-items: flex-end;
+  position: relative;
+  color: #fff;
+  background-color: #FFFFFF;
+  margin-bottom: 100px;
+  z-index: 1;
+  .container {
+    position: relative;
+    padding: 0 35px 56px;
+    z-index: 2;
+  }
+
+  &__img {
+    position: absolute;
+    inset: 18px 16px 0;
+    overflow: hidden;
+    z-index: -1;
+    will-change: clip-path;
+    clip-path: inset(50% 50% 50% 50% round 30px);
+    img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      border-radius: 30px;
+      transform: scale(1.25);
+      transform-origin: center;
+      will-change: transform, opacity, filter;
+      backface-visibility: hidden;
+      opacity: 0.4;
+    }
+  }
+
+  &__title {
+    max-width: 832px;
+    width: 100%;
+    display: block;
+    line-height: 1.24;
+    visibility: hidden;
+
+    strong {
+      display: inline-block;
+    }
+  }
+}
+
+/* =========================
+   REVEAL SYSTEM
+========================= */
+
+/* Початковий стан для тексту з лініями (data-reveal) */
+[data-reveal="lines"] {
+  opacity: 0;
+  visibility: hidden;
+}
+/* Захист від смикання ліній SplitText */
+.reveal-mask {
+  overflow: hidden;
+  display: block;
+}
+
+@include mixins.respond-to(variables.$xl) {
+
+}
+
+@include mixins.respond-to(variables.$md) {
+
+}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}
+
+@include mixins.respond-to(variables.$xxs) {
+
+}
+
+@media only screen and (max-width: 360px) {
+
+}

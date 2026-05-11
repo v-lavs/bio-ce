@@ -1,0 +1,75 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.heading {
+
+
+  &_xxl {
+
+  }
+
+  &_xl {
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 1.24;
+  }
+
+  &_lg {
+    font-weight: 500;
+    font-size: 36px;
+    line-height: 1.24;
+  }
+  &_md{
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.24;
+  }
+}
+
+//---------
+
+strong {
+  font-weight: 700;
+}
+
+.text {
+  &_xl {
+    font-size: 32px;
+    line-height: 1.5;
+  }
+
+  &_lg {
+    font-size: 24px;
+    line-height: 1.5;
+  }
+
+  &_md {
+    font-size: 18px;
+    line-height: 1.5;
+  }
+}
+
+@include mixins.respond-to(variables.$xl) {
+
+}
+
+@include mixins.respond-to(variables.$md) {
+
+}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+
+@include mixins.respond-to(variables.$xs) {
+
+}
+
+
+
+
+
+
+
+

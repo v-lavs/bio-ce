@@ -1,0 +1,18 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.page-blog {
+
+}
+
+.article {
+
+}
+
+@include mixins.respond-to(variables.$xl) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

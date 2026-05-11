@@ -1,0 +1,123 @@
+@use "../../utils/mixins";
+@use "../../utils/variables";
+
+.section-contacts {
+  background-color: #FFFFFF;
+  position: relative;
+  border-radius: 0 0 30px 30px;
+  overflow: hidden;
+  z-index: 2;
+  .heading_lg {
+    margin-bottom: 40px;
+    color: #990B6E;
+    text-align: center;
+  }
+
+  .fieldboxes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .form-group {
+    width: calc(50% - 4px);
+
+    &_big {
+      width: 100%;
+    }
+  }
+
+  .logobox {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    padding-left: 56px;
+    padding-right: 12px;
+    padding-top: 54px;
+  }
+
+  .form__footer {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 44px;
+    padding-bottom: 30px;
+  }
+}
+
+.contacts-list {
+  display: flex;
+  backdrop-filter: blur(20px);
+  background: linear-gradient(90deg, #e3ecf8 0%, #edf3f6 50%, #eff7f2 100%);
+  border-radius: 30px;
+  gap: 32px;
+  padding: 55px 70px;
+  color: #2980E5;
+  margin-bottom: 40px;
+
+  &__title {
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1.38;
+  }
+}
+
+.contacts-list__item {
+  background-color: #FFFFFF;
+  border-radius: 24px;
+  font-size: 18px;
+  line-height: 1.5;
+  padding: 8px 22px 8px 88px;
+  position: relative;
+  flex-grow: 1;
+
+  &:before {
+    position: absolute;
+    content: '';
+    width: 40px;
+    height: 40px;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+    left: 32px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  &.phone:before {
+    background-image: url(../assets/img/phone.svg);
+  }
+
+  &.address:before,
+  &.email:before {
+    background-image: url(../assets/img/email.svg);
+  }
+}
+
+.inner-form-contact {
+  color: #0071FF;
+  backdrop-filter: blur(20px);
+  background: linear-gradient(90deg, #e3ecf8 0%, #edf3f6 50%, #eff7f2 100%);
+  border-radius: 30px;
+  padding: 128px 50px 20px 50px;
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.form_contact {
+  textarea {
+    height: 262px;
+  }
+}
+
+.form__logo {
+  display: block;
+  max-width: 190px;
+  margin-bottom: 72px;
+}
+
+.form__logo-decor {
+  display: block;
+  width: 100%;
+  height: auto;
+}

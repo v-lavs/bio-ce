@@ -1,0 +1,252 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+html, body {
+  height: auto;
+  min-height: 100%;
+}
+
+html {
+  scroll-behavior: auto !important;
+}
+
+body {
+  font: 300 16px variables.$main-font;
+  height: 100%;
+  line-height: 1.5;
+  letter-spacing: 0;
+}
+
+body.menu-open {
+  overflow: hidden;
+  padding-right: var(--scrollbar-width);
+}
+
+.wrapper {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.main {
+  flex: 1 1 auto;
+}
+
+.d-flex {
+  display: flex;
+}
+
+.section {
+  padding-bottom: 100px;
+
+  &__title {
+    position: relative;
+    z-index: 1;
+
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 120%;
+    color: #8e0e61;
+
+    padding: 14px 12px 14px 18px;
+    white-space: nowrap;
+
+    display: inline-block;
+    width: max-content;
+    max-width: calc(100% - 30px);
+    border: 1px solid transparent;
+    border-radius: 10px 0 0 10px;
+    background: linear-gradient(#fff, #fff) padding-box,
+    linear-gradient(180deg, #056AFD 0%, #89FBC1 100%) border-box;
+
+    &:before {
+      content: "";
+      position: absolute;
+      top: -1px;
+      bottom: -1px;
+      right: -16px;
+      width: 25px;
+      z-index: 2;
+      background-image: url("../assets/img/arrow-corner-title.svg");
+      background-size: 100% 100%;
+      background-repeat: no-repeat;
+    }
+  }
+
+  &__content {
+    h3 {
+      font-size: 36px;
+      margin-bottom: 42px;
+    }
+
+    h2, h3, h4 {
+      color: #8e0e61;
+      font-weight: 500;
+      line-height: 1.24;
+    }
+  }
+}
+
+.split-layout {
+  display: flex;
+
+  &__col2 {
+    width: 25%;
+  }
+
+  &__col3 {
+    width: 43.30%;
+  }
+
+  &__col5 {
+    width: 57.70%;
+  }
+
+  &__col6 {
+    width: 75%;
+  }
+}
+
+//.dynamic-content {
+//  p {
+//    margin-bottom: 15px;
+//    line-height: 1.1;
+//  }
+//
+//  img {
+//    max-width: 100%;
+//    height: auto;
+//
+//    &.alignleft {
+//      float: left;
+//      margin: 4px 25px 25px 0;
+//    }
+//
+//    &.alignright {
+//      float: right;
+//      margin: 4px 0 25px 25px;
+//    }
+//
+//    &.aligncenter {
+//      display: block;
+//      margin: 50px auto;
+//      clear: both;
+//    }
+//
+//    &.alignfull {
+//      width: 100%;
+//      height: auto;
+//      display: block;
+//      margin: 50px 0;
+//    }
+//  }
+//
+//
+//  h1, h2,
+//  h3, h4, h5, h6 {
+//  }
+//
+//  h3, h4, h5, h6 {
+//
+//  }
+//
+//  h1, h2 {
+//
+//  }
+//
+//  h3 {
+//
+//  }
+//
+//  h4 {
+//
+//  }
+//
+//  ul, ol {
+//
+//  }
+//
+//  ol {
+//    counter-reset: list;
+//
+//    li {
+//      overflow-wrap: anywhere;
+//      position: relative;
+//      list-style: inherit;
+//      padding-left: 35px;
+//
+//      &:before {
+//        position: absolute;
+//        top: 0;
+//        left: 8px;
+//        counter-increment: list;
+//        content: counter(list) '.';
+//      }
+//    }
+//  }
+//
+//  ul {
+//    li {
+//      &:before {
+//        content: ".";
+//        display: block;
+//        position: absolute;
+//        left: 17px;
+//        top: -8px;
+//      }
+//    }
+//  }
+//
+//  li {
+//    position: relative;
+//    padding-left: 34px;
+//    margin-bottom: 5px;
+//  }
+//
+//  a {
+//
+//    &:hover,
+//    &:focus {
+//
+//    }
+//  }
+//}
+
+/* =========================
+   REVEAL SYSTEM
+========================= */
+
+.reveal-mask {
+  overflow: hidden;
+  //padding-bottom: 0.12em;
+  //margin-bottom: -0.12em;
+}
+
+.reveal-line {
+  will-change: transform, opacity;
+  backface-visibility: hidden;
+}
+
+@include mixins.respond-to(variables.$xl) {
+
+}
+
+@include mixins.respond-to(variables.$lg) {
+
+}
+
+@include mixins.respond-to(variables.$md) {
+
+}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}
+
+@include mixins.respond-to(variables.$xxs) {
+
+}

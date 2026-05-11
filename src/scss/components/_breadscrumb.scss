@@ -1,0 +1,66 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.breadcrumb {
+  padding: 50px 0;
+
+  ul {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  &__item {
+    position: relative;
+    margin-right: 20px;
+    padding-right: 37px;
+    font-weight: 200;
+    font-size: 20px;
+    line-height: 1.2;
+    letter-spacing: 0;
+  
+    white-space: nowrap;
+
+    a {
+      display: inline-block;
+    }
+
+    &:before {
+      position: absolute;
+      content: '/';
+      display: block;
+      right: 0;
+    }
+
+    &:last-child {
+      padding-right: 0;
+
+      &:before {
+        display: none;
+      }
+    }
+
+    &:last-child:after {
+      position: absolute;
+      display: block;
+      content: '';
+      height: 1px;
+      width: 100%;
+      left: 0;
+      right: 0;
+      bottom: -6px;
+      z-index: 1;
+    }
+  }
+}
+
+@include mixins.respond-to(variables.$screen-md) {
+ 
+}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

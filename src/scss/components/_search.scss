@@ -1,0 +1,76 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.header__search {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -30px;
+  height: auto;
+  background-color: #FFFFFF;
+  padding: 100px 64px;
+  box-shadow: 0 2px 7.6px 0 rgba(0, 0, 0, .25);
+  z-index: 10;
+  opacity: 0;
+  transform: translateY(-100%);
+  transition: .35s ease;
+
+  &.active {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  input {
+    width: 100%;
+  }
+
+  .input-group {
+    display: flex;
+  }
+}
+
+.btn_search,
+.search_open {
+  border: none;
+  width: 32px;
+  height: 32px;
+  padding: 2px;
+  cursor: pointer;
+}
+
+.search_open {
+  background-color: transparent;
+  transition: .35s;
+
+  &:hover {
+    
+  }
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.btn_search {
+  height: 60px;
+  margin-left: 25px;
+  width: 60px;
+  flex-shrink: 0;
+  transition: .35s;
+
+  &:hover {
+    
+  }
+  svg {
+    width: 100%;
+    height: auto;
+  }
+}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

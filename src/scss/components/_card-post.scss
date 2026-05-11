@@ -1,0 +1,28 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.card {
+
+}
+
+.card-post {
+  &__thumb {
+
+  }
+
+  &__title {
+
+  }
+
+  &__body {
+
+  }
+
+  &__link {
+
+  }
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

@@ -1,0 +1,21 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.container{
+  width: 100%;
+  max-width: 1440px;
+  padding: 0 50px;
+  margin: 0 auto;
+
+  @include mixins.respond-to(variables.$lg){
+    
+  }
+
+  @include mixins.respond-to(variables.$sm){
+  
+  }
+
+  @media screen and (max-width: 340px){
+  
+  }
+}

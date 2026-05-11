@@ -1,0 +1,60 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.video-wrap {
+  position: relative;
+  padding-top: 56.25%;
+
+  video {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.btn_play {
+  position: absolute;
+  background-color: rgba(255, 255, 255, .8);
+  border: none;
+  width: 10%;
+  padding-top: 9.92%;
+  border-radius: 50%;
+  cursor: pointer;
+  left: 50%;
+  top: 32%;
+  transform: translateX(-50%);
+  z-index: 1;
+
+  &:before {
+    content: "";
+    position: absolute;
+    width: 25%;
+    height: 27%;
+    background-image: url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20viewBox%3D%270%200%2030%2034%27%3E%3Cpath%20d%3D%27M29.2665%2016.897L0%2033.7941L0%200L29.2665%2016.897Z%27%20fill%3D%27currentColor%27/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: inherit;
+    margin-left: 4%;
+    z-index: 1;
+  }
+}
+
+.section-video {
+  padding-top: 0;
+}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

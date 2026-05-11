@@ -1,0 +1,45 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+//swiper pagination-bullets
+.swiper-pagination.swiper-pagination-bullets{
+  display: none;
+  justify-content: center;
+  gap: 3px;
+  bottom: 0;
+}
+
+.swiper-pagination-bullet {
+  width: 50px;
+  height: 2px;
+  background-color: #E4E4E4;
+  border-radius: 2px;
+  opacity: 1;
+  transition: background-color 0.3s ease;
+}
+
+.swiper-pagination-bullet-active {
+  background-color: #7EA68C;
+}
+.swiper-button-next svg, .swiper-button-prev svg {
+  display: none;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  color: #5B8869;
+}
+
+.swiper-button-next:after, .swiper-button-prev:after {
+  font-size: 30px;
+  font-weight: 600;
+}
+
+@include mixins.respond-to(variables.$xs) {
+  .swiper-button-next,
+  .swiper-button-prev {
+    display: none;
+  }
+  .swiper-pagination.swiper-pagination-bullets{
+    display: flex!important;
+  }
+}

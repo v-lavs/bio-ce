@@ -1,0 +1,90 @@
+@use "../../utils/mixins";
+@use "../../utils/variables";
+
+.advantages-section{
+  background-repeat: no-repeat!important;
+  background-position: center;
+  background-size: cover;
+  min-height: 737px;
+  padding: 76px 0;
+}
+/* Головний контейнер обмежуємо по ширині під 3 слайди, щоб бокові картки гарно ставали по краях сайту */
+.advantages-swiper {
+  width: 100%;
+  max-width: 1240px; /* Сума ширин трьох карток + відступи. Підберіть під свій макет */
+  margin: 0 auto;
+  padding: 60px 0;
+  overflow: visible; /* Дозволяє контенту виходити за межі, якщо екран вузький */
+}
+
+/* Обгортка слайда Swiper (Нерухома база, яка тримає симетрію) */
+.advantages-swiper .swiper-slide {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  /* Видаляємо всі CSS-переходи з самої коробки Swiper, щоб не було мікрострибків */
+  transition: none !important;
+}
+
+/* БАЗОВИЙ СТАН: Менші бокові картки (Пропорції з вашого першого референсу) */
+.advantages-swiper .swiper-slide-inner {
+  width: 280px;   /* Ширина бокових карток */
+  height: 380px;  /* Висота бокових карток */
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 24px;
+  backdrop-filter: blur(12px);
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+  transform: scale(1); /* Жодних косих нахилів rotateY */
+
+  /* Плавне, масляне розширення у всі боки одночасно */
+  transition: width 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+  height 0.75s cubic-bezier(0.25, 1, 0.5, 1),
+  background 0.5s ease;
+
+  will-change: width, height;
+}
+
+/* Опис тексту на бокових картах повністю схований */
+.card-description {
+  max-height: 0;
+  opacity: 0;
+  overflow: hidden;
+  margin-top: 0;
+  font-size: 15px;
+  line-height: 1.5;
+  color: rgba(255, 255, 255, 0.7);
+  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
+}
+
+/* ========================================================
+   ЦЕНТРАЛЬНИЙ АКТИВНИЙ СЛАЙД — ДЗЕРКАЛЬНЕ СИМЕТРИЧНЕ РОЗШИРЕННЯ
+   ======================================================== */
+.advantages-swiper .swiper-slide-active {
+  z-index: 10; /* Виносимо велику картку на передній план */
+}
+
+.advantages-swiper .swiper-slide-active .swiper-slide-inner {
+  width: 460px;   /* Нова фізична ширина центральної картки */
+  height: 440px;  /* Нова фізична висота центральної картки */
+  background: rgba(255, 255, 255, 0.14);
+  border-color: rgba(255, 255, 255, 0.25);
+  justify-content: center; /* Контент стає по центру картки */
+}
+
+/* Мягке розгортання тексту опису строго по центру із затримкою */
+.advantages-swiper .swiper-slide-active .card-description {
+  max-height: 150px;
+  opacity: 1;
+  margin-top: 14px;
+  /* Текст випливає, коли картка повністю розширилася */
+  transition: max-height 0.75s cubic-bezier(0.25, 1, 0.5, 1) 0.15s,
+  opacity 0.5s ease 0.25s;
+}

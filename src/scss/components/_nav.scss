@@ -1,0 +1,166 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.menu {
+  display: flex;
+  list-style: none;
+  z-index: 2;
+  &__item{
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1;
+  }
+}
+
+.menu__link {
+  padding: 20px 25px;
+  color: #FFFFFF;
+  text-decoration: none;
+  display: block;
+  transition: color 0.25s ease, text-shadow 0.25s ease;
+}
+
+.menu__link:hover,
+.menu__link.active {
+  color: #fff;
+  text-shadow:
+          0 0 1.2px currentColor,
+          0 0 1.2px currentColor;
+}
+
+.nav-active-bg {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  border: 1px solid variables.$light-blue;
+  border-radius: 50px;
+  z-index: -1;
+  pointer-events: none;
+
+  will-change: transform, width;
+}
+
+.submenu {
+  position: absolute;
+  transform: translateY(100%);
+  padding: 20px;
+  border-radius: 20px;
+  min-width: 150px;
+  transition: transform 0.35s ease , opacity .3s;
+  opacity: 0;
+  pointer-events: none;
+  border: 1px solid variables.$light-blue;
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(20px);
+  a{
+    display: block;
+  }
+  li{
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #FFFFFF;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
+}
+
+.has-submenu:hover {
+  &:before{
+    transform: translateY(-50%) rotate(180deg);
+  }
+  .submenu {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: all;
+  }
+}
+
+.has-submenu {
+  position: relative;
+}
+
+.has-submenu .menu__link{
+  padding-right: 32px;
+}
+
+.arrow {
+  display: none;
+}
+
+.has-submenu:before {
+  position: absolute;
+  content: url('data:image/svg+xml,<svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.397766 0.427124L3.77309 3.80245L7.71097 0.427124" stroke="white" stroke-width="1.12511"/></svg>');
+  display: block;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transform-origin: center;
+  transition: .35s;
+  font-size: 10px;
+  z-index: 1;
+
+}
+
+
+@include mixins.respond-to(variables.$screen-md) {
+
+}
+
+@include mixins.respond-to(variables.$md) {
+  .menu {
+    flex-direction: column;
+    width: 100%;
+    gap: 20px;
+  }
+
+  .menu__link {
+    font-size: 24px;
+    padding: 0;
+  }
+
+  .submenu {
+    opacity: 0;
+    transform: translateY(-10px);
+    pointer-events: none;
+    visibility: hidden;
+    transition: 0.3s ease;
+  }
+
+  .menu__item.is-open .submenu {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+    visibility: visible;
+    position: static;
+  }
+
+  .arrow {
+    display: inline-block;
+    margin-left: 10px;
+    cursor: pointer;
+    position: absolute;
+    right: 0;
+    top: 4px;
+    transform-origin: center;
+    z-index: -1;
+    transition: 0.35s;
+  }
+  .menu__item.is-open .arrow {
+    transform: rotate(180deg);
+
+  }
+  .has-submenu:hover .submenu {
+    opacity: initial;
+    transform: initial;
+  }
+  .has-submenu:before {
+    display: none;
+  }
+}
+@include mixins.respond-to(variables.$xs) {
+ 
+}

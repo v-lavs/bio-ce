@@ -1,0 +1,85 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+#modal-calendar {
+  padding: 0;
+  border: none;
+  border-radius: 16px;
+  background: white;
+  max-width: 480px;
+  width: 90vw;
+
+  animation: slideDown 0.35s ease;
+
+  .month-block {
+    width: 420px;
+    margin-bottom: 0;
+    &:before,&:after{
+      display: none;
+    }
+    &:first-child {
+      margin-left: 0;
+    }
+  }
+}
+
+#modal-calendar[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+#modal-calendar::backdrop {
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(6px);
+  transition: 0.3s ease;
+}
+
+.dialog-content {
+  padding: 20px;
+}
+
+.close-btn {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.close-btn::before,
+.close-btn::after {
+  content: "";
+  position: absolute;
+  width: 20px;
+  height: 2px;
+  background: #000;
+  left: 2px;
+  top: 11px;
+}
+
+.close-btn::before {
+  transform: rotate(45deg);
+}
+
+.close-btn::after {
+  transform: rotate(-45deg);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

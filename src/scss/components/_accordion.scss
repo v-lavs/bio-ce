@@ -1,0 +1,85 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.accordion{
+  width: 100%;
+  counter-reset: accordion-counter;
+  &__item{
+    border-bottom: 1px solid rgba(216, 216, 216, 0.4);
+    margin-bottom: 44px;
+    counter-increment: accordion-counter;
+    position: relative;
+    &:before{
+      position: absolute;
+      content: counter(accordion-counter, decimal-leading-zero) ".";
+      left: 0;
+      top: 6px;
+      font-weight: 400;
+      font-size: 40px;
+      line-height: 1;
+      color: #C9CBBD;
+    }
+    &:last-child{
+      margin-bottom: 0;
+    }
+    &.active{
+      .accordion__item-display {
+        max-height: 1500px;
+        transition: max-height 1.2s ease;
+        will-change: max-height;
+        overflow: hidden
+      }
+      .plus-vertical {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  &__tab-container {
+    display: flex;
+    padding: 0 120px 32px 77px;
+    position: relative;
+    min-height: 100px;
+  }
+  &__item-display{
+    max-height: 0;
+    padding: 0;
+    overflow: hidden;
+    transition: max-height 1.2s ease;
+    will-change: max-height;
+  }
+  &__content-icon{
+    width: 78px;
+    height: 85px;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin: 0 auto;
+  }
+  .split-layout{
+    align-items: center;
+    padding: 73px 0 95px;
+  }
+  &__caret{
+    position: absolute;
+    right: 60px;
+    top: 12px;
+    width: 40px;
+    height: auto;
+    svg{
+      display: block;
+      width: 100%;
+    }
+  }
+}
+.plus-vertical,
+.plus-horizontal {
+  transform-origin: center;
+  transition: .8s ease;
+}
+@include mixins.respond-to(variables.$xl) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

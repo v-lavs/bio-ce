@@ -1,0 +1,75 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+.tabs {
+  &__nav {
+    position: relative;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    padding-bottom: 26px;
+  }
+
+  &-nav__link {
+    display: inline-block;
+    padding-top: 24px;
+    padding-bottom: 22px;
+    width: 50%;
+    text-align: left;
+    border: none;
+    border-bottom: 1px solid #A2CCFF;
+    color: rgba(153, 11, 110, 0.29);
+    cursor: pointer;
+    transition: color .35s ease;
+    background-color: transparent;
+    &.active {
+      color: #990B6E;
+    }
+  }
+  &__content{
+    position: relative;
+    min-height: 496px;
+    width: 76%;
+  }
+}
+.tab-content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition:
+          opacity .8s ease,
+          visibility .35s;
+
+  &.active {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition:
+            opacity 1.6s;
+  }
+}
+
+.tab-active-border {
+  position: absolute;
+  left: 0;
+  bottom: 26px;
+  height: 1px;
+  width: 0;
+  background-color: #006BF0;
+  z-index: 1;
+  will-change: transform, width;
+  transition: transform .8s ease, width .35s ease;
+}
+
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}

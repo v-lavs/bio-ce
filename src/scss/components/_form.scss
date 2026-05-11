@@ -1,0 +1,119 @@
+@use "../utils/mixins";
+@use "../utils/variables";
+
+form {
+  font-weight: 300;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #0071FF;
+
+  .label {
+    color: #0071FF;
+    display: inline-block;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 1.38;
+    padding: 4px 8px;
+  }
+
+  input {
+    display: block;
+    padding: 17px 10px 17px 30px;
+    line-height: 1.1;
+    border: 1.05px solid #A2CCFF;
+    border-radius: 32px;
+    background-color: transparent;
+    margin-bottom: 8px;
+    width: 100%;
+  }
+
+  textarea {
+    padding: 28px 30px;
+    border: 1.05px solid #A2CCFF;
+    border-radius: 32px;
+    background-color: transparent;
+    display: block;
+    width: 100%;
+  }
+}
+
+::placeholder {
+  color: rgba(0, 113, 255, 0.5);
+}
+
+.btn_submit {
+
+}
+
+
+//CUSTOM CHECKBOX
+//.checkbox-wrap {
+//  position: relative;
+//  display: inline-block;
+//  cursor: pointer;
+//  user-select: none;
+//  padding-left: 55px;
+//  color: variables.$black;
+//  font-size: 22px;
+//  line-height: 1.1;
+//  max-width: 836px;
+//  width: 100%;
+//
+//  input {
+//    position: absolute;
+//    opacity: 0;
+//    pointer-events: none;
+//  }
+//
+//  input:checked + .checkmark {
+//    background: variables.$green-100;
+//  }
+//
+//  input:checked + .checkmark::after {
+//    opacity: 1;
+//  }
+//}
+//
+//.checkmark {
+//  width: 33px;
+//  height: 33px;
+//  border: 1px solid variables.$green-100;
+//  display: inline-block;
+//  position: absolute;
+//  left: 0;
+//  top: 0;
+//
+//  &:after {
+//    content: '';
+//    position: absolute;
+//    left: 50%;
+//    top: 50%;
+//    width: 7px;
+//    height: 18px;
+//    border: solid white;
+//    border-width: 0 2px 2px 0;
+//    transform: translate(-50%, -50%) rotate(45deg);
+//    opacity: 0;
+//    transition: opacity 0.2s ease;
+//  }
+//}
+
+@include mixins.respond-to(variables.$xl) {
+
+}
+
+@include mixins.respond-to(variables.$md) {
+
+}
+
+@include mixins.respond-to(variables.$sm) {
+
+}
+
+@include mixins.respond-to(variables.$xs) {
+
+}
+
+@include mixins.respond-to(variables.$xxs) {
+
+}
