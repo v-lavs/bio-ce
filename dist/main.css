@@ -342,6 +342,39 @@ strong {
   vector-effect: non-scaling-stroke;
 }
 
+.btn_call,
+.btn_top {
+  position: fixed;
+  right: 50px;
+  z-index: 600;
+}
+
+.btn_call img,
+.btn_call svg,
+.btn_top img,
+.btn_top svg {
+  display: inline-block;
+  width: 100%;
+  height: auto;
+}
+
+.btn_call {
+  bottom: 67px;
+  display: inline-block;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
+.btn_top {
+  width: 46px;
+  height: 46px;
+  border: 1px solid transparent;
+  background-color: #0F3F71;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
 .menu {
   display: flex;
   list-style: none;
@@ -365,7 +398,6 @@ strong {
 .menu__link:hover,
 .menu__link.active {
   color: #fff;
-  text-shadow: 0 0 1.2px currentColor, 0 0 1.2px currentColor;
 }
 
 .nav-active-bg {
