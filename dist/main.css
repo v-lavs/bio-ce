@@ -342,39 +342,22 @@ strong {
   vector-effect: non-scaling-stroke;
 }
 
-.btn_call,
-.btn_top {
-  position: fixed;
-  right: 50px;
-  z-index: 600;
-}
-
-.btn_call img,
-.btn_call svg,
-.btn_top img,
-.btn_top svg {
-  display: inline-block;
-  width: 100%;
-  height: auto;
-}
-
 .btn_call {
   bottom: 67px;
   display: inline-block;
   width: 75px;
   height: 75px;
   border-radius: 50%;
+  position: fixed;
+  right: 50px;
+  z-index: 600;
 }
 
-.btn_top {
-  display: none;
-  width: 46px;
-  height: 46px;
-  border: 1px solid transparent;
-  background-color: transparent;
-  box-shadow: none;
-  padding: 0;
-  bottom: 200px;
+.btn_call img,
+.btn_call svg {
+  display: inline-block;
+  width: 100%;
+  height: auto;
 }
 
 .menu {
@@ -881,7 +864,7 @@ form textarea {
 
 .section-banner {
   height: 100vh;
-  padding: 18px 16px 0;
+  padding: 18px 16px;
   display: flex;
   align-items: flex-end;
   position: relative;
@@ -899,7 +882,7 @@ form textarea {
 
 .section-banner__img {
   position: absolute;
-  inset: 18px 16px 0;
+  inset: 18px 16px;
   overflow: hidden;
   z-index: -1;
   will-change: clip-path;

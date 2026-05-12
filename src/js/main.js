@@ -426,6 +426,7 @@ function initScrollReveals() {
         });
     });
 }
+
 // =========================
 //SECTIONS ANIM GSAP
 // =========================
