@@ -104,8 +104,12 @@
   //}
 }
 
-.btn_call,
-.btn_top {
+.btn_call{
+  bottom: 67px;
+  display: inline-block;
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
   position: fixed;
   right: 50px;
   z-index: 600;
@@ -115,25 +119,6 @@
     width: 100%;
     height: auto;
   }
-}
-
-.btn_call {
-  bottom: 67px;
-  display: inline-block;
-  width: 75px;
-  height: 75px;
-  border-radius: 50%;
-}
-
-.btn_top {
-  display: none;
-  width: 46px;
-  height: 46px;
-  border: 1px solid transparent;
-  background-color: transparent;
-  box-shadow: none;
-  padding: 0;
-  bottom: 200px;
 }
 
 //.load_more {
