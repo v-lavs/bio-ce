@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>fin gsap center slide resp </title>
+</head>
+<body>
+<style>
+    :root {
+        --gap: 43px;
+    }
+
+    body {
+        background: #090d1a;
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: system-ui, sans-serif;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .slider-viewport {
+        width: 100%;
+        max-width: 1207px;
+        height: 540px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        box-sizing: border-box;
+
+    }
+
+    .slider-track {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        position: relative;
+        height: 400px;
+        width: max-content;
+        touch-action: pan-y;
+    }
+
+    .slide {
+        flex-shrink: 0;
+        width: 287px; /* Базовий розмір, JS сам змінить його плавно */
+        height: 323px;
+        background: #121829;
+        border: 1px solid #FFFFFF;
+        border-radius: 24px;
+        box-sizing: border-box;
+        cursor: pointer;
+        overflow: hidden;
+    }
+
+    /* ЗМІНИ ТІЛЬКИ ДЛЯ ТАБЛЕТА ТА МОБІЛКИ */
+    @media (max-width: 1023px) {
+        .slider-viewport {
+
+            padding: 0 20px; /* Картки не липнуть до екрану */
+        }
+        .slider-track {
+            gap: 20px !important; /* Фіксований відступ для адаптиву */
+        }
+        .slide {
+            /* Розрахунок під 2 слайди в ряд мінус відступ */
+            width: calc((100vw - 40px - 20px) / 2) !important;
+            max-width: 480px;
+            height: 340px !important;
+        }
+    }
+
+    @media (max-width: 600px) {
+        .slide {
+            /* На мобілці рівно 1 слайд на ширину екрану */
+            width: calc(100vw - 40px) !important;
+            max-width: 100%;
+            height: 320px !important;
+        }
+    }
+
+
+
+
+    /* Решта ваших стилів (.slide-inner, .bottom-controls) залишаються без змін */
+
+    .slide-inner {
+        width: 100%;
+        height: 100%;
+        padding: 32px;
+        box-sizing: border-box;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .icon {
+        font-size: 2rem;
+        color: #ff3366;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        color: #fff;
+        margin: 0;
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+
+    .description-wrap {
+        overflow: hidden;
+        height: 0;
+        opacity: 0;
+    }
+
+    .description {
+        color: rgba(255, 255, 255, 0.6);
+        font-size: 0.95rem;
+        line-height: 1.6;
+        margin: 16px 0 0 0;
+    }
+
+    .bottom-controls {
+        width: 100%;
+        margin-top: auto;
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 50px;
+    }
+
+    .slider-line-wrapper {
+        position: absolute;
+        left: 0;
+        right: 120px;
+        height: 2px;
+        z-index: 1;
+    }
+
+    .slider-line-bg {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    .progress-bar-fill {
+        position: absolute;
+        left: 0;
+        top: 0;
+        height: 100%;
+        width: 0;
+        background: linear-gradient(90deg, #ff3366, #ff6699);
+    }
+
+    .slider-nav {
+        position: relative;
+        z-index: 2;
+        background: #090d1a;
+        padding-left: 20px;
+        margin-left: auto;
+        display: flex;
+        gap: 10px;
+    }
+
+    .nav-btn {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        color: #fff;
+        border-radius: 8px;
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+        font-size: 1.1rem;
+        transition: all 0.3s;
+    }
+
+    .nav-btn:hover {
+        background: rgba(255, 255, 255, 0.1);
+    }
+    /* СТИЛІ ДЛЯ РЕЖИМУ ТАБЛЕТ/МОБІЛКА (менше 1024px) */
+
+
+    @media (max-width: 600px) {
+        .slide {
+            /* На мобілці — 1 слайд на всю ширину видимого екрану */
+            width: calc(100vw - 40px) !important;
+            height: 320px !important;
+        }
+    }
+</style>
+
+<div class="slider-viewport" id="sliderViewport">
+    <div class="slider-track" id="sliderTrack">
+
+        <!-- Слайд 1 -->
+        <div class="slide" data-index="0">
+            <div class="slide-inner">
+                <div class="icon">⬡</div>
+                <h3 class="title">Стратегія</h3>
+                <div class="description-wrap">
+                    <p class="description">Аналіз ринку, побудова архітектури даних та детальне проектування майбутнього інтерфейсу.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 2 (Стартовий за замовчуванням) -->
+        <div class="slide" data-index="1">
+            <div class="slide-inner">
+                <div class="icon">🕸</div>
+                <h3 class="title">Оптимізація</h3>
+                <div class="description-wrap">
+                    <p class="description">Максимальне масштабування швидкості, інтеграція штучного інтелекту та преміальних візуальних ефектів.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 3 -->
+        <div class="slide" data-index="2">
+            <div class="slide-inner">
+                <div class="icon">✵</div>
+                <h3 class="title">Аналітика</h3>
+                <div class="description-wrap">
+                    <p class="description">Глибокий збір метрик, відстеження конверсії користувачів та автоматизована звітність.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Слайд 4 -->
+        <div class="slide" data-index="3">
+            <div class="slide-inner">
+                <div class="icon">⧉</div>
+                <h3 class="title">Розробка</h3>
+                <div class="description-wrap">
+                    <p class="description">Створення стабільного коду, хмарна інтеграція та безперервне тестування систем.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Керування та Індикатор прогресу -->
+    <div class="bottom-controls">
+        <div class="slider-line-wrapper">
+            <div class="slider-line-bg"></div>
+            <!-- Лінія заповнення прогресу -->
+            <div class="progress-bar-fill" id="progressBar"></div>
+        </div>
+        <div class="slider-nav">
+            <button class="nav-btn" id="prevBtn">←</button>
+            <button class="nav-btn" id="nextBtn">→</button>
+        </div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/Flip.min.js"></script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const track = document.getElementById('sliderTrack');
+        const viewport = document.getElementById('sliderViewport');
+        const prevBtn = document.getElementById('prevBtn');
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progressBar');
+
+        // 1. АВТОМАТИЧНЕ КЛОНУВАННЯ ПЕРШОГО СЛАЙДА ДЛЯ ВУ WP/CMS ОПТИМІЗАЦІЇ
+        const originalSlides = Array.from(track.querySelectorAll('.slide'));
+        const totalSteps = originalSlides.length;
+
+        // Створюємо клон, тільки якщо ми на десктопі
+        let isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+        if (totalSteps > 0 && isDesktop) {
+            const firstSlideClone = originalSlides[0].cloneNode(true);
+            firstSlideClone.classList.add('slide-clone'); // Додаємо мітку для клону
+            track.appendChild(firstSlideClone);
+        }
+
+        let slides = Array.from(track.querySelectorAll('.slide'));
+        let activeIndex = 1;
+
+        // КОНСТАНТИ РОЗМІРІВ З ВАШОГО ТЗ
+        const SIDE_WIDTH = 287;
+        const ACTIVE_WIDTH = 547;
+        const GAP = 43;
+
+        function updateSlider(animate = true) {
+            isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+            if (!slides[activeIndex]) return;
+            const logicalIndex = parseInt(slides[activeIndex].getAttribute('data-index')) || 0;
+
+            // 2. АНІМАЦІЯ ЛІНІЙНОГО ІНДИКАТОРА PROGRESS BAR
+            let progressPercent;
+            if (isDesktop) {
+                progressPercent = ((logicalIndex + 1) / totalSteps) * 100;
+            } else {
+                if (window.innerWidth >= 601 && window.innerWidth < 1024) {
+                    const maxTabletIndex = totalSteps - 2;
+                    const currentProgressIndex = Math.min(activeIndex, maxTabletIndex);
+                    progressPercent = (currentProgressIndex / maxTabletIndex) * 100;
+                } else {
+                    progressPercent = ((activeIndex + 1) / totalSteps) * 100;
+                }
+            }
+
+            gsap.to(progressBar, {
+                width: `${progressPercent}%`,
+                duration: animate ? 0.6 : 0,
+                ease: "power2.out"
+            });
+
+            if (isDesktop) {
+                // ДИНАМІЧНИЙ РОЗРАХУНОК КОЕФІЦІЄНТА СТИСКАННЯ ДЛЯ РЕЗИНОВОГО ДЕСКТОПА
+                const currentViewportWidth = viewport.offsetWidth;
+                let scaleFactor = currentViewportWidth / 1207;
+                if (scaleFactor > 1) scaleFactor = 1;
+
+                const DYNAMIC_SIDE_WIDTH = SIDE_WIDTH * scaleFactor;
+                const DYNAMIC_ACTIVE_WIDTH = ACTIVE_WIDTH * scaleFactor;
+                const DYNAMIC_GAP = GAP * scaleFactor;
+
+                const DYNAMIC_SIDE_HEIGHT = 323 * scaleFactor;
+                const DYNAMIC_ACTIVE_HEIGHT = 376 * scaleFactor;
+
+                // 3. АНІМАЦІЯ ПРОПОРЦІЙ КАРТОК (Розсунення ззаду)
+                slides.forEach((slide, index) => {
+                    const desc = slide.querySelector('.description-wrap');
+
+                    if (index === activeIndex) {
+                        slide.classList.add('active');
+                        gsap.to(slide, {
+                            width: DYNAMIC_ACTIVE_WIDTH,
+                            height: DYNAMIC_ACTIVE_HEIGHT,
+                            duration: animate ? 0.6 : 0,
+                            ease: "power2.out"
+                        });
+                        gsap.to(desc, { height: "auto", opacity: 1, duration: animate ? 0.6 : 0, delay: animate ? 0.2 : 0 });
+                    } else {
+                        slide.classList.remove('active');
+                        gsap.to(slide, {
+                            width: DYNAMIC_SIDE_WIDTH,
+                            height: DYNAMIC_SIDE_HEIGHT,
+                            duration: animate ? 0.6 : 0,
+                            ease: "power2.out"
+                        });
+                        // Примусово вбиваємо будь-яку застряглу анімацію і ховаємо текст
+                        gsap.killTweensOf(desc);
+                        gsap.to(desc, { height: 0, opacity: 0, duration: animate ? 0.3 : 0 });
+                    }
+                });
+
+                // 4. МАТЕМАТИЧНИЙ ЗСУВ ТРЕКУ ДЛЯ ЗАЛІЗОБЕТОННОГО ЦЕНТРУВАННЯ
+                let accumulatedLeft = 0;
+                for (let i = 0; i < activeIndex; i++) {
+                    accumulatedLeft += DYNAMIC_SIDE_WIDTH + DYNAMIC_GAP;
+                }
+
+                const activeSlideCenter = accumulatedLeft + (DYNAMIC_ACTIVE_WIDTH / 2);
+                const containerCenter = currentViewportWidth / 2;
+                const trackX = containerCenter - activeSlideCenter;
+
+                gsap.to(track, {
+                    x: trackX,
+                    gap: `${DYNAMIC_GAP}px`,
+                    duration: animate ? 0.6 : 0,
+                    ease: "power2.out"
+                });
+            } else {
+                // --- ТАБЛЕТ / МОБІЛКА: АНІМАЦІЯ ТЕКСТУ В ЗОНІ ВИДИМОСТІ ---
+
+                // Визначаємо, скільки слайдів зараз видно в ряд
+                const isTablet = window.innerWidth >= 601 && window.innerWidth < 1024;
+
+                slides.forEach((slide, index) => {
+                    slide.classList.remove('active'); // На мобах великий центр не потрібен
+                    const desc = slide.querySelector('.description-wrap');
+
+                    // Умова: чи знаходиться слайд у поточній зоні бачення користувача?
+                    // На мобільці (видимий тільки index === activeIndex)
+                    // На планшеті (видимі два слайди: index === activeIndex ТА сусідній index === activeIndex + 1)
+                    const isVisible = (index === activeIndex) || (isTablet && index === activeIndex + 1);
+
+                    if (isVisible) {
+                        // Якщо слайд увійшов у зону бачення — плавно відкриваємо його текст
+                        gsap.to(desc, {
+                            height: "auto",
+                            opacity: 1,
+                            duration: animate ? 0.5 : 0,
+                            ease: "power2.out",
+                            delay: animate ? 0.1 : 0 // Легка затримка для красивого ефекту після зсуву
+                        });
+                    } else {
+                        // Якщо слайд полетів за край екрана — примусово і тихо ховаємо текст назад
+                        gsap.killTweensOf(desc);
+                        gsap.to(desc, {
+                            height: 0,
+                            opacity: 0,
+                            duration: animate ? 0.3 : 0,
+                            ease: "power2.in"
+                        });
+                    }
+                });
+
+                // Стандартний лінійний зсув треку (Ваш рідний, без змін)
+                const MOBILE_GAP = 20;
+                const currentSlideWidth = slides[activeIndex].offsetWidth;
+                const trackX = -(activeIndex * (currentSlideWidth + MOBILE_GAP));
+
+                gsap.to(track, {
+                    x: trackX,
+                    duration: animate ? 0.8 : 0,
+                    ease: "power2.out"
+                });
+            }
+
+        }
+
+        // --- ПРАВИЛЬНИЙ ТАЧ-СВАЙП ДЛЯ МОБІЛЬНИХ (З ВИПРАВЛЕННЯМ TOUCHES) ---
+        let startX = 0;
+        let currentX = 0;
+        let isDragging = false;
+        let dragStartTrackX = 0;
+        let isRealMove = false;
+
+        // Універсальна функція: правильно дістає координати для миші та для тачу
+        function getX(e) {
+            if (e.type.includes('mouse')) {
+                return e.pageX;
+            }
+            // Для touch подій: якщо touches пустий (наприклад, у touchend), беремо дані з changedTouches
+            const touch = e.touches[0] || e.changedTouches[0];
+            return touch ? touch.pageX : 0;
+        }
+
+        const onDragStart = (e) => {
+            if (e.type.includes('mouse') && e.button !== 0) return; // Ігнор правої кнопки
+            isDragging = true;
+            isRealMove = false;
+            startX = getX(e);
+            currentX = startX;
+            dragStartTrackX = gsap.getProperty(track, "x");
+        };
+
+        const onDragMove = (e) => {
+            if (!isDragging) return;
+            currentX = getX(e);
+            const diff = currentX - startX;
+
+            if (Math.abs(diff) > 10) {
+                isRealMove = true;
+
+                // Жорстко блокуємо дефолтний скрол браузера, щоб сторінка не сіпалася вгору/вниз під час свайпу каруселі
+                if (e.cancelable) {
+                    e.preventDefault();
+                }
+
+                gsap.set(track, { x: dragStartTrackX + diff });
+            }
+        };
+
+        const onDragEnd = (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+
+            // Оновлюємо фінальну точку через changedTouches перед аналізом відпуску пальця
+            currentX = getX(e);
+
+            if (!isRealMove) return; // Якщо це був звичайний швидкий клік/тап на місці
+
+            const diff = currentX - startX;
+            if (Math.abs(diff) > 40) { // Зменшуємо поріг для мобільних (40px достатньо для легкого свайпу)
+                if (diff > 0 && activeIndex > 0) {
+                    activeIndex--;
+                } else if (diff < 0 && activeIndex < slides.length - 1) {
+                    if (window.innerWidth >= 601 && window.innerWidth < 1024 && activeIndex >= slides.length - 2) {
+                        // Стоп на таблеті
+                    } else {
+                        activeIndex++;
+                    }
+                }
+            }
+            updateSlider();
+        };
+
+        // Слухачі для Миші
+        track.addEventListener('mousedown', onDragStart);
+        track.addEventListener('mousemove', onDragMove);
+        track.addEventListener('mouseup', onDragEnd);
+        track.addEventListener('mouseleave', onDragEnd);
+
+        // Слухачі для Тач-екранів (Тепер працюють синхронно завдяки changedTouches)
+        track.addEventListener('touchstart', onDragStart, { passive: true });
+        track.addEventListener('touchmove', onDragMove, { passive: false }); // passive: false дозволяє робити preventDefault
+        track.addEventListener('touchend', onDragEnd);
+        track.addEventListener('touchcancel', onDragEnd);
+        // Слухачі стрілок навігації (Рідні, працюють залізобетонно)
+        nextBtn.addEventListener('click', () => {
+            if (window.innerWidth >= 601 && window.innerWidth < 1024 && activeIndex >= slides.length - 2) return;
+            if (activeIndex < slides.length - 1) {
+                activeIndex++;
+                updateSlider();
+            }
+        });
+
+        prevBtn.addEventListener('click', () => {
+            if (activeIndex > 0) {
+                activeIndex--;
+                updateSlider();
+            }
+        });
+
+        // КЛІК ПО КАРТКАХ (Працює і на оригіналах, і на останньому клоні)
+        slides.forEach((slide, index) => {
+            slide.addEventListener('click', (e) => {
+                // 1. Блокуємо перемикання по кліку, якщо користувач реально свайпав мишкою
+                if (isRealMove) return;
+
+                // 2. ЗАХИСТ ВІД БАГУ ТЕКСТУ: Якщо клікнули на вже активний слайд — повністю ігноруємо,
+                // щоб не перезапускати цикл анімацій і сусідні описи не вилазили!
+                if (index === activeIndex) return;
+
+                // 3. Звичайний клік по сусідніх картках на десктопі
+                if (window.innerWidth >= 1024) {
+                    activeIndex = index;
+                    updateSlider();
+                }
+            });
+        });
+
+        // Оновлення структури при зміні вікна браузера
+        window.addEventListener('resize', () => {
+            const isDesktopNow = window.matchMedia('(min-width: 1024px)').matches;
+            const hasClone = track.querySelector('.slide-clone');
+
+            if (isDesktopNow && !hasClone && totalSteps > 0) {
+                const firstSlideClone = originalSlides[0].cloneNode(true);
+                firstSlideClone.classList.add('slide-clone');
+                track.appendChild(firstSlideClone);
+            } else if (!isDesktopNow && hasClone) {
+                hasClone.remove();
+                if (activeIndex >= totalSteps) activeIndex = totalSteps - 1;
+            }
+
+            slides = Array.from(track.querySelectorAll('.slide'));
+            updateSlider(false);
+        });
+
+        // Стартова ініціалізація
+        updateSlider(false);
+    });
+
+
+</script>
+</body>
+</html>
+
