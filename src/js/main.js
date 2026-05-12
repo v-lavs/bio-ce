@@ -179,7 +179,6 @@ document.addEventListener("keydown", (e) => {
 // =========================
 window.addEventListener("load", () => {
     if (activeLink) moveBlob(activeLink);
-    console.log("activeLink:", activeLink);
 });
 
 // =========================
@@ -287,81 +286,72 @@ function initLiquidButtons() {
 // =========================
 // ACCORDION
 // =========================
-document.querySelectorAll('.accordion__item').forEach((item) => {
-    item.addEventListener('click', () => {
-        const isActive = item.classList.contains('active');
-        document.querySelectorAll('.accordion__item').forEach((item) => item.classList.remove('active'));
-        if (!isActive) item.classList.add('active');
-    });
-});
-
-// =========================
-// TABS
-// =========================
-const tabs = document.querySelector('[data-tabs]');
-
-if (tabs) {
-    const buttons = tabs.querySelectorAll('.tabs-nav__link');
-    const contents = tabs.querySelectorAll('.tab-content');
-    const indicator = tabs.querySelector('.tab-active-border');
-
-    const moveIndicator = (button) => {
-        indicator.style.width = `${button.offsetWidth}px`;
-        indicator.style.transform = `translateX(${button.offsetLeft}px)`;
-    };
-
-    const activateTab = (button) => {
-        const tabId = button.dataset.tab;
-
-        buttons.forEach(btn => {
-            btn.classList.remove('active');
-            btn.setAttribute('aria-selected', 'false');
+function initAccordion () {
+    document.querySelectorAll('.accordion__item').forEach((item) => {
+        item.addEventListener('click', () => {
+            const isActive = item.classList.contains('active');
+            document.querySelectorAll('.accordion__item').forEach((item) => item.classList.remove('active'));
+            if (!isActive) item.classList.add('active');
         });
-
-        contents.forEach(content => {
-            content.classList.remove('active');
-        });
-
-        button.classList.add('active');
-        button.setAttribute('aria-selected', 'true');
-
-        document.getElementById(tabId).classList.add('active');
-        moveIndicator(button);
-    };
-
-    buttons.forEach(button => {
-        button.addEventListener('click', () => {
-            activateTab(button);
-        });
-    });
-
-    const activeButton = tabs.querySelector('.tabs-nav__link.active');
-
-    if (activeButton) {
-        moveIndicator(activeButton);
-    }
-
-    window.addEventListener('resize', () => {
-        const current = tabs.querySelector('.tabs-nav__link.active');
-
-        if (current) {
-            moveIndicator(current);
-        }
     });
 }
 
 // =========================
-// BTN TO TOP
+// TABS
 // =========================
-const btnToTop = document.getElementById("scrollToTopBtn");
+function initTabs() {
+    const tabs = document.querySelector('[data-tabs]');
 
-window.onscroll = function() {
-    if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
-       btnToTop.style.display = "block";
-    } else {
-        btnToTop.style.display = "none";
+    if (tabs) {
+        const buttons = tabs.querySelectorAll('.tabs-nav__link');
+        const contents = tabs.querySelectorAll('.tab-content');
+        const indicator = tabs.querySelector('.tab-active-border');
+
+        const moveIndicator = (button) => {
+            indicator.style.width = `${button.offsetWidth}px`;
+            indicator.style.transform = `translateX(${button.offsetLeft}px)`;
+        };
+
+        const activateTab = (button) => {
+            const tabId = button.dataset.tab;
+
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.setAttribute('aria-selected', 'false');
+            });
+
+            contents.forEach(content => {
+                content.classList.remove('active');
+            });
+
+            button.classList.add('active');
+            button.setAttribute('aria-selected', 'true');
+
+            document.getElementById(tabId).classList.add('active');
+            moveIndicator(button);
+        };
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                activateTab(button);
+            });
+        });
+
+        const activeButton = tabs.querySelector('.tabs-nav__link.active');
+
+        if (activeButton) {
+            moveIndicator(activeButton);
+        }
+
+        window.addEventListener('resize', () => {
+            const current = tabs.querySelector('.tabs-nav__link.active');
+
+            if (current) {
+                moveIndicator(current);
+            }
+        });
     }
-};
+}
 
 /**
  * Універсальна функція для створення анімації появи тексту по рядках
@@ -469,216 +459,6 @@ function initHeroAnimation() {
 // =========================
 // PINNED STORY
 // =========================
-
-// function initPinnedStory() {
-//
-//     const storySection = document.querySelector('[data-story]');
-//
-//     if (!storySection) return;
-//
-//     const pinWrap = storySection.querySelector('.story-pin-wrap');
-//
-//     const slides = gsap.utils.toArray('.story-slide');
-//
-//     const progressBar = storySection.querySelector(
-//         '.story-progress__bar'
-//     );
-//
-//     const currentEl = storySection.querySelector(
-//         '.story-current'
-//     );
-//
-//     const totalEl = storySection.querySelector(
-//         '.story-total'
-//     );
-//
-//     // =========================
-//     // TOTAL
-//     // =========================
-//
-//     totalEl.textContent = String(slides.length)
-//         .padStart(2, '0');
-//
-//     if (currentEl) {
-//         currentEl.textContent = "01";
-//     }
-//
-//     // =========================
-//     // SECTION HEIGHT & TIMINGS
-//     // =========================
-//     // Щоб анімація була ПОВІЛЬНІШОЮ, збільшуємо множник до 2.5
-//     // Використовуємо висоту вікна, оскільки pinWrap зафіксується (pin: true)
-//     const scrollDistance = window.innerHeight * slides.length * 2.5;
-//
-//     gsap.set(storySection, {
-//         height: `${scrollDistance}px`
-//     });
-//
-//     // =========================
-//     // MASTER TL
-//     // =========================
-//
-//     const masterTL = gsap.timeline();
-//
-//     // =========================
-//     // SLIDES
-//     // =========================
-//
-//     slides.forEach((slide, index) => {
-//
-//         const textElements = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
-//
-//         if (!textElements.length) return;
-//
-//         let allLines = [];
-//         let allChars = [];
-//
-//         textElements.forEach(el => {
-//             const split = new SplitText(el, {
-//                 type: "lines,chars",
-//                 linesClass: "story-line",
-//                 charsClass: "story-char"
-//             });
-//             allLines.push(...split.lines);
-//             allChars.push(...split.chars);
-//         });
-//
-//         const lines = gsap.utils.toArray(allLines);
-//         const chars = gsap.utils.toArray(allChars);
-//
-//         // =========================
-//         // INITIAL STATE
-//         // =========================
-//
-//         const isFirst = index === 0;
-//
-//         gsap.set(slide, {
-//             autoAlpha: isFirst ? 1 : 0
-//         });
-//
-//         gsap.set(lines, {
-//             yPercent: isFirst ? 0 : 120
-//         });
-//
-//         gsap.set(chars, {
-//             opacity: 0.35
-//         });
-//
-//         // =========================
-//         // BLOCK TL
-//         // =========================
-//
-//         const blockTL = gsap.timeline();
-//
-//         // =========================
-//         // ACTIVE FRACTION
-//         // =========================
-//
-//         blockTL.call(() => {
-//             currentEl.textContent = String(index + 1)
-//                 .padStart(2, '0');
-//         });
-//
-//         // =========================
-//         // LINES REVEAL
-//         // =========================
-//         if (!isFirst) {
-//             blockTL.set(slides, {
-//                 autoAlpha: 0
-//             });
-//
-//             blockTL.set(slide, {
-//                 autoAlpha: 1
-//             });
-//
-//             blockTL.to(lines, {
-//                 yPercent: 0,
-//                 stagger: 0.14,
-//                 duration: 1.8,
-//                 ease: "power1.out"
-//             });
-//         }
-//
-//         // =========================
-//         // LETTER ACTIVATION
-//         // =========================
-//
-//         blockTL.to(chars, {
-//             opacity: 1,
-//             stagger: {
-//                 each: 0.06,
-//                 from: "start",
-//                 ease: "power2.out"
-//             },
-//             duration: 3.4,
-//             ease: "none"
-//         });
-//
-//         // =========================
-//         // HOLD
-//         // =========================
-//
-//         blockTL.to({}, {
-//             duration: 1.4
-//         });
-//
-//         // =========================
-//         // LINES OUT
-//         // =========================
-//
-//         blockTL.to(lines, {
-//             yPercent: -110,
-//             opacity: 0,
-//             stagger: 0.16,
-//             duration: 1.6,
-//             ease: "power1.out"
-//         });
-//
-//         masterTL.add(blockTL);
-//
-//     });
-//
-//     // =========================
-//     // SCROLLTRIGGER
-//     // =========================
-//
-//     ScrollTrigger.create({
-//
-//         trigger: storySection,
-//
-//         start: "top top",
-//
-//         // MODIFIED: Точно вказуємо фініш скролу відповідно до висоти секції
-//         end: "bottom bottom",
-//
-//         pin: pinWrap,
-//
-//         // MODIFIED: Додано pinSpacing: false, щоб ScrollTrigger НЕ створював білу діру знизу
-//         pinSpacing: false,
-//
-//         scrub: 2.4,
-//
-//         animation: masterTL,
-//
-//         invalidateOnRefresh: true,
-//
-//         onUpdate: (self) => {
-//
-//             gsap.set(progressBar, {
-//
-//                 scaleX: self.progress,
-//
-//                 transformOrigin: "left center"
-//
-//             });
-//
-//         }
-//
-//     });
-//
-//     // Перераховуємо геометрію сторінки після створення тригера
-//     ScrollTrigger.refresh();
-// }
 
 function initPinnedStory() {
     const stickyTrigger = document.querySelector('[data-story-trigger]');
@@ -836,5 +616,7 @@ window.addEventListener("load", () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+    initAccordion ();
+    initTabs();
     initLiquidButtons();
 });
