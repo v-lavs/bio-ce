@@ -595,39 +595,7 @@ function initPinnedStory() {
 // =========================
 // SLIDER ADVANTAGE
 // =========================
-const advantagesSwiper = new Swiper('.advantages-swiper', {
-    loop: true,                 // Нескінченний луп працює ідеально
-    centeredSlides: true,       // Активний слайд завжди по центру
-    slidesPerView: 3,           // 3 слайди на десктопі
-    // spaceBetween: 30,           // Відступ між слайдами
-    initialSlide: 1,            // Починаємо з другого слайду (індексація з 0)
 
-    // Стрілки та точки
-    navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-    pagination: {
-        el: '.swiper-pagination',
-        clickable: true,
-    },
-
-    // Адаптивність під мобільні та планшети
-    breakpoints: {
-        0: {
-            slidesPerView: 1,       // Мобільні — 1 слайд
-            centeredSlides: false,  // Вимикаємо центр для звичайного відображення
-        },
-        768: {
-            slidesPerView: 1,       // Планшет (tablet) — 1 слайд, як ви просили
-            centeredSlides: false,
-        },
-        1024: {
-            slidesPerView: 3,       // Десктоп — повертаємо 3 слайди та центрування
-            centeredSlides: true,
-        }
-    }
-});
 
 window.addEventListener("load", () => {
     initHeroAnimation();

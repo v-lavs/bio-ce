@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>fin gsap center slide resp </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+          rel="stylesheet">
+    <link rel="stylesheet" href="./dist/main.css">
 </head>
 <body>
 <style>
@@ -12,7 +17,8 @@
     }
 
     body {
-        background: #090d1a;
+        background-image: url(assets/img/bg-accordion-slider.png);
+
         min-height: 100vh;
         display: flex;
         align-items: center;
@@ -37,7 +43,8 @@
 
     .slider-track {
         display: flex;
-        align-items: center;
+        /*align-items: center;*/
+        align-items: flex-end;
         justify-content: flex-start;
         position: relative;
         height: 400px;
@@ -49,41 +56,15 @@
         flex-shrink: 0;
         width: 287px; /* Базовий розмір, JS сам змінить його плавно */
         height: 323px;
-        background: #121829;
-        border: 1px solid #FFFFFF;
-        border-radius: 24px;
-        box-sizing: border-box;
+        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .5);
+        backdrop-filter: blur(20px);
+        background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
+
+        /*border: 1px solid #FFFFFF;*/
+        border-radius: 15px;
         cursor: pointer;
         overflow: hidden;
     }
-
-    /* ЗМІНИ ТІЛЬКИ ДЛЯ ТАБЛЕТА ТА МОБІЛКИ */
-    @media (max-width: 1023px) {
-        .slider-viewport {
-
-            padding: 0 20px; /* Картки не липнуть до екрану */
-        }
-        .slider-track {
-            gap: 20px !important; /* Фіксований відступ для адаптиву */
-        }
-        .slide {
-            /* Розрахунок під 2 слайди в ряд мінус відступ */
-            width: calc((100vw - 40px - 20px) / 2) !important;
-            max-width: 480px;
-            height: 340px !important;
-        }
-    }
-
-    @media (max-width: 600px) {
-        .slide {
-            /* На мобілці рівно 1 слайд на ширину екрану */
-            width: calc(100vw - 40px) !important;
-            max-width: 100%;
-            height: 320px !important;
-        }
-    }
-
-
 
 
     /* Решта ваших стилів (.slide-inner, .bottom-controls) залишаються без змін */
@@ -91,23 +72,28 @@
     .slide-inner {
         width: 100%;
         height: 100%;
-        padding: 32px;
-        box-sizing: border-box;
+        padding: 44px 49px;
         display: flex;
         flex-direction: column;
+        justify-content: space-between;
+        color: #FFFFFF;
     }
 
     .icon {
-        font-size: 2rem;
-        color: #ff3366;
-        margin-bottom: 20px;
+        width: 112px;
+        height: 112px;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        margin-bottom: 24px;
     }
 
     .title {
-        color: #fff;
-        margin: 0;
-        font-size: 1.25rem;
-        font-weight: 600;
+        /*font-family: Verdana;  !*?????;*!*/
+        font-weight: 700;
+        font-size: 20px;
+        line-height: 1.44;
+        /*font-size: 1.25rem;*/
     }
 
     .description-wrap {
@@ -117,10 +103,10 @@
     }
 
     .description {
-        color: rgba(255, 255, 255, 0.6);
-        font-size: 0.95rem;
-        line-height: 1.6;
-        margin: 16px 0 0 0;
+        font-size: 18px;
+        line-height: 1.50;
+
+        /*font-size: 0.95rem;*/
     }
 
     .bottom-controls {
@@ -182,79 +168,112 @@
     .nav-btn:hover {
         background: rgba(255, 255, 255, 0.1);
     }
-    /* СТИЛІ ДЛЯ РЕЖИМУ ТАБЛЕТ/МОБІЛКА (менше 1024px) */
 
+    /* ЗМІНИ ТІЛЬКИ ДЛЯ ТАБЛЕТА ТА МОБІЛКИ */
+    @media (max-width: 1023px) {
+        .slider-viewport {
+
+            padding: 0 20px; /* Картки не липнуть до екрану */
+        }
+
+        .slider-track {
+            gap: 20px !important; /* Фіксований відступ для адаптиву */
+        }
+
+        .slide {
+            /* Розрахунок під 2 слайди в ряд мінус відступ */
+            width: calc((100vw - 40px - 20px) / 2) !important;
+            max-width: 480px;
+            height: 340px !important;
+        }
+    }
 
     @media (max-width: 600px) {
         .slide {
-            /* На мобілці — 1 слайд на всю ширину видимого екрану */
+            /* На мобілці рівно 1 слайд на ширину екрану */
             width: calc(100vw - 40px) !important;
+            max-width: 100%;
             height: 320px !important;
         }
     }
+
 </style>
+<section>
+    <div class="container">
+        <div class="slider-viewport" id="sliderViewport">
+            <div class="slider-track" id="sliderTrack">
 
-<div class="slider-viewport" id="sliderViewport">
-    <div class="slider-track" id="sliderTrack">
+                <!-- Слайд 1 -->
+                <div class="slide" data-index="0">
+                    <div class="slide-inner">
+                        <div class="icon" style="background-image: url(assets/img/ic-advantage1.svg);"
+                             aria-hidden="true"></div>
+                        <h3 class="title">Високі
+                            стандарти якості</h3>
+                        <div class="description-wrap">
+                            <p class="description">Аналіз ринку, побудова архітектури даних та детальне проектування
+                                майбутнього інтерфейсу.</p>
+                        </div>
+                    </div>
+                </div>
 
-        <!-- Слайд 1 -->
-        <div class="slide" data-index="0">
-            <div class="slide-inner">
-                <div class="icon">⬡</div>
-                <h3 class="title">Стратегія</h3>
-                <div class="description-wrap">
-                    <p class="description">Аналіз ринку, побудова архітектури даних та детальне проектування майбутнього інтерфейсу.</p>
+                <!-- Слайд 2 (Стартовий за замовчуванням) -->
+                <div class="slide" data-index="1">
+                    <div class="slide-inner">
+                        <div class="icon" style="background-image: url(assets/img/ic-advantage2.svg);"
+                             aria-hidden="true"></div>
+                        <h3 class="title">Досвідчена команда</h3>
+                        <div class="description-wrap">
+                            <p class="description">Наша команда — це фахівці з глибокою галузевою експертизою та
+                                багаторічним практичним досвідом у виробництві, регуляторних процесах і промоції
+                                фармацевтичної продукції.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 3 -->
+                <div class="slide" data-index="2">
+                    <div class="slide-inner">
+                        <div class="icon" style="background-image: url(assets/img/ic-advantage3.svg);"
+                             aria-hidden="true"></div>
+                        <h3 class="title">Міжнародна
+                            співпраця</h3>
+                        <div class="description-wrap">
+                            <p class="description">Глибокий збір метрик, відстеження конверсії користувачів та
+                                автоматизована звітність.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Слайд 4 -->
+                <div class="slide" data-index="3">
+                    <div class="slide-inner">
+                        <div class="icon" style="background-image: url(assets/img/ic-advantage2.svg);"
+                             aria-hidden="true"></div>
+                        <h3 class="title">Розробка</h3>
+                        <div class="description-wrap">
+                            <p class="description">Створення стабільного коду, хмарна інтеграція та безперервне
+                                тестування систем.</p>
+                        </div>
+                    </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Слайд 2 (Стартовий за замовчуванням) -->
-        <div class="slide" data-index="1">
-            <div class="slide-inner">
-                <div class="icon">🕸</div>
-                <h3 class="title">Оптимізація</h3>
-                <div class="description-wrap">
-                    <p class="description">Максимальне масштабування швидкості, інтеграція штучного інтелекту та преміальних візуальних ефектів.</p>
+            <!-- Керування та Індикатор прогресу -->
+            <div class="bottom-controls">
+                <div class="slider-line-wrapper">
+                    <div class="slider-line-bg"></div>
+                    <!-- Лінія заповнення прогресу -->
+                    <div class="progress-bar-fill" id="progressBar"></div>
                 </div>
-            </div>
-        </div>
-
-        <!-- Слайд 3 -->
-        <div class="slide" data-index="2">
-            <div class="slide-inner">
-                <div class="icon">✵</div>
-                <h3 class="title">Аналітика</h3>
-                <div class="description-wrap">
-                    <p class="description">Глибокий збір метрик, відстеження конверсії користувачів та автоматизована звітність.</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Слайд 4 -->
-        <div class="slide" data-index="3">
-            <div class="slide-inner">
-                <div class="icon">⧉</div>
-                <h3 class="title">Розробка</h3>
-                <div class="description-wrap">
-                    <p class="description">Створення стабільного коду, хмарна інтеграція та безперервне тестування систем.</p>
+                <div class="slider-nav">
+                    <button class="nav-btn" id="prevBtn">←</button>
+                    <button class="nav-btn" id="nextBtn">→</button>
                 </div>
             </div>
         </div>
     </div>
-
-    <!-- Керування та Індикатор прогресу -->
-    <div class="bottom-controls">
-        <div class="slider-line-wrapper">
-            <div class="slider-line-bg"></div>
-            <!-- Лінія заповнення прогресу -->
-            <div class="progress-bar-fill" id="progressBar"></div>
-        </div>
-        <div class="slider-nav">
-            <button class="nav-btn" id="prevBtn">←</button>
-            <button class="nav-btn" id="nextBtn">→</button>
-        </div>
-    </div>
-</div>
+</section>
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
 
 <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/Flip.min.js"></script>
@@ -338,7 +357,12 @@
                             duration: animate ? 0.6 : 0,
                             ease: "power2.out"
                         });
-                        gsap.to(desc, { height: "auto", opacity: 1, duration: animate ? 0.6 : 0, delay: animate ? 0.2 : 0 });
+                        gsap.to(desc, {
+                            height: "auto",
+                            opacity: 1,
+                            duration: animate ? 0.6 : 0,
+                            delay: animate ? 0.2 : 0
+                        });
                     } else {
                         slide.classList.remove('active');
                         gsap.to(slide, {
@@ -349,7 +373,7 @@
                         });
                         // Примусово вбиваємо будь-яку застряглу анімацію і ховаємо текст
                         gsap.killTweensOf(desc);
-                        gsap.to(desc, { height: 0, opacity: 0, duration: animate ? 0.3 : 0 });
+                        gsap.to(desc, {height: 0, opacity: 0, duration: animate ? 0.3 : 0});
                     }
                 });
 
@@ -458,7 +482,7 @@
                     e.preventDefault();
                 }
 
-                gsap.set(track, { x: dragStartTrackX + diff });
+                gsap.set(track, {x: dragStartTrackX + diff});
             }
         };
 
@@ -493,8 +517,8 @@
         track.addEventListener('mouseleave', onDragEnd);
 
         // Слухачі для Тач-екранів (Тепер працюють синхронно завдяки changedTouches)
-        track.addEventListener('touchstart', onDragStart, { passive: true });
-        track.addEventListener('touchmove', onDragMove, { passive: false }); // passive: false дозволяє робити preventDefault
+        track.addEventListener('touchstart', onDragStart, {passive: true});
+        track.addEventListener('touchmove', onDragMove, {passive: false}); // passive: false дозволяє робити preventDefault
         track.addEventListener('touchend', onDragEnd);
         track.addEventListener('touchcancel', onDragEnd);
         // Слухачі стрілок навігації (Рідні, працюють залізобетонно)
