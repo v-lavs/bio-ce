@@ -4,10 +4,11 @@
 
 'use strict'
 
+gsap.registerPlugin(Flip, SplitText, MorphSVGPlugin, ScrollTrigger);
+
 // =========================
 // LENIS (SMOOTH SCROLL)
 // =========================
-gsap.registerPlugin(Flip, SplitText, MorphSVGPlugin, ScrollTrigger);
 const lenis = new Lenis({
     duration: 1.4,
     easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
@@ -445,7 +446,7 @@ function initHeroAnimation() {
     // 2. Поява хедера
     heroTL.to(header,
         { y: 0, opacity: 1, duration: 1.4 },
-        "-=1.5"
+        "-=1.4"
     );
 
     // 3. ПЕРЕВИКОРИСТАННЯ: Отримуємо таймлайн ліній для Hero і додаємо його в основний
@@ -595,24 +596,26 @@ function initPinnedStory() {
 // =========================
 // SLIDER ADVANTAGE
 // =========================
-function initAdvantageSlider (){
-    const track = document.getElementById('sliderTrack');
+function initAdvantageSlider() {
+     const track = document.getElementById('sliderTrack');
     const viewport = document.getElementById('sliderViewport');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
     const progressBar = document.getElementById('progressBar');
 
-    const originalSlides = Array.from(track.querySelectorAll('.slide'));
+    const originalSlides = Array.from(track.querySelectorAll('.slider-advantages .slide'));
     const totalSteps = originalSlides.length;
 
     let isDesktop = window.matchMedia('(min-width: 1024px)').matches;
     if (totalSteps > 0 && isDesktop) {
+
         const firstSlideClone = originalSlides[0].cloneNode(true);
+        track.querySelectorAll('.slide-clone').forEach(el => el.remove());
         firstSlideClone.classList.add('slide-clone');
         track.appendChild(firstSlideClone);
     }
 
-    let slides = Array.from(track.querySelectorAll('.slide'));
+    let slides = Array.from(track.querySelectorAll('.slider-advantages .slide'));
     let activeIndex = 1;
 
     const SIDE_WIDTH = 287;
@@ -646,7 +649,7 @@ function initAdvantageSlider (){
         });
 
         if (isDesktop) {
-            // COMPRESSION RATIO
+            // anim cards
             const currentViewportWidth = viewport.offsetWidth;
             let scaleFactor = currentViewportWidth / 1207;
             if (scaleFactor > 1) scaleFactor = 1;
@@ -657,25 +660,21 @@ function initAdvantageSlider (){
 
             const DYNAMIC_SIDE_HEIGHT = 323 * scaleFactor;
             const DYNAMIC_ACTIVE_HEIGHT = 376 * scaleFactor;
-
-            // ANIM CARDS
+            //anim cards
             slides.forEach((slide, index) => {
-                const desc = slide.querySelector('.description-wrap');
-                const icon = slide.querySelector('.icon');
-
+                const desc = slide.querySelector('.slider-advantages .description-wrap');
+                const icon = slide.querySelector('.slider-advantages .icon');
                 const DYNAMIC_SIDE_ICON = 90 * scaleFactor;
                 const DYNAMIC_ACTIVE_ICON = 112 * scaleFactor;
 
                 if (index === activeIndex) {
                     slide.classList.add('active');
-
                     gsap.to(slide, {
                         width: DYNAMIC_ACTIVE_WIDTH,
                         height: DYNAMIC_ACTIVE_HEIGHT,
                         duration: animate ? 0.6 : 0,
                         ease: "power2.out"
                     });
-
                     if (icon) {
                         gsap.to(icon, {
                             width: DYNAMIC_ACTIVE_ICON,
@@ -684,24 +683,21 @@ function initAdvantageSlider (){
                             ease: "power2.out"
                         });
                     }
-
                     gsap.to(desc, {
                         height: "auto",
                         opacity: 1,
                         duration: animate ? 0.6 : 0,
-                        delay: animate ? 0.2 : 0
+                        delay: animate ? 0.4 : 0
                     });
 
                 } else {
                     slide.classList.remove('active');
-
                     gsap.to(slide, {
                         width: DYNAMIC_SIDE_WIDTH,
                         height: DYNAMIC_SIDE_HEIGHT,
                         duration: animate ? 0.6 : 0,
                         ease: "power2.out"
                     });
-
                     if (icon) {
                         gsap.to(icon, {
                             width: DYNAMIC_SIDE_ICON,
@@ -710,7 +706,6 @@ function initAdvantageSlider (){
                             ease: "power2.out"
                         });
                     }
-
                     if (desc) {
                         gsap.killTweensOf(desc);
                         gsap.to(desc, {height: 0, opacity: 0, duration: animate ? 0.3 : 0});
@@ -718,7 +713,7 @@ function initAdvantageSlider (){
                 }
             });
 
-            // 4. CENTER SLIDE
+            //center-slide
             let accumulatedLeft = 0;
             for (let i = 0; i < activeIndex; i++) {
                 accumulatedLeft += DYNAMIC_SIDE_WIDTH + DYNAMIC_GAP;
@@ -735,13 +730,12 @@ function initAdvantageSlider (){
                 ease: "power2.out"
             });
         } else {
-           //RESPONSIVE
-
+            //tab, mob
             const isTablet = window.innerWidth >= 601 && window.innerWidth < 1024;
 
             slides.forEach((slide, index) => {
                 slide.classList.remove('active');
-                const desc = slide.querySelector('.description-wrap');
+                const desc = slide.querySelector('.slider-advantages .description-wrap');
                 const isVisible = (index === activeIndex) || (isTablet && index === activeIndex + 1);
 
                 if (isVisible) {
@@ -773,10 +767,9 @@ function initAdvantageSlider (){
                 ease: "power2.out"
             });
         }
-
     }
 
-    // SWIPE, TOUCHES
+    // touches, swipes
     let startX = 0;
     let currentX = 0;
     let isDragging = false;
@@ -807,6 +800,7 @@ function initAdvantageSlider (){
 
         if (Math.abs(diff) > 10) {
             isRealMove = true;
+
             if (e.cancelable) {
                 e.preventDefault();
             }
@@ -829,6 +823,7 @@ function initAdvantageSlider (){
                 activeIndex--;
             } else if (diff < 0 && activeIndex < slides.length - 1) {
                 if (window.innerWidth >= 601 && window.innerWidth < 1024 && activeIndex >= slides.length - 2) {
+                    // Стоп на таблеті
                 } else {
                     activeIndex++;
                 }
@@ -846,7 +841,6 @@ function initAdvantageSlider (){
     track.addEventListener('touchmove', onDragMove, {passive: false});
     track.addEventListener('touchend', onDragEnd);
     track.addEventListener('touchcancel', onDragEnd);
-
     nextBtn.addEventListener('click', () => {
         if (window.innerWidth >= 601 && window.innerWidth < 1024 && activeIndex >= slides.length - 2) return;
         if (activeIndex < slides.length - 1) {
@@ -862,36 +856,62 @@ function initAdvantageSlider (){
         }
     });
 
-    // CLICK CARD
+    // click cards
     slides.forEach((slide, index) => {
         slide.addEventListener('click', (e) => {
             if (isRealMove) return;
+
             if (index === activeIndex) return;
+
             if (window.innerWidth >= 1024) {
                 activeIndex = index;
                 updateSlider();
             }
         });
     });
-
+    //resize
     window.addEventListener('resize', () => {
         const isDesktopNow = window.matchMedia('(min-width: 1024px)').matches;
         const hasClone = track.querySelector('.slide-clone');
 
-        if (isDesktopNow && !hasClone && totalSteps > 0) {
-            const firstSlideClone = originalSlides[0].cloneNode(true);
-            firstSlideClone.classList.add('slide-clone');
-            track.appendChild(firstSlideClone);
-        } else if (!isDesktopNow && hasClone) {
-            hasClone.remove();
-            if (activeIndex >= totalSteps) activeIndex = totalSteps - 1;
+        if (isDesktopNow) {
+            if (!hasClone && totalSteps > 0) {
+                const firstSlideClone = originalSlides[0].cloneNode(true);
+                firstSlideClone.classList.add('slide-clone');
+                track.appendChild(firstSlideClone);
+                if (activeIndex === 0) activeIndex = 1;
+            }
+        } else {
+            if (hasClone) {
+                hasClone.remove();
+            }
+            activeIndex = 0;
+            const allCurrentSlides = track.querySelectorAll('.slider-advantages .slide');
+            allCurrentSlides.forEach(slide => {
+                slide.classList.remove('active');
+                slide.style.width = '';
+                slide.style.height = '';
+
+                const icon = slide.querySelector('.slider-advantages .icon');
+                if (icon) {
+                    icon.style.width = '';
+                    icon.style.height = '';
+                }
+
+                const desc = slide.querySelector('.slider-advantages .description-wrap');
+                if (desc) {
+                    desc.style.height = '';
+                    desc.style.opacity = '';
+                }
+            });
         }
 
-        slides = Array.from(track.querySelectorAll('.slide'));
+        slides = Array.from(track.querySelectorAll('.slider-advantages .slide'));
+
         updateSlider(false);
     });
 
-    updateSlider(false);
+    updateSlider(false)
 }
 
 window.addEventListener("load", () => {
@@ -899,7 +919,10 @@ window.addEventListener("load", () => {
     initPinnedStory();
     initScrollReveals();
     initAdvantageSlider();
-    ScrollTrigger.refresh();
+    // ScrollTrigger.refresh();
+    if (typeof ScrollTrigger !== 'undefined') {
+        ScrollTrigger.refresh();
+    }
 });
 
 document.addEventListener('DOMContentLoaded', () => {

@@ -107,12 +107,9 @@
             </div>
         </section>
 
-        <!-- NEW: Зовнішній тригер, який задаватиме довжину скролу для всієї анімації -->
         <div class="sticky-trigger" data-story-trigger>
 
-            <!-- Ваша оригінальна секція (тепер вона фіксується через CSS Sticky) -->
             <section class="story-section" data-story>
-                <!--                <img class="section-work__bg" src="assets/img/logo-bg.svg" alt="" aria-hidden="true">-->
                 <div class="story-pin-wrap container">
 
                     <div class="story-top">
@@ -143,10 +140,8 @@
                                 партнерські відносини у фармацевтичній галузі.</p>
                         </article>
                     </div>
-
                 </div>
             </section>
-
         </div>
 
         <section class="section section-activity">
@@ -272,74 +267,88 @@
 
         <section class="advantages-section" style="background-image: url(assets/img/bg-accordion-slider.png);">
             <div class="container">
-                <h2 class="heading_xl">Наші переваги</h2>
+                <h2 class="section__title heading_xl">Наші переваги</h2>
+                <div class="slider-advantages">
+                    <div class="slider-viewport" id="sliderViewport">
+                        <div class="slider-track" id="sliderTrack">
 
-                <!-- Головний контейнер Swiper -->
-                                <div class="swiper advantages-swiper">
-                                    <div class="swiper-wrapper">
-
-                                        <!-- Слайд 1 -->
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-inner">
-                                                <div class="card-content">
-                                                    <div class="card-icon"><!-- SVG 1 --></div>
-                                                    <div class="card-text-block">
-                                                        <h3 class="card-title">Високі стандарти якості</h3>
-                                                        <p class="card-description">Наш підхід ґрунтується на суворих стандартах контролю кожного етапу виробництва.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
+                            <div class="slide" data-index="0">
+                                <div class="slide-inner">
+                                    <div class="icon" style="background-image: url(assets/img/ic-advantage1.svg);"
+                                         aria-hidden="true"></div>
+                                    <div class="">
+                                        <h3 class="title">Високі
+                                            стандарти якості</h3>
+                                        <div class="description-wrap">
+                                            <p class="description">Аналіз ринку, побудова архітектури даних та детальне
+                                                проектування
+                                                майбутнього інтерфейсу.</p>
                                         </div>
-
-                                        <!-- Слайд 2 (Центральний на старті) -->
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-inner">
-                                                <div class="card-content">
-                                                    <div class="card-icon"><!-- SVG 2 --></div>
-                                                    <div class="card-text-block">
-                                                        <h3 class="card-title">Досвідчена команда</h3>
-                                                        <p class="card-description">Наша команда — це лідери з глибокою експертизою, які прагнуть створювати якісні фармацевтичні продукти.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Слайд 3 -->
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-inner">
-                                                <div class="card-content">
-                                                    <div class="card-icon"><!-- SVG 3 --></div>
-                                                    <div class="card-text-block">
-                                                        <h3 class="card-title">Міжнародна кооперація</h3>
-                                                        <p class="card-description">Ми будуємо довгострокові партнерські відносини з провідними світовими брендами.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <!-- Слайд 4 (NEW) -->
-                                        <div class="swiper-slide">
-                                            <div class="swiper-slide-inner">
-                                                <div class="card-content">
-                                                    <div class="card-icon"><!-- SVG 4 --></div>
-                                                    <div class="card-text-block">
-                                                        <h3 class="card-title">Інноваційні рішення</h3>
-                                                        <p class="card-description">Ми впроваджуємо передові технології для забезпечення максимальної результативності рішень.</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                    <!-- Навігація -->
-                                    <div class="swiper-navigation-wrap">
-                                        <div class="swiper-button-prev"></div>
-                                        <div class="swiper-button-next"></div>
                                     </div>
                                 </div>
+                            </div>
 
+                            <div class="slide" data-index="1">
+                                <div class="slide-inner">
+                                    <div class="icon" style="background-image: url(assets/img/ic-advantage2.svg);"
+                                         aria-hidden="true"></div>
+                                    <div class="">
+                                        <h3 class="title">Досвідчена команда</h3>
+                                        <div class="description-wrap">
+                                            <p class="description">Наша команда — це фахівці з глибокою галузевою
+                                                експертизою та
+                                                багаторічним практичним досвідом у виробництві, регуляторних процесах і
+                                                промоції
+                                                фармацевтичної продукції.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
+                            <div class="slide" data-index="2">
+                                <div class="slide-inner">
+                                    <div class="icon" style="background-image: url(assets/img/ic-advantage3.svg);"
+                                         aria-hidden="true"></div>
+                                    <div class="">
+                                        <h3 class="title">Міжнародна
+                                            співпраця</h3>
+                                        <div class="description-wrap">
+                                            <p class="description">Глибокий збір метрик, відстеження конверсії
+                                                користувачів та
+                                                автоматизована звітність.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="slide" data-index="3">
+                                <div class="slide-inner">
+                                    <div class="icon" style="background-image: url(assets/img/ic-advantage2.svg);"
+                                         aria-hidden="true"></div>
+                                    <div class="">
+                                        <h3 class="title">Розробка</h3>
+                                        <div class="description-wrap">
+                                            <p class="description">Створення стабільного коду, хмарна інтеграція та
+                                                безперервне
+                                                тестування систем.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="bottom-controls">
+                    <div class="slider-line-wrapper">
+                        <div class="slider-line-bg"></div>
+                        <div class="progress-bar-fill" id="progressBar"></div>
+                    </div>
+
+                    <div class="slider-nav">
+                        <button type="button" class="nav-btn nav-btn_left" id="prevBtn"></button>
+                        <button type="button" class="nav-btn nav-btn_right" id="nextBtn"></button>
+                    </div>
+                </div>
             </div>
         </section>
 
@@ -703,8 +712,7 @@
 <script src="https://unpkg.com/lenis@1.3.23/dist/lenis.min.js"></script>
 
 
-
-<script src="dist/main.js" defer></script>
+<script src="./dist/main.js" defer></script>
 </body>
 </html>
 

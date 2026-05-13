@@ -1056,7 +1056,7 @@ form textarea {
 }
 
 .advantages-section {
-  background-repeat: no-repeat !important;
+  background-repeat: no-repeat;
   background-position: center;
   background-size: cover;
   min-height: 737px;
@@ -1072,14 +1072,17 @@ form textarea {
   --gap: 43px;
 }
 
+.container {
+  border: 1px solid red;
+}
+
 .slider-advantages {
   padding: 50px 0;
   margin: 0 auto;
-  width: -moz-max-content;
-  width: max-content;
+  border: 1px solid green;
 }
 
-.slider-advantages .slider-viewport {
+.slider-viewport {
   width: 100%;
   max-width: 1207px;
   height: 380px;
@@ -1088,10 +1091,11 @@ form textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-bottom: 56px;
+  border: 1px solid blueviolet;
+  margin: 0 auto;
 }
 
-.slider-advantages .slider-track {
+.slider-track {
   display: flex;
   align-items: flex-end;
   justify-content: flex-start;
@@ -1120,7 +1124,7 @@ form textarea {
   padding: 44px 49px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-end;
   color: #FFFFFF;
 }
 
@@ -1131,6 +1135,7 @@ form textarea {
   background-position: center;
   background-size: contain;
   flex-shrink: 0;
+  margin-bottom: auto;
 }
 
 .slider-advantages .title {
@@ -1151,13 +1156,13 @@ form textarea {
   line-height: 1.5;
 }
 
-.slider-advantages .bottom-controls {
+.bottom-controls {
   width: 100%;
   position: relative;
   display: flex;
 }
 
-.slider-advantages .slider-line-wrapper {
+.slider-line-wrapper {
   position: absolute;
   left: 0;
   right: 0;
@@ -1165,14 +1170,14 @@ form textarea {
   z-index: 1;
 }
 
-.slider-advantages .slider-line-bg {
+.slider-line-bg {
   position: absolute;
   width: 100%;
   height: 100%;
   background: rgba(231, 241, 255, 0.4);
 }
 
-.slider-advantages .progress-bar-fill {
+.progress-bar-fill {
   position: absolute;
   left: 0;
   top: 0;
@@ -1181,7 +1186,7 @@ form textarea {
   background: #E7F1FF;
 }
 
-.slider-advantages .slider-nav {
+.slider-nav {
   position: relative;
   z-index: 2;
   display: flex;
@@ -1190,7 +1195,7 @@ form textarea {
   gap: 8px;
 }
 
-.slider-advantages .nav-btn {
+.nav-btn {
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
@@ -1202,15 +1207,15 @@ form textarea {
   transition: all 0.35s;
 }
 
-.slider-advantages .nav-btn_left {
-  background-image: url(assets/img/arrow-left.svg);
+.nav-btn_left {
+  background-image: url(../assets/img/arrow-left.svg);
 }
 
-.slider-advantages .nav-btn_right {
-  background-image: url(assets/img/arrow-right.svg);
+.nav-btn_right {
+  background-image: url(../assets/img/arrow-right.svg);
 }
 
-.slider-advantages .nav-btn:hover {
+.nav-btn:hover {
   opacity: 0.6;
 }
 
@@ -1393,19 +1398,42 @@ form textarea {
   height: auto;
 }
 
+@media only screen and (max-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+
+  .container {
+    border: 2px solid red;
+  }
+}
+
+@media only screen and (max-width:1024px) {
+  .container {
+    max-width: 980px;
+    padding: 0 25px;
+  }
+
+  .container {
+    border: 2px solid blue;
+  }
+}
+
 @media (max-width: 1023px) {
-  .slider-viewport {
-    padding: 0 20px;
+  section.advantages-section .slider-viewport .slider-track {
+    gap: 20px;
+    max-width: 100%;
   }
 
-  .slider-track {
-    gap: 20px !important;
-  }
-
-  .slide {
-    width: calc((100vw - 40px - 20px) / 2) !important;
+  section.advantages-section .slider-viewport .slide {
+    width: calc((100% - 20px) / 2);
     max-width: 480px;
-    height: 340px !important;
+    height: 380px;
+  }
+
+  .slider-advantages .icon {
+    width: 80px;
+    height: 80px;
   }
 }
 
@@ -1462,6 +1490,14 @@ form textarea {
     display: none;
   }
 
+  .container {
+    max-width: 780px;
+  }
+
+  .container {
+    border: 2px solid goldenrod;
+  }
+
   .burger {
     display: flex;
   }
@@ -1489,11 +1525,42 @@ form textarea {
   }
 }
 
+@media only screen and (max-width: 767px) {
+  .container {
+    max-width: 580px;
+  }
+
+  .container {
+    border: 2px solid greenyellow;
+  }
+}
+
 @media (max-width: 600px) {
-  .slide {
-    width: calc(100vw - 40px) !important;
+  section.advantages-section .slider-viewport .slide {
+    width: 100%;
     max-width: 100%;
-    height: 320px !important;
+    height: 100%;
+  }
+}
+
+@media only screen and (max-width: 580px) {
+  .container {
+    max-width: 420px;
+  }
+
+  .container {
+    border: 2px solid fuchsia;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .container {
+    max-width: 100%;
+    padding: 0 15px;
+  }
+
+  .container {
+    border: 2px solid blueviolet;
   }
 }
 /*# sourceMappingURL=main.css.map */

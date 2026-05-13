@@ -103,7 +103,7 @@
 }
 
 
-@include mixins.respond-to(variables.$screen-md) {
+@include mixins.respond-to(variables.$lg) {
 
 }
 

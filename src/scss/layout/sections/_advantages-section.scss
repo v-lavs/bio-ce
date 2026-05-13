@@ -1,0 +1,191 @@
+@use "../../utils/mixins";
+@use "../../utils/variables";
+
+.advantages-section{
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: cover;
+  min-height: 737px;
+  padding: 76px 0;
+  overflow: hidden;
+  .section__title{
+    color: #FFFFFF;
+  }
+}
+
+:root {
+  --gap: 43px;
+}
+
+.container {
+  border: 1px solid red;
+}
+
+.slider-advantages {
+  padding: 50px 0;
+  margin: 0 auto;
+  border: 1px solid green;
+}
+
+.slider-viewport {
+  width: 100%;
+  max-width: 1207px;
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid blueviolet;
+  margin: 0 auto;
+}
+
+.slider-track {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  position: relative;
+  height: 400px;
+  width: max-content;
+  touch-action: pan-y;
+}
+
+.slider-advantages .slide {
+  flex-shrink: 0;
+  width: 287px;
+  height: 323px;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .2);
+  backdrop-filter: blur(20px);
+  background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
+  border-radius: 15px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.slider-advantages .slide-inner {
+  width: 100%;
+  height: 100%;
+  padding: 44px 49px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+
+  color: #FFFFFF;
+}
+
+.slider-advantages .icon {
+  width: 112px;
+  height: 112px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  flex-shrink: 0;
+  margin-bottom: auto;
+}
+
+.slider-advantages .title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.44;
+  padding-top: 24px;
+}
+
+.slider-advantages .description-wrap {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+}
+
+.slider-advantages .description {
+  font-size: 18px;
+  line-height: 1.50;
+}
+
+.bottom-controls {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.slider-line-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 1;
+}
+
+.slider-line-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(231, 241, 255, 0.4);
+}
+
+.progress-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: #E7F1FF;
+}
+
+.slider-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  padding-top: 17px;
+  margin-left: auto;
+  gap: 8px;
+}
+
+.nav-btn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  width: 51px;
+  height: 46px;
+  cursor: pointer;
+  transition: all 0.35s;
+}
+
+.nav-btn_left {
+  background-image: url(../assets/img/arrow-left.svg);
+}
+
+.nav-btn_right {
+  background-image: url(../assets/img/arrow-right.svg);
+}
+
+.nav-btn:hover {
+  opacity: 0.6;
+}
+
+@media (max-width: 1023px) {
+
+  section.advantages-section .slider-viewport   .slider-track {
+    gap: 20px;
+    max-width: 100%;
+  }
+
+  section.advantages-section .slider-viewport .slide {
+    width: calc((100% - 20px) / 2);
+    max-width: 480px;
+    height: 380px ;
+  }
+  .slider-advantages .icon{
+    width: 80px;
+    height: 80px;
+  }
+}
+
+@media (max-width: 600px) {
+  section.advantages-section .slider-viewport   .slide {
+    width: 100% ;
+    max-width: 100%;
+    height: 100%;
+  }
+}
