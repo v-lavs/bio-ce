@@ -1072,14 +1072,9 @@ form textarea {
   --gap: 43px;
 }
 
-.container {
-  border: 1px solid red;
-}
-
 .slider-advantages {
   padding: 50px 0;
   margin: 0 auto;
-  border: 1px solid green;
 }
 
 .slider-viewport {
@@ -1091,7 +1086,6 @@ form textarea {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  border: 1px solid blueviolet;
   margin: 0 auto;
 }
 
@@ -1398,24 +1392,22 @@ form textarea {
   height: auto;
 }
 
-@media only screen and (max-width: 1280px) {
+@media only screen and (max-width: 1439px) {
   .container {
     max-width: 1280px;
   }
+}
 
+@media only screen and (max-width: 1280px) {
   .container {
-    border: 2px solid red;
+    max-width: 1080px;
   }
 }
 
-@media only screen and (max-width:1024px) {
+@media only screen and (max-width:1080px) {
   .container {
-    max-width: 980px;
+    max-width: 880px;
     padding: 0 25px;
-  }
-
-  .container {
-    border: 2px solid blue;
   }
 }
 
@@ -1491,11 +1483,7 @@ form textarea {
   }
 
   .container {
-    max-width: 780px;
-  }
-
-  .container {
-    border: 2px solid goldenrod;
+    max-width: 100%;
   }
 
   .burger {
@@ -1527,11 +1515,7 @@ form textarea {
 
 @media only screen and (max-width: 767px) {
   .container {
-    max-width: 580px;
-  }
-
-  .container {
-    border: 2px solid greenyellow;
+    padding: 0 15px;
   }
 }
 
@@ -1540,27 +1524,6 @@ form textarea {
     width: 100%;
     max-width: 100%;
     height: 100%;
-  }
-}
-
-@media only screen and (max-width: 580px) {
-  .container {
-    max-width: 420px;
-  }
-
-  .container {
-    border: 2px solid fuchsia;
-  }
-}
-
-@media only screen and (max-width: 420px) {
-  .container {
-    max-width: 100%;
-    padding: 0 15px;
-  }
-
-  .container {
-    border: 2px solid blueviolet;
   }
 }
 /*# sourceMappingURL=main.css.map */

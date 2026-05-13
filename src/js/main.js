@@ -687,7 +687,7 @@ function initAdvantageSlider() {
                         height: "auto",
                         opacity: 1,
                         duration: animate ? 0.6 : 0,
-                        delay: animate ? 0.4 : 0
+                        delay: animate ? 0.5 : 0
                     });
 
                 } else {

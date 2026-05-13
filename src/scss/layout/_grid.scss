@@ -6,53 +6,55 @@
   max-width: 1440px;
   padding: 0 50px;
   margin: 0 auto;
-
-  @include mixins.respond-to(variables.$xl) {
+  @include mixins.respond-to(variables.$xxl) {
     max-width: 1280px;
   }
+  @include mixins.respond-to(variables.$xl) {
+    max-width: 1080px;
+  }
   @include mixins.respond-to(variables.$lg) {
-    max-width: 980px;
+    max-width: 880px;
     padding: 0 25px;
   }
 
   @include mixins.respond-to(variables.$md) {
-    max-width: 780px;
+    max-width: 100%;
   }
 
   @include mixins.respond-to(variables.$sm) {
-    max-width: 580px;
-  }
-
-  @include mixins.respond-to(variables.$xs) {
-    max-width: 420px;
-  }
-  @include mixins.respond-to(variables.$xxs) {
-    max-width: 100%;
     padding: 0 15px;
   }
 
-  @media screen and (max-width: 340px) {
-
-  }
+  //@include mixins.respond-to(variables.$xs) {
+  //
+  //}
+  //@include mixins.respond-to(variables.$xxs) {
+  //
+  //
+  //}
+  //
+  //@media screen and (max-width: 340px) {
+  //
+  //}
 }
 
-.container {
-  @include mixins.respond-to(variables.$xl) {
-    border: 2px solid red;
-  }
-  @include mixins.respond-to(variables.$lg) {
-    border: 2px solid blue;
-  }
-  @include mixins.respond-to(variables.$md) {
-    border: 2px solid goldenrod;
-  }
-  @include mixins.respond-to(variables.$sm) {
-    border: 2px solid greenyellow;
-  }
-  @include mixins.respond-to(variables.$xs) {
-    border: 2px solid fuchsia;
-  }
-  @include mixins.respond-to(variables.$xxs) {
-    border: 2px solid blueviolet;
-  }
-}
+//.container {
+//  @include mixins.respond-to(variables.$xl) {
+//    border: 2px solid red;
+//  }
+//  @include mixins.respond-to(variables.$lg) {
+//    border: 2px solid blue;
+//  }
+//  @include mixins.respond-to(variables.$md) {
+//    border: 2px solid goldenrod;
+//  }
+//  @include mixins.respond-to(variables.$sm) {
+//    border: 2px solid greenyellow;
+//  }
+//  @include mixins.respond-to(variables.$xs) {
+//    border: 2px solid fuchsia;
+//  }
+//  @include mixins.respond-to(variables.$xxs) {
+//    border: 2px solid blueviolet;
+//  }
+//}
