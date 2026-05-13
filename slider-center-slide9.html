@@ -17,28 +17,32 @@
     }
 
     body {
-        background-image: url(assets/img/bg-accordion-slider.png);
 
         min-height: 100vh;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: system-ui, sans-serif;
-        margin: 0;
-        overflow: hidden;
+    }
+
+    .container {
+        border: 1px solid red;
+    }
+
+    .slider-advantages {
+        padding: 50px 0;
+        margin: 0 auto;
+        width: max-content;
+        border: 1px solid green;
     }
 
     .slider-viewport {
         width: 100%;
         max-width: 1207px;
-        height: 540px;
+        height: 380px;
         position: relative;
         overflow: hidden;
         display: flex;
         flex-direction: column;
         justify-content: center;
-        box-sizing: border-box;
-
+        border: 1px solid blueviolet;
+        margin-bottom: 56px;
     }
 
     .slider-track {
@@ -56,7 +60,7 @@
         flex-shrink: 0;
         width: 287px; /* Базовий розмір, JS сам змінить його плавно */
         height: 323px;
-        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .5);
+        box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .2);
         backdrop-filter: blur(20px);
         background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
 
@@ -75,7 +79,7 @@
         padding: 44px 49px;
         display: flex;
         flex-direction: column;
-        justify-content: space-between;
+        /*justify-content: space-between;*/
         color: #FFFFFF;
     }
 
@@ -85,7 +89,7 @@
         background-repeat: no-repeat;
         background-position: center;
         background-size: contain;
-        margin-bottom: 24px;
+        flex-shrink: 0;
     }
 
     .title {
@@ -93,6 +97,7 @@
         font-weight: 700;
         font-size: 20px;
         line-height: 1.44;
+        padding-top: 24px;
         /*font-size: 1.25rem;*/
     }
 
@@ -111,18 +116,14 @@
 
     .bottom-controls {
         width: 100%;
-        margin-top: auto;
         position: relative;
         display: flex;
-        align-items: center;
-        justify-content: space-between;
-        height: 50px;
     }
 
     .slider-line-wrapper {
         position: absolute;
         left: 0;
-        right: 120px;
+        right: 0;
         height: 2px;
         z-index: 1;
     }
@@ -131,7 +132,7 @@
         position: absolute;
         width: 100%;
         height: 100%;
-        background: rgba(255, 255, 255, 0.1);
+        background: rgba(231, 241, 255, 0.4);
     }
 
     .progress-bar-fill {
@@ -140,33 +141,40 @@
         top: 0;
         height: 100%;
         width: 0;
-        background: linear-gradient(90deg, #ff3366, #ff6699);
+        background: #E7F1FF;
     }
 
     .slider-nav {
         position: relative;
         z-index: 2;
-        background: #090d1a;
-        padding-left: 20px;
-        margin-left: auto;
         display: flex;
-        gap: 10px;
+        padding-top: 17px;
+        margin-left: auto;
+        gap: 8px;
     }
 
     .nav-btn {
-        background: transparent;
-        border: 1px solid rgba(255, 255, 255, 0.2);
-        color: #fff;
-        border-radius: 8px;
-        width: 44px;
-        height: 44px;
+        background-color: transparent;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: contain;
+        border: none;
+        width: 51px;
+        height: 46px;
         cursor: pointer;
-        font-size: 1.1rem;
-        transition: all 0.3s;
+        transition: all 0.35s;
+    }
+
+    .nav-btn_left {
+        background-image: url(assets/img/arrow-left.svg);
+    }
+
+    .nav-btn_right {
+        background-image: url(assets/img/arrow-right.svg);
     }
 
     .nav-btn:hover {
-        background: rgba(255, 255, 255, 0.1);
+        opacity: 0.6;
     }
 
     /* ЗМІНИ ТІЛЬКИ ДЛЯ ТАБЛЕТА ТА МОБІЛКИ */
@@ -198,78 +206,92 @@
     }
 
 </style>
-<section>
+<section class="advantages-section" style="background-image: url(assets/img/bg-accordion-slider.png);">
     <div class="container">
-        <div class="slider-viewport" id="sliderViewport">
-            <div class="slider-track" id="sliderTrack">
+        <h2 class="section__title heading_xl">Наші переваги</h2>
+        <div class="slider-advantages">
+            <div class="slider-viewport" id="sliderViewport">
+                <div class="slider-track" id="sliderTrack">
 
-                <!-- Слайд 1 -->
-                <div class="slide" data-index="0">
-                    <div class="slide-inner">
-                        <div class="icon" style="background-image: url(assets/img/ic-advantage1.svg);"
-                             aria-hidden="true"></div>
-                        <h3 class="title">Високі
-                            стандарти якості</h3>
-                        <div class="description-wrap">
-                            <p class="description">Аналіз ринку, побудова архітектури даних та детальне проектування
-                                майбутнього інтерфейсу.</p>
+                    <!-- Слайд 1 -->
+                    <div class="slide" data-index="0">
+                        <div class="slide-inner">
+                            <div class="icon" style="background-image: url(assets/img/ic-advantage1.svg);"
+                                 aria-hidden="true"></div>
+                            <div class="">
+                                <h3 class="title">Високі
+                                    стандарти якості</h3>
+                                <div class="description-wrap">
+                                    <p class="description">Аналіз ринку, побудова архітектури даних та детальне
+                                        проектування
+                                        майбутнього інтерфейсу.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Слайд 2 (Стартовий за замовчуванням) -->
+                    <div class="slide" data-index="1">
+                        <div class="slide-inner">
+                            <div class="icon" style="background-image: url(assets/img/ic-advantage2.svg);"
+                                 aria-hidden="true"></div>
+                            <div class="">
+                                <h3 class="title">Досвідчена команда</h3>
+                                <div class="description-wrap">
+                                    <p class="description">Наша команда — це фахівці з глибокою галузевою експертизою та
+                                        багаторічним практичним досвідом у виробництві, регуляторних процесах і промоції
+                                        фармацевтичної продукції.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Слайд 3 -->
+                    <div class="slide" data-index="2">
+                        <div class="slide-inner">
+                            <div class="icon" style="background-image: url(assets/img/ic-advantage3.svg);"
+                                 aria-hidden="true"></div>
+                            <div class="">
+                                <h3 class="title">Міжнародна
+                                    співпраця</h3>
+                                <div class="description-wrap">
+                                    <p class="description">Глибокий збір метрик, відстеження конверсії користувачів та
+                                        автоматизована звітність.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Слайд 4 -->
+                    <div class="slide" data-index="3">
+                        <div class="slide-inner">
+                            <div class="icon" style="background-image: url(assets/img/ic-advantage2.svg);"
+                                 aria-hidden="true"></div>
+                            <div class="">
+                                <h3 class="title">Розробка</h3>
+                                <div class="description-wrap">
+                                    <p class="description">Створення стабільного коду, хмарна інтеграція та безперервне
+                                        тестування систем.</p>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Слайд 2 (Стартовий за замовчуванням) -->
-                <div class="slide" data-index="1">
-                    <div class="slide-inner">
-                        <div class="icon" style="background-image: url(assets/img/ic-advantage2.svg);"
-                             aria-hidden="true"></div>
-                        <h3 class="title">Досвідчена команда</h3>
-                        <div class="description-wrap">
-                            <p class="description">Наша команда — це фахівці з глибокою галузевою експертизою та
-                                багаторічним практичним досвідом у виробництві, регуляторних процесах і промоції
-                                фармацевтичної продукції.</p>
-                        </div>
-                    </div>
-                </div>
+                <!-- Керування та Індикатор прогресу -->
 
-                <!-- Слайд 3 -->
-                <div class="slide" data-index="2">
-                    <div class="slide-inner">
-                        <div class="icon" style="background-image: url(assets/img/ic-advantage3.svg);"
-                             aria-hidden="true"></div>
-                        <h3 class="title">Міжнародна
-                            співпраця</h3>
-                        <div class="description-wrap">
-                            <p class="description">Глибокий збір метрик, відстеження конверсії користувачів та
-                                автоматизована звітність.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Слайд 4 -->
-                <div class="slide" data-index="3">
-                    <div class="slide-inner">
-                        <div class="icon" style="background-image: url(assets/img/ic-advantage2.svg);"
-                             aria-hidden="true"></div>
-                        <h3 class="title">Розробка</h3>
-                        <div class="description-wrap">
-                            <p class="description">Створення стабільного коду, хмарна інтеграція та безперервне
-                                тестування систем.</p>
-                        </div>
-                    </div>
-                </div>
             </div>
 
-            <!-- Керування та Індикатор прогресу -->
-            <div class="bottom-controls">
-                <div class="slider-line-wrapper">
-                    <div class="slider-line-bg"></div>
-                    <!-- Лінія заповнення прогресу -->
-                    <div class="progress-bar-fill" id="progressBar"></div>
-                </div>
-                <div class="slider-nav">
-                    <button class="nav-btn" id="prevBtn">←</button>
-                    <button class="nav-btn" id="nextBtn">→</button>
-                </div>
+        </div>
+        <div class="bottom-controls">
+            <div class="slider-line-wrapper">
+                <div class="slider-line-bg"></div>
+                <!-- Лінія заповнення прогресу -->
+                <div class="progress-bar-fill" id="progressBar"></div>
+            </div>
+            <div class="slider-nav">
+                <button type="button" class="nav-btn nav-btn_left" id="prevBtn"></button>
+                <button type="button" class="nav-btn nav-btn_right" id="nextBtn"></button>
             </div>
         </div>
     </div>
@@ -346,34 +368,100 @@
                 const DYNAMIC_ACTIVE_HEIGHT = 376 * scaleFactor;
 
                 // 3. АНІМАЦІЯ ПРОПОРЦІЙ КАРТОК (Розсунення ззаду)
+                // slides.forEach((slide, index) => {
+                //     const desc = slide.querySelector('.description-wrap');
+                //
+                //     if (index === activeIndex) {
+                //         slide.classList.add('active');
+                //         gsap.to(slide, {
+                //             width: DYNAMIC_ACTIVE_WIDTH,
+                //             height: DYNAMIC_ACTIVE_HEIGHT,
+                //             duration: animate ? 0.6 : 0,
+                //             ease: "power2.out"
+                //         });
+                //         gsap.to(desc, {
+                //             height: "auto",
+                //             opacity: 1,
+                //             duration: animate ? 0.6 : 0,
+                //             delay: animate ? 0.2 : 0
+                //         });
+                //     } else {
+                //         slide.classList.remove('active');
+                //         gsap.to(slide, {
+                //             width: DYNAMIC_SIDE_WIDTH,
+                //             height: DYNAMIC_SIDE_HEIGHT,
+                //             duration: animate ? 0.6 : 0,
+                //             ease: "power2.out"
+                //         });
+                //         // Примусово вбиваємо будь-яку застряглу анімацію і ховаємо текст
+                //         gsap.killTweensOf(desc);
+                //         gsap.to(desc, {height: 0, opacity: 0, duration: animate ? 0.3 : 0});
+                //     }
+                // });
+                // НАДІЙНИЙ ЦИКЛ АНІМАЦІЇ КАРТОК + ІКОНКА
                 slides.forEach((slide, index) => {
                     const desc = slide.querySelector('.description-wrap');
+                    const icon = slide.querySelector('.icon'); // Знаходимо іконку
+
+                    // Динамічні розміри іконок під коефіцієнт стискання екрану
+                    const DYNAMIC_SIDE_ICON = 90 * scaleFactor;
+                    const DYNAMIC_ACTIVE_ICON = 112 * scaleFactor;
 
                     if (index === activeIndex) {
                         slide.classList.add('active');
+
+                        // Плавно збільшуємо картку
                         gsap.to(slide, {
                             width: DYNAMIC_ACTIVE_WIDTH,
                             height: DYNAMIC_ACTIVE_HEIGHT,
                             duration: animate ? 0.6 : 0,
                             ease: "power2.out"
                         });
+
+                        // АНІМАЦІЯ ІКОНКИ: Збільшуємо до 112px
+                        if (icon) {
+                            gsap.to(icon, {
+                                width: DYNAMIC_ACTIVE_ICON,
+                                height: DYNAMIC_ACTIVE_ICON,
+                                duration: animate ? 0.6 : 0,
+                                ease: "power2.out"
+                            });
+                        }
+
+                        // Ваша рідна робоча анімація тексту
                         gsap.to(desc, {
                             height: "auto",
                             opacity: 1,
                             duration: animate ? 0.6 : 0,
                             delay: animate ? 0.2 : 0
                         });
+
                     } else {
                         slide.classList.remove('active');
+
+                        // Повертаємо базовий розмір карткам
                         gsap.to(slide, {
                             width: DYNAMIC_SIDE_WIDTH,
                             height: DYNAMIC_SIDE_HEIGHT,
                             duration: animate ? 0.6 : 0,
                             ease: "power2.out"
                         });
-                        // Примусово вбиваємо будь-яку застряглу анімацію і ховаємо текст
-                        gsap.killTweensOf(desc);
-                        gsap.to(desc, {height: 0, opacity: 0, duration: animate ? 0.3 : 0});
+
+                        // АНІМАЦІЯ ІКОНКИ: Зменшуємо до 90px
+                        if (icon) {
+                            gsap.to(icon, {
+                                width: DYNAMIC_SIDE_ICON,
+                                height: DYNAMIC_SIDE_ICON,
+                                duration: animate ? 0.6 : 0,
+                                ease: "power2.out"
+                            });
+                        }
+
+                        // Ваша рідна робоча анімація приховування тексту
+                        if (desc) {
+                            gsap.killTweensOf(desc);
+                            gsap.to(desc, {height: 0, opacity: 0, duration: animate ? 0.3 : 0});
+                        }
                     }
                 });
 

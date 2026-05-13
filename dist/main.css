@@ -151,7 +151,7 @@ body.menu-open {
   padding-bottom: 100px;
 }
 
-.section__title {
+.section__title-gb {
   position: relative;
   z-index: 1;
   font-size: 24px;
@@ -169,7 +169,7 @@ body.menu-open {
   background: linear-gradient(#fff, #fff) padding-box, linear-gradient(180deg, #056AFD 0%, #89FBC1 100%) border-box;
 }
 
-.section__title:before {
+.section__title-gb:before {
   content: "";
   position: absolute;
   top: -1px;
@@ -1064,26 +1064,155 @@ form textarea {
   overflow: hidden;
 }
 
-/* Базовий стан для ВСІХ слайдів (зокрема й бокових) */
+.advantages-section .section__title {
+  color: #FFFFFF;
+}
 
-.swiper-slide .swiper-slide-inner {
-  transform: scale(0.85);
-  /* Бокові слайди менші на 15% */
+:root {
+  --gap: 43px;
+}
+
+.slider-advantages {
+  padding: 50px 0;
+  margin: 0 auto;
+  width: -moz-max-content;
+  width: max-content;
+}
+
+.slider-advantages .slider-viewport {
+  width: 100%;
+  max-width: 1207px;
+  height: 380px;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 56px;
+}
+
+.slider-advantages .slider-track {
+  display: flex;
+  align-items: flex-end;
+  justify-content: flex-start;
+  position: relative;
+  height: 400px;
+  width: -moz-max-content;
+  width: max-content;
+  touch-action: pan-y;
+}
+
+.slider-advantages .slide {
+  flex-shrink: 0;
+  width: 287px;
+  height: 323px;
+  box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(20px);
+  background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
+  border-radius: 15px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.slider-advantages .slide-inner {
+  width: 100%;
+  height: 100%;
+  padding: 44px 49px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #FFFFFF;
+}
+
+.slider-advantages .icon {
+  width: 112px;
+  height: 112px;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  flex-shrink: 0;
+}
+
+.slider-advantages .title {
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 1.44;
+  padding-top: 24px;
+}
+
+.slider-advantages .description-wrap {
+  overflow: hidden;
+  height: 0;
+  opacity: 0;
+}
+
+.slider-advantages .description {
+  font-size: 18px;
+  line-height: 1.5;
+}
+
+.slider-advantages .bottom-controls {
+  width: 100%;
+  position: relative;
+  display: flex;
+}
+
+.slider-advantages .slider-line-wrapper {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  z-index: 1;
+}
+
+.slider-advantages .slider-line-bg {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: rgba(231, 241, 255, 0.4);
+}
+
+.slider-advantages .progress-bar-fill {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 0;
+  background: #E7F1FF;
+}
+
+.slider-advantages .slider-nav {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  padding-top: 17px;
+  margin-left: auto;
+  gap: 8px;
+}
+
+.slider-advantages .nav-btn {
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  border: none;
+  width: 51px;
+  height: 46px;
+  cursor: pointer;
+  transition: all 0.35s;
+}
+
+.slider-advantages .nav-btn_left {
+  background-image: url(assets/img/arrow-left.svg);
+}
+
+.slider-advantages .nav-btn_right {
+  background-image: url(assets/img/arrow-right.svg);
+}
+
+.slider-advantages .nav-btn:hover {
   opacity: 0.6;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  height: 376px;
-  border: 1px solid red;
 }
-
-/* Стан для ЦЕНТРАЛЬНОГО активного слайду (і його клонів) */
-
-.swiper-slide-active .swiper-slide-inner {
-  transform: scale(1);
-  /* Центральний стає великим */
-  opacity: 1;
-}
-
-/* Скидаємо зменшення на мобільних та планшетах */
 
 .section-pharmacovigilance {
   padding-top: 100px;
@@ -1265,9 +1394,18 @@ form textarea {
 }
 
 @media (max-width: 1023px) {
-  .swiper-slide .slide-content {
-    transform: scale(1);
-    opacity: 1;
+  .slider-viewport {
+    padding: 0 20px;
+  }
+
+  .slider-track {
+    gap: 20px !important;
+  }
+
+  .slide {
+    width: calc((100vw - 40px - 20px) / 2) !important;
+    max-width: 480px;
+    height: 340px !important;
   }
 }
 
@@ -1348,6 +1486,14 @@ form textarea {
 
   .header__nav.is-open {
     transform: translateX(0);
+  }
+}
+
+@media (max-width: 600px) {
+  .slide {
+    width: calc(100vw - 40px) !important;
+    max-width: 100%;
+    height: 320px !important;
   }
 }
 /*# sourceMappingURL=main.css.map */

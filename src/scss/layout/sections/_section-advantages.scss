@@ -1,120 +1,184 @@
 @use "../../utils/mixins";
 @use "../../utils/variables";
 
-.advantages-section{
-  background-repeat: no-repeat!important;
+.advantages-section {
+  background-repeat: no-repeat !important;
   background-position: center;
   background-size: cover;
   min-height: 737px;
   padding: 76px 0;
   overflow: hidden;
-}
-///* Головний контейнер обмежуємо по ширині під 3 слайди, щоб бокові картки гарно ставали по краях сайту */
-//.advantages-swiper {
-//  width: 100%;
-//  max-width: 1240px; /* Сума ширин трьох карток + відступи. Підберіть під свій макет */
-//  margin: 0 auto;
-//  padding: 60px 0;
-//  overflow: visible; /* Дозволяє контенту виходити за межі, якщо екран вузький */
-//}
-//
-///* Обгортка слайда Swiper (Нерухома база, яка тримає симетрію) */
-//.advantages-swiper .swiper-slide {
-//  width: 100%;
-//  display: flex;
-//  justify-content: center;
-//  align-items: center;
-//  position: relative;
-//  /* Видаляємо всі CSS-переходи з самої коробки Swiper, щоб не було мікрострибків */
-//  transition: none !important;
-//  transition:all 200ms linear;
-//  transform: scale(0.8);
-//
-//
-//}
-//
-///* БАЗОВИЙ СТАН: Менші бокові картки (Пропорції з вашого першого референсу) */
-//.advantages-swiper .swiper-slide-inner {
-//  //width: 280px;   /* Ширина бокових карток */
-//  //height: 380px;  /* Висота бокових карток */
-//  background: rgba(255, 255, 255, 0.06);
-//  border: 1px solid rgba(255, 255, 255, 0.12);
-//  border-radius: 24px;
-//  backdrop-filter: blur(12px);
-//  padding: 30px;
-//  display: flex;
-//  flex-direction: column;
-//  justify-content: flex-end;
-//  position: relative;
-//  z-index: 1;
-//  transform: scale(1); /* Жодних косих нахилів rotateY */
-//
-//  /* Плавне, масляне розширення у всі боки одночасно */
-//  transition: width 0.75s cubic-bezier(0.25, 1, 0.5, 1),
-//  height 0.75s cubic-bezier(0.25, 1, 0.5, 1),
-//  background 0.5s ease;
-//
-//  will-change: width, height;
-//}
-//
-///* Опис тексту на бокових картах повністю схований */
-//.card-description {
-//  max-height: 0;
-//  opacity: 0;
-//  overflow: hidden;
-//  margin-top: 0;
-//  font-size: 15px;
-//  line-height: 1.5;
-//  color: rgba(255, 255, 255, 0.7);
-//  transition: max-height 0.4s ease, opacity 0.3s ease, margin-top 0.3s ease;
-//}
-//
-///* ========================================================
-//   ЦЕНТРАЛЬНИЙ АКТИВНИЙ СЛАЙД — ДЗЕРКАЛЬНЕ СИМЕТРИЧНЕ РОЗШИРЕННЯ
-//   ======================================================== */
-//.advantages-swiper .swiper-slide-active {
-//  z-index: 10; /* Виносимо велику картку на передній план */
-//  transform: scale(1);
-//  background: #fc0
-//}
-//
-//.advantages-swiper .swiper-slide-active .swiper-slide-inner {
-//  //width: 460px;   /* Нова фізична ширина центральної картки */
-//  //height: 440px;  /* Нова фізична висота центральної картки */
-//  background: rgba(255, 255, 255, 0.14);
-//  border-color: rgba(255, 255, 255, 0.25);
-//  justify-content: center; /* Контент стає по центру картки */
-//}
-//
-///* Мягке розгортання тексту опису строго по центру із затримкою */
-//.advantages-swiper .swiper-slide-active .card-description {
-//  max-height: 150px;
-//  opacity: 1;
-//  margin-top: 14px;
-//  /* Текст випливає, коли картка повністю розширилася */
-//  transition: max-height 0.75s cubic-bezier(0.25, 1, 0.5, 1) 0.15s,
-//  opacity 0.5s ease 0.25s;
-//}
 
-/* Базовий стан для ВСІХ слайдів (зокрема й бокових) */
-.swiper-slide .swiper-slide-inner {
-  transform: scale(0.85); /* Бокові слайди менші на 15% */
-  opacity: 0.6;
-  transition: transform 0.4s ease, opacity 0.4s ease;
-  height: 376px;
-  border: 1px solid red;
+  .section__title {
+    color: #FFFFFF;
+  }
 }
 
-/* Стан для ЦЕНТРАЛЬНОГО активного слайду (і його клонів) */
-.swiper-slide-active .swiper-slide-inner{
-  transform: scale(1);    /* Центральний стає великим */
-  opacity: 1;
+:root {
+  --gap: 43px;
 }
 
-/* Скидаємо зменшення на мобільних та планшетах */
+.slider-advantages {
+  padding: 50px 0;
+  margin: 0 auto;
+  width: max-content;
+
+  .slider-viewport {
+    width: 100%;
+    max-width: 1207px;
+    height: 380px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-bottom: 56px;
+  }
+
+  .slider-track {
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    position: relative;
+    height: 400px;
+    width: max-content;
+    touch-action: pan-y;
+  }
+
+  .slide {
+    flex-shrink: 0;
+    width: 287px;
+    height: 323px;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .2);
+    backdrop-filter: blur(20px);
+    background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
+    border-radius: 15px;
+    cursor: pointer;
+    overflow: hidden;
+  }
+
+  .slide-inner {
+    width: 100%;
+    height: 100%;
+    padding: 44px 49px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    color: #FFFFFF;
+  }
+
+  .icon {
+    width: 112px;
+    height: 112px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    flex-shrink: 0;
+  }
+
+  .title {
+    font-weight: 700;
+    font-size: 20px;
+    line-height: 1.44;
+    padding-top: 24px;
+  }
+
+  .description-wrap {
+    overflow: hidden;
+    height: 0;
+    opacity: 0;
+  }
+
+  .description {
+    font-size: 18px;
+    line-height: 1.50;
+  }
+
+  .bottom-controls {
+    width: 100%;
+    position: relative;
+    display: flex;
+  }
+
+  .slider-line-wrapper {
+    position: absolute;
+    left: 0;
+    right: 0;
+    height: 2px;
+    z-index: 1;
+  }
+
+  .slider-line-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: rgba(231, 241, 255, 0.4);
+  }
+
+  .progress-bar-fill {
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: #E7F1FF;
+  }
+
+  .slider-nav {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    padding-top: 17px;
+    margin-left: auto;
+    gap: 8px;
+  }
+
+  .nav-btn {
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+    border: none;
+    width: 51px;
+    height: 46px;
+    cursor: pointer;
+    transition: all 0.35s;
+  }
+
+  .nav-btn_left {
+    background-image: url(assets/img/arrow-left.svg);
+  }
+
+  .nav-btn_right {
+    background-image: url(assets/img/arrow-right.svg);
+  }
+
+  .nav-btn:hover {
+    opacity: 0.6;
+  }
+}
+
 @media (max-width: 1023px) {
-  .swiper-slide .slide-content {
-    transform: scale(1);
-    opacity: 1;
+  .slider-viewport {
+
+    padding: 0 20px;
+  }
+
+  .slider-track {
+    gap: 20px !important;
+  }
+
+  .slide {
+    width: calc((100vw - 40px - 20px) / 2) !important;
+    max-width: 480px;
+    height: 340px !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .slide {
+    width: calc(100vw - 40px) !important;
+    max-width: 100%;
+    height: 320px !important;
   }
 }

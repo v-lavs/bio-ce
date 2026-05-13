@@ -595,12 +595,310 @@ function initPinnedStory() {
 // =========================
 // SLIDER ADVANTAGE
 // =========================
+function initAdvantageSlider (){
+    const track = document.getElementById('sliderTrack');
+    const viewport = document.getElementById('sliderViewport');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+    const progressBar = document.getElementById('progressBar');
 
+    const originalSlides = Array.from(track.querySelectorAll('.slide'));
+    const totalSteps = originalSlides.length;
+
+    let isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+    if (totalSteps > 0 && isDesktop) {
+        const firstSlideClone = originalSlides[0].cloneNode(true);
+        firstSlideClone.classList.add('slide-clone');
+        track.appendChild(firstSlideClone);
+    }
+
+    let slides = Array.from(track.querySelectorAll('.slide'));
+    let activeIndex = 1;
+
+    const SIDE_WIDTH = 287;
+    const ACTIVE_WIDTH = 547;
+    const GAP = 43;
+
+    function updateSlider(animate = true) {
+        isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+
+        if (!slides[activeIndex]) return;
+        const logicalIndex = parseInt(slides[activeIndex].getAttribute('data-index')) || 0;
+
+        //PROGRESS BAR
+        let progressPercent;
+        if (isDesktop) {
+            progressPercent = ((logicalIndex + 1) / totalSteps) * 100;
+        } else {
+            if (window.innerWidth >= 601 && window.innerWidth < 1024) {
+                const maxTabletIndex = totalSteps - 2;
+                const currentProgressIndex = Math.min(activeIndex, maxTabletIndex);
+                progressPercent = (currentProgressIndex / maxTabletIndex) * 100;
+            } else {
+                progressPercent = ((activeIndex + 1) / totalSteps) * 100;
+            }
+        }
+
+        gsap.to(progressBar, {
+            width: `${progressPercent}%`,
+            duration: animate ? 0.6 : 0,
+            ease: "power2.out"
+        });
+
+        if (isDesktop) {
+            // COMPRESSION RATIO
+            const currentViewportWidth = viewport.offsetWidth;
+            let scaleFactor = currentViewportWidth / 1207;
+            if (scaleFactor > 1) scaleFactor = 1;
+
+            const DYNAMIC_SIDE_WIDTH = SIDE_WIDTH * scaleFactor;
+            const DYNAMIC_ACTIVE_WIDTH = ACTIVE_WIDTH * scaleFactor;
+            const DYNAMIC_GAP = GAP * scaleFactor;
+
+            const DYNAMIC_SIDE_HEIGHT = 323 * scaleFactor;
+            const DYNAMIC_ACTIVE_HEIGHT = 376 * scaleFactor;
+
+            // ANIM CARDS
+            slides.forEach((slide, index) => {
+                const desc = slide.querySelector('.description-wrap');
+                const icon = slide.querySelector('.icon');
+
+                const DYNAMIC_SIDE_ICON = 90 * scaleFactor;
+                const DYNAMIC_ACTIVE_ICON = 112 * scaleFactor;
+
+                if (index === activeIndex) {
+                    slide.classList.add('active');
+
+                    gsap.to(slide, {
+                        width: DYNAMIC_ACTIVE_WIDTH,
+                        height: DYNAMIC_ACTIVE_HEIGHT,
+                        duration: animate ? 0.6 : 0,
+                        ease: "power2.out"
+                    });
+
+                    if (icon) {
+                        gsap.to(icon, {
+                            width: DYNAMIC_ACTIVE_ICON,
+                            height: DYNAMIC_ACTIVE_ICON,
+                            duration: animate ? 0.6 : 0,
+                            ease: "power2.out"
+                        });
+                    }
+
+                    gsap.to(desc, {
+                        height: "auto",
+                        opacity: 1,
+                        duration: animate ? 0.6 : 0,
+                        delay: animate ? 0.2 : 0
+                    });
+
+                } else {
+                    slide.classList.remove('active');
+
+                    gsap.to(slide, {
+                        width: DYNAMIC_SIDE_WIDTH,
+                        height: DYNAMIC_SIDE_HEIGHT,
+                        duration: animate ? 0.6 : 0,
+                        ease: "power2.out"
+                    });
+
+                    if (icon) {
+                        gsap.to(icon, {
+                            width: DYNAMIC_SIDE_ICON,
+                            height: DYNAMIC_SIDE_ICON,
+                            duration: animate ? 0.6 : 0,
+                            ease: "power2.out"
+                        });
+                    }
+
+                    if (desc) {
+                        gsap.killTweensOf(desc);
+                        gsap.to(desc, {height: 0, opacity: 0, duration: animate ? 0.3 : 0});
+                    }
+                }
+            });
+
+            // 4. CENTER SLIDE
+            let accumulatedLeft = 0;
+            for (let i = 0; i < activeIndex; i++) {
+                accumulatedLeft += DYNAMIC_SIDE_WIDTH + DYNAMIC_GAP;
+            }
+
+            const activeSlideCenter = accumulatedLeft + (DYNAMIC_ACTIVE_WIDTH / 2);
+            const containerCenter = currentViewportWidth / 2;
+            const trackX = containerCenter - activeSlideCenter;
+
+            gsap.to(track, {
+                x: trackX,
+                gap: `${DYNAMIC_GAP}px`,
+                duration: animate ? 0.6 : 0,
+                ease: "power2.out"
+            });
+        } else {
+           //RESPONSIVE
+
+            const isTablet = window.innerWidth >= 601 && window.innerWidth < 1024;
+
+            slides.forEach((slide, index) => {
+                slide.classList.remove('active');
+                const desc = slide.querySelector('.description-wrap');
+                const isVisible = (index === activeIndex) || (isTablet && index === activeIndex + 1);
+
+                if (isVisible) {
+                    gsap.to(desc, {
+                        height: "auto",
+                        opacity: 1,
+                        duration: animate ? 0.5 : 0,
+                        ease: "power2.out",
+                        delay: animate ? 0.1 : 0
+                    });
+                } else {
+                    gsap.killTweensOf(desc);
+                    gsap.to(desc, {
+                        height: 0,
+                        opacity: 0,
+                        duration: animate ? 0.3 : 0,
+                        ease: "power2.in"
+                    });
+                }
+            });
+
+            const MOBILE_GAP = 20;
+            const currentSlideWidth = slides[activeIndex].offsetWidth;
+            const trackX = -(activeIndex * (currentSlideWidth + MOBILE_GAP));
+
+            gsap.to(track, {
+                x: trackX,
+                duration: animate ? 0.8 : 0,
+                ease: "power2.out"
+            });
+        }
+
+    }
+
+    // SWIPE, TOUCHES
+    let startX = 0;
+    let currentX = 0;
+    let isDragging = false;
+    let dragStartTrackX = 0;
+    let isRealMove = false;
+
+    function getX(e) {
+        if (e.type.includes('mouse')) {
+            return e.pageX;
+        }
+        const touch = e.touches[0] || e.changedTouches[0];
+        return touch ? touch.pageX : 0;
+    }
+
+    const onDragStart = (e) => {
+        if (e.type.includes('mouse') && e.button !== 0) return;
+        isDragging = true;
+        isRealMove = false;
+        startX = getX(e);
+        currentX = startX;
+        dragStartTrackX = gsap.getProperty(track, "x");
+    };
+
+    const onDragMove = (e) => {
+        if (!isDragging) return;
+        currentX = getX(e);
+        const diff = currentX - startX;
+
+        if (Math.abs(diff) > 10) {
+            isRealMove = true;
+            if (e.cancelable) {
+                e.preventDefault();
+            }
+
+            gsap.set(track, {x: dragStartTrackX + diff});
+        }
+    };
+
+    const onDragEnd = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+
+        currentX = getX(e);
+
+        if (!isRealMove) return;
+
+        const diff = currentX - startX;
+        if (Math.abs(diff) > 40) {
+            if (diff > 0 && activeIndex > 0) {
+                activeIndex--;
+            } else if (diff < 0 && activeIndex < slides.length - 1) {
+                if (window.innerWidth >= 601 && window.innerWidth < 1024 && activeIndex >= slides.length - 2) {
+                } else {
+                    activeIndex++;
+                }
+            }
+        }
+        updateSlider();
+    };
+
+    track.addEventListener('mousedown', onDragStart);
+    track.addEventListener('mousemove', onDragMove);
+    track.addEventListener('mouseup', onDragEnd);
+    track.addEventListener('mouseleave', onDragEnd);
+
+    track.addEventListener('touchstart', onDragStart, {passive: true});
+    track.addEventListener('touchmove', onDragMove, {passive: false});
+    track.addEventListener('touchend', onDragEnd);
+    track.addEventListener('touchcancel', onDragEnd);
+
+    nextBtn.addEventListener('click', () => {
+        if (window.innerWidth >= 601 && window.innerWidth < 1024 && activeIndex >= slides.length - 2) return;
+        if (activeIndex < slides.length - 1) {
+            activeIndex++;
+            updateSlider();
+        }
+    });
+
+    prevBtn.addEventListener('click', () => {
+        if (activeIndex > 0) {
+            activeIndex--;
+            updateSlider();
+        }
+    });
+
+    // CLICK CARD
+    slides.forEach((slide, index) => {
+        slide.addEventListener('click', (e) => {
+            if (isRealMove) return;
+            if (index === activeIndex) return;
+            if (window.innerWidth >= 1024) {
+                activeIndex = index;
+                updateSlider();
+            }
+        });
+    });
+
+    window.addEventListener('resize', () => {
+        const isDesktopNow = window.matchMedia('(min-width: 1024px)').matches;
+        const hasClone = track.querySelector('.slide-clone');
+
+        if (isDesktopNow && !hasClone && totalSteps > 0) {
+            const firstSlideClone = originalSlides[0].cloneNode(true);
+            firstSlideClone.classList.add('slide-clone');
+            track.appendChild(firstSlideClone);
+        } else if (!isDesktopNow && hasClone) {
+            hasClone.remove();
+            if (activeIndex >= totalSteps) activeIndex = totalSteps - 1;
+        }
+
+        slides = Array.from(track.querySelectorAll('.slide'));
+        updateSlider(false);
+    });
+
+    updateSlider(false);
+}
 
 window.addEventListener("load", () => {
     initHeroAnimation();
     initPinnedStory();
     initScrollReveals();
+    initAdvantageSlider();
     ScrollTrigger.refresh();
 });
 
