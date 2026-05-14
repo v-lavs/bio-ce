@@ -616,7 +616,7 @@ function initAdvantageSlider() {
     const GAP = 43;
 
     function updateSlider(animate = true) {
-        isDesktop = window.matchMedia('(min-width: 1024px)').matches;
+        isDesktop = window.matchMedia('(min-width: 1081px)').matches;
 
         if (!slides[activeIndex]) return;
         const logicalIndex = parseInt(slides[activeIndex].getAttribute('data-index')) || 0;
@@ -626,7 +626,7 @@ function initAdvantageSlider() {
         if (isDesktop) {
             progressPercent = ((logicalIndex + 1) / totalSteps) * 100;
         } else {
-            if (window.innerWidth >= 601 && window.innerWidth < 1024) {
+            if (window.innerWidth >= 601 && window.innerWidth < 1081) {
                 const maxTabletIndex = totalSteps - 2;
                 const currentProgressIndex = Math.min(activeIndex, maxTabletIndex);
                 progressPercent = (currentProgressIndex / maxTabletIndex) * 100;
@@ -724,7 +724,7 @@ function initAdvantageSlider() {
             });
         } else {
             //tab, mob
-            const isTablet = window.innerWidth >= 601 && window.innerWidth < 1024;
+            const isTablet = window.innerWidth >= 601 && window.innerWidth < 1081;
 
             slides.forEach((slide, index) => {
                 slide.classList.remove('active');
@@ -815,7 +815,7 @@ function initAdvantageSlider() {
             if (diff > 0 && activeIndex > 0) {
                 activeIndex--;
             } else if (diff < 0 && activeIndex < slides.length - 1) {
-                if (window.innerWidth >= 601 && window.innerWidth < 1024 && activeIndex >= slides.length - 2) {
+                if (window.innerWidth >= 601 && window.innerWidth < 1081 && activeIndex >= slides.length - 2) {
                     // Стоп на таблеті
                 } else {
                     activeIndex++;
@@ -835,7 +835,7 @@ function initAdvantageSlider() {
     track.addEventListener('touchend', onDragEnd);
     track.addEventListener('touchcancel', onDragEnd);
     nextBtn.addEventListener('click', () => {
-        if (window.innerWidth >= 601 && window.innerWidth < 1024 && activeIndex >= slides.length - 2) return;
+        if (window.innerWidth >= 601 && window.innerWidth < 1081 && activeIndex >= slides.length - 2) return;
         if (activeIndex < slides.length - 1) {
             activeIndex++;
             updateSlider();
@@ -856,7 +856,7 @@ function initAdvantageSlider() {
 
             if (index === activeIndex) return;
 
-            if (window.innerWidth >= 1024) {
+            if (window.innerWidth >= 1080) {
                 activeIndex = index;
                 updateSlider();
             }
@@ -864,7 +864,7 @@ function initAdvantageSlider() {
     });
     //resize
     window.addEventListener('resize', () => {
-        const isDesktopNow = window.matchMedia('(min-width: 1024px)').matches;
+        const isDesktopNow = window.matchMedia('(min-width: 1081px)').matches;
         const hasClone = track.querySelector('.slide-clone');
 
         if (isDesktopNow) {

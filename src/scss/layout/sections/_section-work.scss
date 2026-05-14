@@ -16,3 +16,14 @@
     z-index: -1;
   }
 }
+
+@include mixins.respond-to(variables.$xl) {
+  .slider-advantages {
+    .slide-inner {
+      padding: 30px 25px;
+    }
+    .description{
+      font-size: 16px;
+    }
+  }
+}
