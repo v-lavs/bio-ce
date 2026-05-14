@@ -22,6 +22,7 @@
     cursor: pointer;
     transition: color .35s ease;
     background-color: transparent;
+    padding-left: 0;
     &.active {
       color: #990B6E;
     }
