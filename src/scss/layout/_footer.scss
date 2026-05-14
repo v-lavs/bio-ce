@@ -148,6 +148,7 @@
   .btn_submit {
     min-width: 0;
     margin-left: 10px;
+    flex-shrink: 0;
     &:hover .btn__svg-path {
       transition: transform 0.55s cubic-bezier(0.6, -0.28, 0.1, 1.35),
       opacity 0.35s ease;

@@ -137,3 +137,16 @@
     margin-bottom: 9px;
   }
 }
+@include mixins.respond-to(variables.$xl) {
+  .contacts-list {
+    padding: 45px 50px;
+    &__item{
+      padding-left: 80px;
+      &:before{
+        width: 34px;
+        height: 34px;
+        left: 24px;
+      }
+    }
+  }
+}
