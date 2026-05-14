@@ -107,7 +107,7 @@
 
 }
 
-@include mixins.respond-to(variables.$md) {
+@include mixins.respond-to(variables.$lg) {
   .menu {
     flex-direction: column;
     width: 100%;
@@ -115,10 +115,13 @@
   }
 
   .menu__link {
+    color: #2a2a2a;
     font-size: 24px;
     padding: 0;
   }
-
+  .menu__link.active {
+    color: #2A2A2A;
+  }
   .submenu {
     opacity: 0;
     transform: translateY(-10px);
@@ -159,5 +162,5 @@
   }
 }
 @include mixins.respond-to(variables.$xs) {
- 
+
 }

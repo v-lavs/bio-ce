@@ -7,6 +7,7 @@
   border-radius: 0 0 30px 30px;
   overflow: hidden;
   z-index: 2;
+
   .heading_lg {
     margin-bottom: 40px;
     color: #990B6E;
@@ -120,4 +121,19 @@
   display: block;
   width: 100%;
   height: auto;
+}
+
+@include mixins.respond-to(variables.$xxl) {
+  .contacts-list__item {
+  line-height: 1;
+    width: 300%;
+    flex-grow: 1;
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .contacts-list__title {
+    line-height: 1;
+    margin-bottom: 9px;
+  }
 }

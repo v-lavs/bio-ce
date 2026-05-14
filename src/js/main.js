@@ -31,7 +31,6 @@ gsap.ticker.lagSmoothing(0);
 // =========================
 const nav = document.querySelector(".header__nav");
 const burger = document.querySelector(".burger");
-const overlay = document.querySelector(".nav-overlay");
 const activeBg = document.querySelector(".nav-active-bg");
 const links = document.querySelectorAll(".menu__link");
 
@@ -123,14 +122,13 @@ burger.addEventListener("click", () => {
 function openMenu() {
     nav.classList.add("is-open");
     burger.classList.add("active");
-    overlay?.classList.add("active");
     document.body.classList.add("menu-open");
 
     const spans = burger.querySelectorAll("span");
 
-    gsap.to(spans[0], {rotate: 45, y: 8, duration: 0.3});
-    gsap.to(spans[1], {opacity: 0, duration: 0.2});
-    gsap.to(spans[2], {rotate: -45, y: -8, duration: 0.3});
+    gsap.to(spans[0], {rotate: 45, y: 8, backgroundColor: "#2a2a2a", duration: 0.3});
+    gsap.to(spans[1], {opacity: 0, backgroundColor: "#2a2a2a", duration: 0.2});
+    gsap.to(spans[2], {rotate: -45, y: -8, backgroundColor: "#2a2a2a", duration: 0.3});
 
     gsap.from(".menu__item", {
         x: 30,
@@ -146,7 +144,6 @@ function openMenu() {
 function closeMenu() {
     nav.classList.remove("is-open");
     burger.classList.remove("active");
-    overlay?.classList.remove("active");
     document.body.classList.remove("menu-open");
 
     const spans = burger.querySelectorAll("span");
@@ -155,18 +152,14 @@ function closeMenu() {
         rotate: 0,
         y: 0,
         opacity: 1,
-        duration: 0.25
+        backgroundColor: "#FFFFFF",
+        duration: 0.2
     });
 
     document.querySelectorAll(".menu__item.is-open").forEach(i => {
         i.classList.remove("is-open");
     });
 }
-
-// =========================
-// OVERLAY
-// =========================
-overlay?.addEventListener("click", closeMenu);
 
 // =========================
 // ESC

@@ -56,23 +56,7 @@
   transition: 0.35s;
 }
 
-.nav-overlay {
-  position: fixed;
-  inset: 0;
-  background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
-  backdrop-filter: blur(20px);
-  opacity: 0;
-  pointer-events: none;
-  transition: 0.3s ease;
-  z-index: 100;
-}
-
-.nav-overlay.active {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-@include mixins.respond-to(variables.$md) {
+@include mixins.respond-to(variables.$lg) {
   .burger {
     display: flex;
   }
@@ -86,9 +70,9 @@
     top: 0;
     right: 0;
     transform: translateX(100%);
-    width: 80%;
+    width:100%;
     height: 100vh;
-    background: #222;
+    background: #FFFFFF;
     flex-direction: column;
     padding: 100px 40px;
     border-radius: 0;
