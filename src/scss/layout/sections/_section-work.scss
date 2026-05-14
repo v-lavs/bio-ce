@@ -27,3 +27,9 @@
     }
   }
 }
+
+@include mixins.respond-to(variables.$sm) {
+  .section-work{
+    padding-bottom: 100px;
+  }
+}

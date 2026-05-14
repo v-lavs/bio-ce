@@ -14,7 +14,7 @@
   }
   @include mixins.respond-to(variables.$lg) {
     max-width: 880px;
-    padding: 0 25px;
+    padding: 0 40px;
   }
 
   @include mixins.respond-to(variables.$md) {

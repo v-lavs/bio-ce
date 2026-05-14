@@ -103,8 +103,13 @@
 }
 
 
-@include mixins.respond-to(variables.$lg) {
-
+@include mixins.respond-to(variables.$xl){
+  .menu__link {
+    padding: 15px 20px;
+  }
+  .menu__item{
+    font-size: 16px;
+  }
 }
 
 @include mixins.respond-to(variables.$lg) {
@@ -161,6 +166,7 @@
     display: none;
   }
 }
+
 @include mixins.respond-to(variables.$xs) {
 
 }

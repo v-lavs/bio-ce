@@ -111,7 +111,21 @@
   opacity: .3;
   will-change: opacity, transform;
 }
-
+@include mixins.respond-to(variables.$sm) {
+  .story-section{
+    height: auto;
+  }
+  .story-top{
+    display: none;
+  }
+  .story-slide{
+    position:static;
+    opacity: 1;
+    visibility: visible;
+    padding: 0;
+    margin-bottom: 60px;
+  }
+}
 @include mixins.respond-to(variables.$xxl) {
   .story-section .text_xl{
     font-size: 28px;

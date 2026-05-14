@@ -235,7 +235,15 @@ body.menu-open {
 }
 
 @include mixins.respond-to(variables.$md) {
-
+.split-layout{
+  flex-wrap: wrap;
+}
+  [class^="split-layout__col"]{
+  width: 100%;
+}
+  .section__title-gb:not(.section-activity .section__title-gb){
+    margin-bottom: 30px;
+  }
 }
 
 @include mixins.respond-to(variables.$sm) {

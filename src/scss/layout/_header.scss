@@ -23,12 +23,9 @@
   opacity: 0;
 }
 
-
 .header__nav {
   box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, 0.05);
-
   backdrop-filter: blur(20px);
-
   position: relative;
   display: flex;
   border: 1px solid variables.$light-blue;
@@ -37,7 +34,6 @@
   z-index: 300;
 }
 
-
 .burger {
   display: none;
   flex-direction: column;
@@ -45,7 +41,7 @@
   background: none;
   border: none;
   cursor: pointer;
-  z-index: 350;
+
 }
 
 .burger__line {
@@ -53,12 +49,25 @@
   width: 30px;
   height: 2px;
   background: white;
-  transition: 0.35s;
+  transition: transform 0.3s cubic-bezier(0.25, 1, 0.5, 1),
+  opacity 0.25s ease,
+  background-color 0.3s ease;
+  transform-origin: center;
+
 }
 
+@include  mixins.respond-to(variables.$xl) {
+  .header__logo {
+    max-width: 225px;
+  }
+}
+
+// Модифікуйте ваш медіазапит у файлі стилів:
 @include mixins.respond-to(variables.$lg) {
   .burger {
     display: flex;
+    z-index: 1000; // Піднімаємо бургер на самий верхній шар
+    position: relative;        // Гарантує роботу z-index
   }
 
   .nav-active-bg {
@@ -69,20 +78,23 @@
     position: fixed;
     top: 0;
     right: 0;
+    left: 0;
+    bottom: 0;
     transform: translateX(100%);
-    width:100%;
+    width: 100%;
     height: 100vh;
     background: #FFFFFF;
     flex-direction: column;
     padding: 100px 40px;
     border-radius: 0;
-    transition: right 0.4s cubic-bezier(0.7, 0, 0.3, 1);
-  }
+    transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1);
+     }
 
   .header__nav.is-open {
     transform: translateX(0);
   }
 }
+
 
 @include mixins.respond-to(variables.$xs) {
 
@@ -91,3 +103,4 @@
 @include mixins.respond-to(variables.$xxs) {
 
 }
+

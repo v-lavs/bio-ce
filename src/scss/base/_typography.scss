@@ -2,13 +2,18 @@
 @use "../utils/variables";
 
 .heading {
+
+
   &_xxl {
+
   }
+
   &_xl {
     font-weight: 400;
     font-size: 40px;
     line-height: 1.24;
   }
+
   &_lg {
     font-weight: 500;
     font-size: 36px;
@@ -20,10 +25,13 @@
     line-height: 1.24;
   }
 }
+
 //---------
+
 strong {
   font-weight: 700;
 }
+
 .text {
   &_xl {
     font-size: 32px;
@@ -43,40 +51,26 @@ strong {
 
 @include mixins.respond-to(variables.$xxl) {
   .heading {
-    &_xxl {
-
-    }
     &_xl {
-      font-weight: 400;
-      font-size: 34px;
-      line-height: 1.24;
+      font-size: 36px;
     }
+
     &_lg {
-      font-weight: 500;
-      font-size: 32px;
-      line-height: 1.24;
+      font-size: 34px;
     }
     &_md{
-      font-weight: 500;
       font-size: 30px;
-      line-height: 1.24;
     }
   }
-  .text {
-    &_xl {
-      font-size: 28px;
-      line-height: 1.5;
-    }
+  h2 {
+    font-size: 36px;
+  }
 
-    &_lg {
-      font-size: 20px;
-      line-height: 1.5;
-    }
-
-    &_md {
-      font-size: 18px;
-      line-height: 1.5;
-    }
+.section__content  h3 {
+    font-size: 34px;
+  }
+  h4{
+    font-size: 30px;
   }
 }
 

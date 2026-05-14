@@ -125,8 +125,8 @@
 
 @include mixins.respond-to(variables.$xxl) {
   .contacts-list__item {
-  line-height: 1;
-    width: 300%;
+    line-height: 1;
+    width: 30%;
     flex-grow: 1;
     padding-top: 12px;
     padding-bottom: 12px;
@@ -137,16 +137,43 @@
     margin-bottom: 9px;
   }
 }
+
 @include mixins.respond-to(variables.$xl) {
   .contacts-list {
     padding: 45px 50px;
-    &__item{
+
+    &__item {
       padding-left: 80px;
-      &:before{
+
+      &:before {
         width: 34px;
         height: 34px;
         left: 24px;
       }
     }
+  }
+}
+
+@include mixins.respond-to(variables.$sm) {
+  .contacts-list {
+    flex-wrap: wrap;
+
+    &__item {
+      width: 100%;
+    }
+  }
+  .tabs__content-box {
+    flex-wrap: wrap;
+  }
+  .section-contacts .logobox {
+    width: 30%;
+    margin-left: auto;
+    padding-left: 0;
+  }
+  .tabs__content{
+    width: 100%;
+  }
+  .form__logo {
+    margin-bottom: 30px;
   }
 }
