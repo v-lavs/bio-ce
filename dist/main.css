@@ -624,6 +624,7 @@ form .label {
   font-size: 16px;
   line-height: 1.38;
   padding: 4px 8px;
+  margin-bottom: 4px;
 }
 
 form input {
@@ -1322,7 +1323,7 @@ form textarea {
   border-radius: 24px;
   font-size: 18px;
   line-height: 1.5;
-  padding: 8px 22px 8px 88px;
+  padding: 23px 22px 23px 88px;
   position: relative;
   flex-grow: 1;
 }
@@ -1412,8 +1413,6 @@ form textarea {
     line-height: 1;
     width: 30%;
     flex-grow: 1;
-    padding-top: 12px;
-    padding-bottom: 12px;
   }
 
   .contacts-list__title {
@@ -1652,8 +1651,8 @@ form textarea {
   }
 
   .container {
-    padding: 0 15px;
-    max-width: 100%;
+    padding: 0 20px;
+    max-width: 540px;
   }
 
   .container {
@@ -1690,6 +1689,10 @@ form textarea {
 }
 
 @media only screen and (max-width: 580px) {
+  .container {
+    max-width: 100%;
+  }
+
   .container {
     border: 2px solid fuchsia;
   }
