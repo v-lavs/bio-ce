@@ -1619,7 +1619,7 @@ form textarea {
 
 @media only screen and (max-width: 991px) {
   .container {
-    max-width: 100%;
+    max-width: 768px;
   }
 
   .container {
@@ -1653,6 +1653,7 @@ form textarea {
 
   .container {
     padding: 0 15px;
+    max-width: 100%;
   }
 
   .container {
