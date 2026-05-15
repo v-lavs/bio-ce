@@ -372,7 +372,7 @@ strong {
 }
 
 .menu__link {
-  padding: 20px 25px;
+  padding: 23px 22px;
   color: #FFFFFF;
   text-decoration: none;
   display: block;
@@ -1401,8 +1401,20 @@ form textarea {
     font-size: 30px;
   }
 
+  .menu__link {
+    padding: 15px 20px;
+  }
+
+  .menu__item {
+    font-size: 16px;
+  }
+
   .container {
     max-width: 1280px;
+  }
+
+  .header__logo {
+    max-width: 224px;
   }
 
   .story-section .text_xl {
@@ -1424,14 +1436,6 @@ form textarea {
 @media only screen and (max-width: 1280px) {
   .heading_md {
     font-size: 28px;
-  }
-
-  .menu__link {
-    padding: 15px 20px;
-  }
-
-  .menu__item {
-    font-size: 16px;
   }
 
   .container {

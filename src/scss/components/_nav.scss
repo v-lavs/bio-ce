@@ -103,7 +103,7 @@
 }
 
 
-@include mixins.respond-to(variables.$xl){
+@include mixins.respond-to(variables.$xxl){
   .menu__link {
     padding: 15px 20px;
   }
