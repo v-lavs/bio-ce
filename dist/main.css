@@ -1461,10 +1461,12 @@ form textarea {
   .contacts-list {
     padding: 45px 50px;
     gap: 24px;
+    flex-wrap: wrap;
   }
 
   .contacts-list__item {
     padding-left: 80px;
+    width: 47%;
   }
 
   .contacts-list__item:before {

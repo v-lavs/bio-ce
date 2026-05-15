@@ -140,9 +140,10 @@
   .contacts-list {
     padding: 45px 50px;
     gap: 24px;
+    flex-wrap: wrap;
     &__item {
       padding-left: 80px;
-
+      width: 47%;
       &:before {
         width: 34px;
         height: 34px;
