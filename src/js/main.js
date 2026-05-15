@@ -442,78 +442,80 @@ document.addEventListener('DOMContentLoaded', () => {
         totalEl.textContent = String(slides.length).padStart(2, '0');
         if (currentEl) currentEl.textContent = "01";
 
-        let mm = gsap.matchMedia();
+        let masterTL;
+        let ST;
+        let allSplits = []; // Тут зберігатимемо спліти, щоб скидати їх при ресайзі
 
-        // NEW: Тепер анімація SplitText повністю працює на Десктопах ТА Таблетах (від 768px і вище)
-        mm.add("(min-width: 768px)", () => {
+        function buildAnimation() {
+            // 1. Повне очищення перед кожним перерахунком (ресайзом)
+            if (ST) ST.kill();
+            if (masterTL) masterTL.kill();
+            allSplits.forEach(split => split.revert());
+            allSplits = [];
+            gsap.set([stickyTrigger, storySection, slides, '.story-line', '.story-char'], {clearProps: "all"});
 
-            // Збільшуємо коефіцієнт тривалості скролу до 2.8, щоб на планшетах скрол пальцем був дуже плавним
-            const scrollDistance = window.innerHeight * slides.length * 2.8;
+            // 2. Розрахунок висоти (для мобільних робимо трохи менший скрол-фактор, щоб не затягувати)
+            const isMobile = window.innerWidth < 768;
+            const scrollFactor = isMobile ? 1.8 : 2.8;
+            const scrollDistance = window.innerHeight * slides.length * scrollFactor;
 
-            gsap.set(stickyTrigger, {
-                height: `${scrollDistance}px`
-            });
+            gsap.set(stickyTrigger, { height: `${scrollDistance}px` });
 
-            const masterTL = gsap.timeline();
+            masterTL = gsap.timeline();
 
             slides.forEach((slide, index) => {
                 const textElements = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
                 if (!textElements.length) return;
 
-                let allLines = [];
-                let allChars = [];
-
-                textElements.forEach(el => {
-                    const split = new SplitText(el, {
-                        type: "lines,chars",
-                        linesClass: "story-line",
-                        charsClass: "story-char"
-                    });
-                    allLines.push(...split.lines);
-                    allChars.push(...split.chars);
+                // Створюємо новий SplitText
+                const split = new SplitText(textElements, {
+                    type: "lines,chars",
+                    linesClass: "story-line",
+                    charsClass: "story-char"
                 });
+                allSplits.push(split); // Запам'ятовуємо його
 
-                const lines = gsap.utils.toArray(allLines);
-                const chars = gsap.utils.toArray(allChars);
+                const lines = gsap.utils.toArray(split.lines);
+                const chars = gsap.utils.toArray(split.chars);
 
                 const isFirst = index === 0;
                 const isLast = index === slides.length - 1;
 
-                // Перший слайд видно одразу, текст має opacity 0.35, лінії на місці
-                gsap.set(slide, {autoAlpha: isFirst ? 1 : 0});
-                gsap.set(lines, {yPercent: isFirst ? 0 : 120});
-                gsap.set(chars, {opacity: 0.3});
+                // Стартові стани
+                gsap.set(slide, { autoAlpha: isFirst ? 1 : 0 });
+                gsap.set(lines, { yPercent: isFirst ? 0 : 120 });
+                gsap.set(chars, { opacity: 0.3 });
 
                 const blockTL = gsap.timeline();
 
                 blockTL.call(() => {
-                    currentEl.textContent = String(index + 1).padStart(2, '0');
-                });
+                    if (currentEl) currentEl.textContent = String(index + 1).padStart(2, '0');
+                }, null, isFirst ? 0 : ">-50%");
 
-                // Пропускаємо заїзд рядків для першого слайду
+                // Анімація появи слайду (пропускаємо для першого)
                 if (!isFirst) {
-                    blockTL.set(slides, {autoAlpha: 0});
-                    blockTL.set(slide, {autoAlpha: 1});
-                    blockTL.to(lines, {
-                        yPercent: 0,
-                        stagger: 0.14,
-                        duration: 1.8,
-                        ease: "power1.out"
-                    });
+                    blockTL.set(slides[index - 1], { autoAlpha: 0 })
+                        .set(slide, { autoAlpha: 1 })
+                        .to(lines, {
+                            yPercent: 0,
+                            stagger: 0.14,
+                            duration: 1.8,
+                            ease: "power1.out"
+                        }, "-=0.2");
                 }
 
-                // Рівномірне проявлення літер при скролі
+                // Проявлення літер (однаково для всіх екранів)
                 blockTL.to(chars, {
                     opacity: 1,
-                    stagger: {each: 0.06, from: "start", ease: "power2.out"},
+                    stagger: { each: 0.06, from: "start", ease: "power2.out" },
                     duration: 3.4,
                     ease: "none"
                 });
 
-                // Пауза для фіксації тексту на екрані
-                blockTL.to({}, {duration: 1.4});
+                // Пауза
+                blockTL.to({}, { duration: 1.4 });
 
-                // Останній слайд НЕ ховаємо, він залишається видимим назавжди
+                // Анімація зникнення (крім останнього)
                 if (!isLast) {
                     blockTL.to(lines, {
                         yPercent: -110,
@@ -524,23 +526,16 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
 
-                // masterTL.add(blockTL);
-                if (index === 0) {
-                    // Перший слайд додаємо без затримок
-                    masterTL.add(blockTL);
-                } else {
-                    // Другий та наступні слайди почнуть з'являтися пізніше.
-                    // "+=0.8" додає штучну сліпу паузу (порожній скрол) між слайдами.
-                    masterTL.add(blockTL, "+=0.8");
-                }
+                // Додаємо в головний таймлайн
+                masterTL.add(blockTL, index === 0 ? 0 : "+=0.8");
             });
 
-            // Повністю синхронізуємо таймлайн зі скролом батьківського стікі-тригера
-            ScrollTrigger.create({
+            // Створення ScrollTrigger з урахуванням тач-скрінів
+            ST = ScrollTrigger.create({
                 trigger: stickyTrigger,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: 2.4,
+                scrub: isMobile ? 1.5 : 2.4, // На мобільних менший scrub прибирає "желейність" при гортанні пальцем
                 animation: masterTL,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
@@ -550,14 +545,150 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
+        }
 
+        // Ініціалізація першого запуску
+        buildAnimation();
+
+        // Головний фікс для ресайзу: при кожному оновленні ScrollTrigger робимо реверт тексту
+        ScrollTrigger.addEventListener("refreshInit", () => {
+            allSplits.forEach(split => split.revert());
         });
 
-        // Вимикаємо анімацію ТІЛЬКИ на мобільних телефонах (менше 767px)
-        mm.add("(max-width: 767px)", () => {
-            gsap.set([stickyTrigger, storySection, slides], {clearProps: "all"});
-            const allText = storySection.querySelectorAll('[data-story-text]');
-            gsap.set(allText, {clearProps: "all"});
+        // Після того, як ScrollTrigger перерахував координати, будуємо анімацію на основі нових розмірів
+        ScrollTrigger.addEventListener("refresh", () => {
+            buildAnimation();
+        });
+    }
+    function initPinnedStory() {
+        const stickyTrigger = document.querySelector('[data-story-trigger]');
+        if (!stickyTrigger) return;
+
+        const storySection = stickyTrigger.querySelector('[data-story]');
+        const slides = gsap.utils.toArray('.story-slide');
+        const progressBar = storySection.querySelector('.story-progress__bar');
+        const currentEl = storySection.querySelector('.story-current');
+        const totalEl = storySection.querySelector('.story-total');
+
+        totalEl.textContent = String(slides.length).padStart(2, '0');
+        if (currentEl) currentEl.textContent = "01";
+
+        let masterTL;
+        let ST;
+        let allSplits = []; // Тут зберігатимемо спліти, щоб скидати їх при ресайзі
+
+        function buildAnimation() {
+            // 1. Повне очищення перед кожним перерахунком (ресайзом)
+            if (ST) ST.kill();
+            if (masterTL) masterTL.kill();
+            allSplits.forEach(split => split.revert());
+            allSplits = [];
+            gsap.set([stickyTrigger, storySection, slides, '.story-line', '.story-char'], {clearProps: "all"});
+
+            // 2. Розрахунок висоти (для мобільних робимо трохи менший скрол-фактор, щоб не затягувати)
+            const isMobile = window.innerWidth < 768;
+            const scrollFactor = isMobile ? 1.8 : 2.8;
+            const scrollDistance = window.innerHeight * slides.length * scrollFactor;
+
+            gsap.set(stickyTrigger, { height: `${scrollDistance}px` });
+
+            masterTL = gsap.timeline();
+
+            slides.forEach((slide, index) => {
+                const textElements = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
+                if (!textElements.length) return;
+
+                // Створюємо новий SplitText
+                const split = new SplitText(textElements, {
+                    type: "lines,chars",
+                    linesClass: "story-line",
+                    charsClass: "story-char"
+                });
+                allSplits.push(split); // Запам'ятовуємо його
+
+                const lines = gsap.utils.toArray(split.lines);
+                const chars = gsap.utils.toArray(split.chars);
+
+                const isFirst = index === 0;
+                const isLast = index === slides.length - 1;
+
+                // Стартові стани
+                gsap.set(slide, { autoAlpha: isFirst ? 1 : 0 });
+                gsap.set(lines, { yPercent: isFirst ? 0 : 120 });
+                gsap.set(chars, { opacity: 0.3 });
+
+                const blockTL = gsap.timeline();
+
+                blockTL.call(() => {
+                    if (currentEl) currentEl.textContent = String(index + 1).padStart(2, '0');
+                }, null, isFirst ? 0 : ">-50%");
+
+                // Анімація появи слайду (пропускаємо для першого)
+                if (!isFirst) {
+                    blockTL.set(slides[index - 1], { autoAlpha: 0 })
+                        .set(slide, { autoAlpha: 1 })
+                        .to(lines, {
+                            yPercent: 0,
+                            stagger: 0.14,
+                            duration: 1.8,
+                            ease: "power1.out"
+                        }, "-=0.2");
+                }
+
+                // Проявлення літер (однаково для всіх екранів)
+                blockTL.to(chars, {
+                    opacity: 1,
+                    stagger: { each: 0.06, from: "start", ease: "power2.out" },
+                    duration: 3.4,
+                    ease: "none"
+                });
+
+                // Пауза
+                blockTL.to({}, { duration: 1.4 });
+
+                // Анімація зникнення (крім останнього)
+                if (!isLast) {
+                    blockTL.to(lines, {
+                        yPercent: -110,
+                        opacity: 0,
+                        stagger: 0.16,
+                        duration: 1.6,
+                        ease: "power1.out"
+                    });
+                }
+
+                // Додаємо в головний таймлайн
+                masterTL.add(blockTL, index === 0 ? 0 : "+=0.8");
+            });
+
+            // Створення ScrollTrigger з урахуванням тач-скрінів
+            ST = ScrollTrigger.create({
+                trigger: stickyTrigger,
+                start: "top top",
+                end: "bottom bottom",
+                scrub: isMobile ? 1.5 : 2.4, // На мобільних менший scrub прибирає "желейність" при гортанні пальцем
+                animation: masterTL,
+                invalidateOnRefresh: true,
+                onUpdate: (self) => {
+                    gsap.set(progressBar, {
+                        scaleX: self.progress,
+                        transformOrigin: "left center"
+                    });
+                }
+            });
+        }
+
+        // Ініціалізація першого запуску
+        buildAnimation();
+
+        // Головний фікс для ресайзу: при кожному оновленні ScrollTrigger робимо реверт тексту
+        ScrollTrigger.addEventListener("refreshInit", () => {
+            allSplits.forEach(split => split.revert());
+        });
+
+        // Після того, як ScrollTrigger перерахував координати, будуємо анімацію на основі нових розмірів
+        ScrollTrigger.addEventListener("refresh", () => {
+            buildAnimation();
         });
     }
 

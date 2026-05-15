@@ -1695,24 +1695,24 @@ form textarea {
     border: 2px solid greenyellow;
   }
 
-  .section-work {
-    padding-bottom: 100px;
-  }
-
   .story-section {
-    height: auto;
+    height: 100vh;
   }
 
-  .story-top {
-    display: none;
+  .story-section .text_xl {
+    font-size: 20px;
   }
 
   .story-slide {
-    position: static;
-    opacity: 1;
-    visibility: visible;
-    padding: 0;
-    margin-bottom: 60px;
+    padding: 20px 40px;
+  }
+
+  .story-top {
+    top: 0;
+  }
+
+  .story-meta {
+    margin-top: 10px;
   }
 }
 
@@ -1808,6 +1808,10 @@ form textarea {
 
   .section-banner {
     margin-bottom: 50px;
+  }
+
+  .story-fraction {
+    font-size: 18px;
   }
 
   .advantages-section {

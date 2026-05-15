@@ -30,6 +30,7 @@
   overflow: hidden;
 
 }
+
 .story-top {
   position: absolute;
 
@@ -75,9 +76,11 @@
   line-height: 1.50;
   color: #9A9A9A;
 }
-.story-current{
+
+.story-current {
   color: #000;
 }
+
 .story-slides {
   position: relative;
 
@@ -111,23 +114,34 @@
   opacity: .3;
   will-change: opacity, transform;
 }
-//@include mixins.respond-to(variables.$sm) {
-//  .story-section{
-//    height: auto;
-//  }
-//  .story-top{
-//    display: none;
-//  }
-//  .story-slide{
-//    position:static;
-//    opacity: 1;
-//    visibility: visible;
-//    padding: 0;
-//    margin-bottom: 60px;
-//  }
-//}
+
 @include mixins.respond-to(variables.$xl) {
-  .story-section .text_xl{
+  .story-section .text_xl {
     font-size: 24px;
+  }
+}
+
+@include mixins.respond-to(variables.$sm) {
+  .story-section {
+    height: 100vh;
+
+    .text_xl {
+      font-size: 20px;
+    }
+  }
+  .story-slide {
+    padding: 20px 40px;
+  }
+  .story-top {
+    top: 0;
+  }
+  .story-meta {
+    margin-top: 10px;
+  }
+}
+
+@include mixins.respond-to(variables.$xs) {
+  .story-fraction{
+    font-size: 18px;
   }
 }
