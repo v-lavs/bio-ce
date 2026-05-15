@@ -1535,7 +1535,7 @@ form textarea {
   }
 
   .container {
-    max-width: 880px;
+    max-width: 980px;
     padding: 0 40px;
   }
 
@@ -1624,7 +1624,7 @@ form textarea {
 
 @media only screen and (max-width: 991px) {
   .container {
-    max-width: 768px;
+    max-width: 870px;
   }
 
   .container {

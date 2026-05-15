@@ -13,12 +13,12 @@
     max-width: 1180px;
   }
   @include mixins.respond-to(variables.$lg) {
-    max-width: 880px;
+    max-width: 980px;
     padding: 0 40px;
   }
 
   @include mixins.respond-to(variables.$md) {
-    max-width: 768px;
+    max-width: 870px;
   }
 
   @include mixins.respond-to(variables.$sm) {
