@@ -231,7 +231,9 @@ body.menu-open {
 }
 
 @include mixins.respond-to(variables.$lg) {
-
+  .section__title-gb {
+    font-size: 22px;
+  }
 }
 
 @include mixins.respond-to(variables.$sm) {

@@ -1455,6 +1455,14 @@ form textarea {
     font-size: 16px;
   }
 
+  .tabs__content {
+    min-height: 714px;
+  }
+
+  .section-contacts .form-group {
+    width: 100%;
+  }
+
   .contacts-list {
     padding: 45px 50px;
     gap: 24px;
@@ -1474,6 +1482,30 @@ form textarea {
 }
 
 @media only screen and (max-width:1080px) {
+  .section__title-gb {
+    font-size: 22px;
+  }
+
+  .text_lg {
+    font-size: 20px;
+  }
+
+  .text_xl {
+    font-size: 24px;
+  }
+
+  .section__content h3 {
+    font-size: 30px;
+  }
+
+  .heading_xl {
+    font-size: 34px;
+  }
+
+  .heading_md {
+    font-size: 26px;
+  }
+
   .menu {
     flex-direction: column;
     width: 100%;
@@ -1531,6 +1563,14 @@ form textarea {
     display: none;
   }
 
+  .accordion br {
+    display: none;
+  }
+
+  .accordion__item:before {
+    font-size: 34px;
+  }
+
   .container {
     max-width: 980px;
     padding: 0 40px;
@@ -1581,24 +1621,6 @@ form textarea {
   .contacts-list__item {
     width: 100%;
   }
-
-  .tabs__content-box {
-    flex-wrap: wrap;
-  }
-
-  .section-contacts .logobox {
-    width: 30%;
-    margin-left: auto;
-    padding-left: 0;
-  }
-
-  .tabs__content {
-    width: 100%;
-  }
-
-  .form__logo {
-    margin-bottom: 30px;
-  }
 }
 
 @media (max-width: 1080px) {
@@ -1637,6 +1659,16 @@ form textarea {
   }
 }
 
+@media screen and (max-width: 870px) {
+  .section-contacts .logobox {
+    display: none;
+  }
+
+  .section-contacts .tabs__content {
+    width: 100%;
+  }
+}
+
 @media only screen and (max-width: 767px) {
   .split-layout {
     flex-wrap: wrap;
@@ -1655,7 +1687,7 @@ form textarea {
 
   .container {
     padding: 0 20px;
-    max-width: 540px;
+    max-width: 640px;
   }
 
   .container {

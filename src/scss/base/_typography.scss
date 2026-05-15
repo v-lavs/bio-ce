@@ -19,7 +19,8 @@
     font-size: 36px;
     line-height: 1.24;
   }
-  &_md{
+
+  &_md {
     font-weight: 500;
     font-size: 32px;
     line-height: 1.24;
@@ -58,7 +59,8 @@ strong {
     &_lg {
       font-size: 34px;
     }
-    &_md{
+
+    &_md {
       font-size: 30px;
     }
   }
@@ -66,10 +68,10 @@ strong {
     font-size: 36px;
   }
 
-.section__content  h3 {
+  .section__content h3 {
     font-size: 34px;
   }
-  h4{
+  h4 {
     font-size: 30px;
   }
 }
@@ -77,6 +79,24 @@ strong {
 @include mixins.respond-to(variables.$xl) {
   .heading_md {
     font-size: 28px;
+  }
+}
+
+@include mixins.respond-to(variables.$lg) {
+  .text_lg {
+    font-size: 20px;
+  }
+  .text_xl {
+    font-size: 24px;
+  }
+  .section__content h3 {
+    font-size: 30px;
+  }
+  .heading_xl {
+    font-size: 34px;
+  }
+  .heading_md {
+    font-size: 26px;
   }
 }
 

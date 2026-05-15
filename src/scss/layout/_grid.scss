@@ -23,7 +23,7 @@
 
   @include mixins.respond-to(variables.$sm) {
     padding: 0 20px;
-    max-width: 540px;
+    max-width: 640px;
   }
 
   @include mixins.respond-to(variables.$xs) {

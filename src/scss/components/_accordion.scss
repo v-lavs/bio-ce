@@ -76,8 +76,13 @@
   transform-origin: center;
   transition: .8s ease;
 }
-@include mixins.respond-to(variables.$xl) {
-
+@include mixins.respond-to(variables.$lg) {
+  .accordion br{
+    display: none;
+  }
+.accordion__item:before{
+  font-size: 34px;
+}
 }
 
 @include mixins.respond-to(variables.$xs) {

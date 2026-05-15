@@ -134,6 +134,12 @@
 }
 
 @include mixins.respond-to(variables.$xl) {
+  .tabs__content {
+    min-height: 714px;
+  }
+  .section-contacts .form-group {
+    width: 100%;
+  }
   .contacts-list {
     padding: 45px 50px;
     gap: 24px;
@@ -158,18 +164,13 @@
       width: 100%;
     }
   }
-  .tabs__content-box {
-    flex-wrap: wrap;
-  }
+}
+
+@media screen and (max-width: 870px){
   .section-contacts .logobox {
-    width: 30%;
-    margin-left: auto;
-    padding-left: 0;
+    display: none;
   }
-  .tabs__content{
+  .section-contacts .tabs__content{
     width: 100%;
-  }
-  .form__logo {
-    margin-bottom: 30px;
   }
 }
