@@ -78,7 +78,6 @@
     vector-effect: non-scaling-stroke;
   }
 
-
   //
   //&_outline {
   //  background-color: transparent;
@@ -147,6 +146,17 @@
 
 }
 
-@include mixins.respond-to(variables.$xs) {
 
+@include mixins.respond-to(variables.$xs) {
+  .btn{
+    min-width: 200px;
+  }
+  .btn_call{
+    width: 55px;
+    height: 55px;
+    right: 20px;
+  }
+  .btn__text{
+    font-size: 16px;
+  }
 }

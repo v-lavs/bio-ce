@@ -11,6 +11,7 @@
   background-color: #FFFFFF;
   margin-bottom: 100px;
   z-index: 1;
+
   .container {
     position: relative;
     padding: 0 35px 56px;
@@ -24,6 +25,7 @@
     z-index: -1;
     will-change: clip-path;
     clip-path: inset(50% 50% 50% 50% round 30px);
+
     img {
       display: block;
       width: 100%;
@@ -60,6 +62,7 @@
   opacity: 0;
   visibility: hidden;
 }
+
 /* Захист від смикання ліній SplitText */
 .reveal-mask {
   overflow: hidden;
@@ -82,8 +85,10 @@
 
 }
 
-@include mixins.respond-to(variables.$xxs) {
-
+@include mixins.respond-to(variables.$xs) {
+  .section-banner {
+    margin-bottom: 50px;
+  }
 }
 
 @media only screen and (max-width: 360px) {

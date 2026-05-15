@@ -7,6 +7,7 @@
   .container {
     position: relative;
     z-index: 1;
+
     &:before {
       content: "";
       position: absolute;
@@ -59,11 +60,22 @@
   color: #757272;
 }
 
-@include mixins.respond-to(variables.$lg){
+@include mixins.respond-to(variables.$lg) {
   .section-pharmacovigilance {
-    .split-layout__col2{
+    .split-layout__col2 {
       width: 43.3%;
     }
+  }
+}
 
+@include mixins.respond-to(variables.$xs) {
+  .section-pharmacovigilance {
+    padding-top: 50px;
+    .split-layout__col2 {
+      width: 100%;
+    }
+  }
+  .block-appl-forms .title {
+    font-size: 20px;
   }
 }

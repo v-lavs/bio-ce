@@ -1127,6 +1127,7 @@ form textarea {
   overflow: hidden;
   height: 0;
   opacity: 0;
+  padding-top: 8px;
 }
 
 .slider-advantages .description {
@@ -1414,10 +1415,6 @@ form textarea {
     max-width: 224px;
   }
 
-  .story-section .text_xl {
-    font-size: 28px;
-  }
-
   .contacts-list__item {
     line-height: 1;
     width: 30%;
@@ -1453,6 +1450,10 @@ form textarea {
 
   .slider-advantages .description {
     font-size: 16px;
+  }
+
+  .story-section .text_xl {
+    font-size: 24px;
   }
 
   .tabs__content {
@@ -1724,12 +1725,129 @@ form textarea {
 }
 
 @media only screen and (max-width: 580px) {
+  .section {
+    padding-bottom: 50px;
+  }
+
+  .section__title-gb {
+    font-size: 16px;
+  }
+
+  .section__content h3 {
+    font-size: 24px;
+  }
+
+  .note {
+    font-size: 12px;
+  }
+
+  .heading_xl {
+    font-size: 32px;
+  }
+
+  .heading_lg {
+    font-size: 26px;
+  }
+
+  .text_lg {
+    font-size: 18px;
+  }
+
+  .text_xl {
+    font-size: 22px;
+  }
+
+  .btn {
+    min-width: 200px;
+  }
+
+  .btn_call {
+    width: 55px;
+    height: 55px;
+    right: 20px;
+  }
+
+  .btn__text {
+    font-size: 16px;
+  }
+
+  .accordion__item:before {
+    font-size: 24px;
+    top: 4px;
+  }
+
+  .accordion__caret {
+    right: 10px;
+    top: 2px;
+    width: 20px;
+  }
+
+  .accordion__tab-container {
+    padding: 0 40px 32px;
+  }
+
+  .accordion__item {
+    margin-bottom: 32px;
+  }
+
+  .accordion .heading_xl {
+    font-size: 26px;
+  }
+
   .container {
     max-width: 100%;
   }
 
   .container {
     border: 2px solid fuchsia;
+  }
+
+  .header__logo {
+    max-width: 160px;
+  }
+
+  .section-banner {
+    margin-bottom: 50px;
+  }
+
+  .advantages-section {
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .advantages-section {
+    min-height: 706px;
+  }
+
+  .section-pharmacovigilance {
+    padding-top: 50px;
+  }
+
+  .section-pharmacovigilance .split-layout__col2 {
+    width: 100%;
+  }
+
+  .block-appl-forms .title {
+    font-size: 20px;
+  }
+
+  .contacts-list {
+    padding: 28px 24px;
+  }
+
+  .contacts-list__item {
+    padding-left: 60px;
+    font-size: 16px;
+  }
+
+  .contacts-list__item:before {
+    width: 24px;
+    height: 24px;
+    left: 24px;
+  }
+
+  .contacts-list__title {
+    font-size: 16px;
   }
 }
 

@@ -109,6 +109,21 @@ strong {
 
 }
 
+@include mixins.respond-to(variables.$xs) {
+  .heading_xl{
+    font-size: 32px;
+  }
+  .heading_lg {
+    font-size: 26px;
+  }
+  .text_lg {
+    font-size: 18px;
+  }
+  .text_xl {
+    font-size: 22px;
+  }
+}
+
 
 
 

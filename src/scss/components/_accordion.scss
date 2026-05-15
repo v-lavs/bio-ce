@@ -88,3 +88,23 @@
 @include mixins.respond-to(variables.$xs) {
 
 }
+@include mixins.respond-to(variables.$xs){
+  .accordion__item:before {
+    font-size: 24px;
+    top: 4px;
+  }
+  .accordion__caret {
+    right: 10px;
+    top: 2px;
+    width: 20px;
+  }
+  .accordion__tab-container {;
+    padding: 0 40px 32px;
+  }
+  .accordion__item{
+    margin-bottom: 32px;
+  }
+  .accordion  .heading_xl {
+    font-size: 26px;
+  }
+}

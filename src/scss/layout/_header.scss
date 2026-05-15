@@ -101,7 +101,9 @@
     max-width: 224px;
   }
 }
-@include mixins.respond-to(variables.$xxs) {
-
+@include mixins.respond-to(variables.$xs) {
+.header__logo{
+  max-width: 160px;
+}
 }
 
