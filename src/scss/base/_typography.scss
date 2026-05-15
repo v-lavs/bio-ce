@@ -74,8 +74,10 @@ strong {
   }
 }
 
-@include mixins.respond-to(variables.$md) {
-
+@include mixins.respond-to(variables.$xl) {
+  .heading_md {
+    font-size: 28px;
+  }
 }
 
 @include mixins.respond-to(variables.$sm) {

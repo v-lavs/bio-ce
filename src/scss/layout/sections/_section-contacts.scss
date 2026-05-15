@@ -141,7 +141,7 @@
 @include mixins.respond-to(variables.$xl) {
   .contacts-list {
     padding: 45px 50px;
-
+    gap: 24px;
     &__item {
       padding-left: 80px;
 
@@ -154,7 +154,7 @@
   }
 }
 
-@include mixins.respond-to(variables.$sm) {
+@include mixins.respond-to(variables.$lg) {
   .contacts-list {
     flex-wrap: wrap;
 

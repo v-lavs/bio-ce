@@ -1423,6 +1423,10 @@ form textarea {
 }
 
 @media only screen and (max-width: 1280px) {
+  .heading_md {
+    font-size: 28px;
+  }
+
   .menu__link {
     padding: 15px 20px;
   }
@@ -1453,6 +1457,7 @@ form textarea {
 
   .contacts-list {
     padding: 45px 50px;
+    gap: 24px;
   }
 
   .contacts-list__item {
@@ -1566,6 +1571,32 @@ form textarea {
   .section-pharmacovigilance .split-layout__col2 {
     width: 43.3%;
   }
+
+  .contacts-list {
+    flex-wrap: wrap;
+  }
+
+  .contacts-list__item {
+    width: 100%;
+  }
+
+  .tabs__content-box {
+    flex-wrap: wrap;
+  }
+
+  .section-contacts .logobox {
+    width: 30%;
+    margin-left: auto;
+    padding-left: 0;
+  }
+
+  .tabs__content {
+    width: 100%;
+  }
+
+  .form__logo {
+    margin-bottom: 30px;
+  }
 }
 
 @media (max-width: 1080px) {
@@ -1594,6 +1625,14 @@ form textarea {
   .container {
     border: 2px solid goldenrod;
   }
+
+  .section-activity .split-layout .split-layout__col2 {
+    width: 27%;
+  }
+
+  .section-activity .split-layout .split-layout__col6 {
+    width: 73%;
+  }
 }
 
 @media only screen and (max-width: 767px) {
@@ -1601,7 +1640,10 @@ form textarea {
     flex-wrap: wrap;
   }
 
-  [class^=split-layout__col] {
+  .split-layout__col2,
+  .split-layout__col3,
+  .split-layout__col5,
+  .split-layout__col6 {
     width: 100%;
   }
 
@@ -1635,32 +1677,6 @@ form textarea {
     visibility: visible;
     padding: 0;
     margin-bottom: 60px;
-  }
-
-  .contacts-list {
-    flex-wrap: wrap;
-  }
-
-  .contacts-list__item {
-    width: 100%;
-  }
-
-  .tabs__content-box {
-    flex-wrap: wrap;
-  }
-
-  .section-contacts .logobox {
-    width: 30%;
-    margin-left: auto;
-    padding-left: 0;
-  }
-
-  .tabs__content {
-    width: 100%;
-  }
-
-  .form__logo {
-    margin-bottom: 30px;
   }
 }
 
