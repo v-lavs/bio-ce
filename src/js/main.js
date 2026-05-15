@@ -429,6 +429,137 @@ document.addEventListener('DOMContentLoaded', () => {
 // PINNED STORY
 // =========================
 
+    // function initPinnedStory() {
+    //     const stickyTrigger = document.querySelector('[data-story-trigger]');
+    //     if (!stickyTrigger) return;
+    //
+    //     const storySection = stickyTrigger.querySelector('[data-story]');
+    //     const slides = gsap.utils.toArray('.story-slide');
+    //     const progressBar = storySection.querySelector('.story-progress__bar');
+    //     const currentEl = storySection.querySelector('.story-current');
+    //     const totalEl = storySection.querySelector('.story-total');
+    //
+    //     totalEl.textContent = String(slides.length).padStart(2, '0');
+    //     if (currentEl) currentEl.textContent = "01";
+    //
+    //     let mm = gsap.matchMedia();
+    //
+    //     // NEW: Тепер анімація SplitText повністю працює на Десктопах ТА Таблетах (від 768px і вище)
+    //     mm.add("(min-width: 768px)", () => {
+    //
+    //         // Збільшуємо коефіцієнт тривалості скролу до 2.8, щоб на планшетах скрол пальцем був дуже плавним
+    //         const scrollDistance = window.innerHeight * slides.length * 2.8;
+    //
+    //         gsap.set(stickyTrigger, {
+    //             height: `${scrollDistance}px`
+    //         });
+    //
+    //         const masterTL = gsap.timeline();
+    //
+    //         slides.forEach((slide, index) => {
+    //             const textElements = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
+    //             if (!textElements.length) return;
+    //
+    //             let allLines = [];
+    //             let allChars = [];
+    //
+    //             textElements.forEach(el => {
+    //                 const split = new SplitText(el, {
+    //                     type: "lines,chars",
+    //                     linesClass: "story-line",
+    //                     charsClass: "story-char"
+    //                 });
+    //                 allLines.push(...split.lines);
+    //                 allChars.push(...split.chars);
+    //             });
+    //
+    //             const lines = gsap.utils.toArray(allLines);
+    //             const chars = gsap.utils.toArray(allChars);
+    //
+    //             const isFirst = index === 0;
+    //             const isLast = index === slides.length - 1;
+    //
+    //             // Перший слайд видно одразу, текст має opacity 0.35, лінії на місці
+    //             gsap.set(slide, {autoAlpha: isFirst ? 1 : 0});
+    //             gsap.set(lines, {yPercent: isFirst ? 0 : 120});
+    //             gsap.set(chars, {opacity: 0.3});
+    //
+    //             const blockTL = gsap.timeline();
+    //
+    //             blockTL.call(() => {
+    //                 currentEl.textContent = String(index + 1).padStart(2, '0');
+    //             });
+    //
+    //             // Пропускаємо заїзд рядків для першого слайду
+    //             if (!isFirst) {
+    //                 blockTL.set(slides, {autoAlpha: 0});
+    //                 blockTL.set(slide, {autoAlpha: 1});
+    //                 blockTL.to(lines, {
+    //                     yPercent: 0,
+    //                     stagger: 0.14,
+    //                     duration: 1.8,
+    //                     ease: "power1.out"
+    //                 });
+    //             }
+    //
+    //             // Рівномірне проявлення літер при скролі
+    //             blockTL.to(chars, {
+    //                 opacity: 1,
+    //                 stagger: {each: 0.06, from: "start", ease: "power2.out"},
+    //                 duration: 3.4,
+    //                 ease: "none"
+    //             });
+    //
+    //             // Пауза для фіксації тексту на екрані
+    //             blockTL.to({}, {duration: 1.4});
+    //
+    //             // Останній слайд НЕ ховаємо, він залишається видимим назавжди
+    //             if (!isLast) {
+    //                 blockTL.to(lines, {
+    //                     yPercent: -110,
+    //                     opacity: 0,
+    //                     stagger: 0.16,
+    //                     duration: 1.6,
+    //                     ease: "power1.out"
+    //                 });
+    //             }
+    //
+    //             // masterTL.add(blockTL);
+    //             if (index === 0) {
+    //                 // Перший слайд додаємо без затримок
+    //                 masterTL.add(blockTL);
+    //             } else {
+    //                 // Другий та наступні слайди почнуть з'являтися пізніше.
+    //                 // "+=0.8" додає штучну сліпу паузу (порожній скрол) між слайдами.
+    //                 masterTL.add(blockTL, "+=0.8");
+    //             }
+    //         });
+    //
+    //         // Повністю синхронізуємо таймлайн зі скролом батьківського стікі-тригера
+    //         ScrollTrigger.create({
+    //             trigger: stickyTrigger,
+    //             start: "top top",
+    //             end: "bottom bottom",
+    //             scrub: 2.4,
+    //             animation: masterTL,
+    //             invalidateOnRefresh: true,
+    //             onUpdate: (self) => {
+    //                 gsap.set(progressBar, {
+    //                     scaleX: self.progress,
+    //                     transformOrigin: "left center"
+    //                 });
+    //             }
+    //         });
+    //
+    //     });
+    //
+    //     // Вимикаємо анімацію ТІЛЬКИ на мобільних телефонах (менше 767px)
+    //     mm.add("(max-width: 767px)", () => {
+    //         gsap.set([stickyTrigger, storySection, slides], {clearProps: "all"});
+    //         const allText = storySection.querySelectorAll('[data-story-text]');
+    //         gsap.set(allText, {clearProps: "all"});
+    //     });
+    // }
     function initPinnedStory() {
         const stickyTrigger = document.querySelector('[data-story-trigger]');
         if (!stickyTrigger) return;
@@ -439,47 +570,47 @@ document.addEventListener('DOMContentLoaded', () => {
         const currentEl = storySection.querySelector('.story-current');
         const totalEl = storySection.querySelector('.story-total');
 
+        // 1. Спліт тексту робимо ОДРАЗУ для всіх екранів, щоб класи .story-line та .story-char з'явилися в DOM
+        const allTextElements = gsap.utils.toArray(storySection.querySelectorAll('[data-story-text]'));
+        const allSplits = allTextElements.map(el => {
+            return new SplitText(el, {
+                type: "lines,chars",
+                linesClass: "story-line",
+                charsClass: "story-char"
+            });
+        });
+
         totalEl.textContent = String(slides.length).padStart(2, '0');
         if (currentEl) currentEl.textContent = "01";
 
         let mm = gsap.matchMedia();
 
-        // NEW: Тепер анімація SplitText повністю працює на Десктопах ТА Таблетах (від 768px і вище)
+        // ДЕСКТОП ТА ПЛАНШЕТ (Зберігаємо вашу логіку без змін)
         mm.add("(min-width: 768px)", () => {
-
-            // Збільшуємо коефіцієнт тривалості скролу до 2.8, щоб на планшетах скрол пальцем був дуже плавним
             const scrollDistance = window.innerHeight * slides.length * 2.8;
 
-            gsap.set(stickyTrigger, {
-                height: `${scrollDistance}px`
-            });
+            gsap.set(stickyTrigger, { height: `${scrollDistance}px` });
 
             const masterTL = gsap.timeline();
 
             slides.forEach((slide, index) => {
-                const textElements = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
-                if (!textElements.length) return;
+                const slideText = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
+                if (!slideText.length) return;
 
-                let allLines = [];
-                let allChars = [];
-
-                textElements.forEach(el => {
-                    const split = new SplitText(el, {
-                        type: "lines,chars",
-                        linesClass: "story-line",
-                        charsClass: "story-char"
-                    });
-                    allLines.push(...split.lines);
-                    allChars.push(...split.chars);
+                // Збираємо лінії та літери поточного слайда, які вже були розбиті вище
+                let lines = [];
+                let chars = [];
+                slideText.forEach(el => {
+                    const foundSplit = allSplits.find(s => s.elements[0] === el);
+                    if (foundSplit) {
+                        lines.push(...foundSplit.lines);
+                        chars.push(...foundSplit.chars);
+                    }
                 });
-
-                const lines = gsap.utils.toArray(allLines);
-                const chars = gsap.utils.toArray(allChars);
 
                 const isFirst = index === 0;
                 const isLast = index === slides.length - 1;
 
-                // Перший слайд видно одразу, текст має opacity 0.35, лінії на місці
                 gsap.set(slide, {autoAlpha: isFirst ? 1 : 0});
                 gsap.set(lines, {yPercent: isFirst ? 0 : 120});
                 gsap.set(chars, {opacity: 0.3});
@@ -490,7 +621,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     currentEl.textContent = String(index + 1).padStart(2, '0');
                 });
 
-                // Пропускаємо заїзд рядків для першого слайду
                 if (!isFirst) {
                     blockTL.set(slides, {autoAlpha: 0});
                     blockTL.set(slide, {autoAlpha: 1});
@@ -502,7 +632,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
 
-                // Рівномірне проявлення літер при скролі
                 blockTL.to(chars, {
                     opacity: 1,
                     stagger: {each: 0.06, from: "start", ease: "power2.out"},
@@ -510,10 +639,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     ease: "none"
                 });
 
-                // Пауза для фіксації тексту на екрані
                 blockTL.to({}, {duration: 1.4});
 
-                // Останній слайд НЕ ховаємо, він залишається видимим назавжди
                 if (!isLast) {
                     blockTL.to(lines, {
                         yPercent: -110,
@@ -524,18 +651,13 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
 
-                // masterTL.add(blockTL);
                 if (index === 0) {
-                    // Перший слайд додаємо без затримок
                     masterTL.add(blockTL);
                 } else {
-                    // Другий та наступні слайди почнуть з'являтися пізніше.
-                    // "+=0.8" додає штучну сліпу паузу (порожній скрол) між слайдами.
                     masterTL.add(blockTL, "+=0.8");
                 }
             });
 
-            // Повністю синхронізуємо таймлайн зі скролом батьківського стікі-тригера
             ScrollTrigger.create({
                 trigger: stickyTrigger,
                 start: "top top",
@@ -550,17 +672,48 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 }
             });
-
         });
 
-        // Вимикаємо анімацію ТІЛЬКИ на мобільних телефонах (менше 767px)
+        // МОБІЛЬНІ ПРИСТРОЇ (Нова логіка плавного ревеалу при звичайному скролі)
         mm.add("(max-width: 767px)", () => {
+            // Очищаємо десктопні інлайнові стилі, які заважають мобільній верстці
             gsap.set([stickyTrigger, storySection, slides], {clearProps: "all"});
-            const allText = storySection.querySelectorAll('[data-story-text]');
-            gsap.set(allText, {clearProps: "all"});
+
+            slides.forEach((slide) => {
+                const slideText = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
+                if (!slideText.length) return;
+
+                let lines = [];
+                slideText.forEach(el => {
+                    const foundSplit = allSplits.find(s => s.elements[0] === el);
+                    if (foundSplit) lines.push(...foundSplit.lines);
+                });
+
+                // Початковий стан для мобільного ревеалу: ховаємо лінії з невеликим зсувом вниз
+                gsap.set(lines, { yPercent: 50, opacity: 0 });
+
+                // Створюємо окремий ScrollTrigger для кожного мобільного слайда
+                gsap.to(lines, {
+                    yPercent: 0,
+                    opacity: 1,
+                    stagger: 0.1,
+                    duration: 0.8,
+                    ease: "power2.out",
+                    scrollTrigger: {
+                        trigger: slide,
+                        start: "top 85%", // Анімація починається, коли слайд перетинає 85% висоти екрану
+                        toggleActions: "play none none none", // Програється один раз при скролі вниз
+                        invalidateOnRefresh: true
+                    }
+                });
+            });
+
+            // Очищення при виході з мобільного брейкпоінту
+            return () => {
+                allSplits.forEach(split => split.revert());
+            };
         });
     }
-
 // =========================
 // SLIDER ADVANTAGE
 // =========================

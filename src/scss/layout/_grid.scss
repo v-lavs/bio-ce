@@ -22,13 +22,13 @@
   }
 
   @include mixins.respond-to(variables.$sm) {
-    padding: 0 15px;
-    max-width: 100%;
+    padding: 0 20px;
+    max-width: 540px;
   }
 
-  //@include mixins.respond-to(variables.$xs) {
-  //
-  //}
+  @include mixins.respond-to(variables.$xs) {
+    max-width: 100%;
+  }
   //@include mixins.respond-to(variables.$xxs) {
   //
   //
