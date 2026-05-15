@@ -234,7 +234,7 @@ body.menu-open {
 
 }
 
-@include mixins.respond-to(variables.$md) {
+@include mixins.respond-to(variables.$sm) {
 .split-layout{
   flex-wrap: wrap;
 }

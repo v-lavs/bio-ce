@@ -1562,6 +1562,10 @@ form textarea {
   .header__nav.is-open {
     transform: translateX(0);
   }
+
+  .section-pharmacovigilance .split-layout__col2 {
+    width: 43.3%;
+  }
 }
 
 @media (max-width: 1080px) {
@@ -1583,6 +1587,16 @@ form textarea {
 }
 
 @media only screen and (max-width: 991px) {
+  .container {
+    max-width: 100%;
+  }
+
+  .container {
+    border: 2px solid goldenrod;
+  }
+}
+
+@media only screen and (max-width: 767px) {
   .split-layout {
     flex-wrap: wrap;
   }
@@ -1595,16 +1609,6 @@ form textarea {
     margin-bottom: 30px;
   }
 
-  .container {
-    max-width: 100%;
-  }
-
-  .container {
-    border: 2px solid goldenrod;
-  }
-}
-
-@media only screen and (max-width: 767px) {
   .container {
     padding: 0 15px;
   }

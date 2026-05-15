@@ -58,3 +58,12 @@
   line-height: 1.20;
   color: #757272;
 }
+
+@include mixins.respond-to(variables.$lg){
+  .section-pharmacovigilance {
+    .split-layout__col2{
+      width: 43.3%;
+    }
+
+  }
+}
