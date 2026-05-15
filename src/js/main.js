@@ -44,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
         // Клік по бургеру
         burger.addEventListener("click", (e) => {
             e.stopPropagation();
+            console.log(22222)
+
             nav.classList.toggle("is-open");
             burger.classList.toggle("active");
             document.body.classList.toggle("menu-open");
@@ -251,8 +253,14 @@ document.addEventListener('DOMContentLoaded', () => {
         document.querySelectorAll('.accordion__item').forEach((item) => {
             item.addEventListener('click', () => {
                 const isActive = item.classList.contains('active');
-                document.querySelectorAll('.accordion__item').forEach((item) => item.classList.remove('active'));
-                if (!isActive) item.classList.add('active');
+                console.log(1111)
+                // 1. Clear 'active' from all items using a different variable name ('el')
+                document.querySelectorAll('.accordion__item').forEach((el) => el.classList.remove('active'));
+
+                // 2. Safely toggle the clicked 'item'
+                if (!isActive) {
+                    item.classList.add('active');
+                }
             });
         });
     }
