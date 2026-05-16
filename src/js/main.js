@@ -32,68 +32,214 @@ document.addEventListener('DOMContentLoaded', () => {
     // ========================================================
     // 1. ІНІЦІАЛІЗАЦІЯ ЕЛЕМЕНТІВ МЕНЮ
     // ========================================================
+    // const nav = document.querySelector(".header__nav");
+    // const burger = document.querySelector(".burger");
+    // const activeBg = document.querySelector(".nav-active-bg");
+    // const links = document.querySelectorAll(".menu__link");
+    //
+    // // ========================================================
+    // // 2. СИСТЕМА КЛІКІВ (ПРАЦЮЄ НА ВСІХ ЕКРАНАХ БЕЗ GSAP)
+    // // ========================================================
+    // if (burger && nav) {
+    //     // Клік по бургеру
+    //     burger.addEventListener("click", (e) => {
+    //         e.stopPropagation();
+    //         console.log(22222)
+    //
+    //         nav.classList.toggle("is-open");
+    //         burger.classList.toggle("active");
+    //         document.body.classList.toggle("menu-open");
+    //     });
+    //
+    //     // Кліки всередині меню (Посилання та мобільні підменю)
+    //     nav.addEventListener("click", (e) => {
+    //         const link = e.target.closest(".menu__link");
+    //         if (!link) return;
+    //
+    //         const item = link.closest(".menu__item");
+    //         if (!item) return;
+    //
+    //         const hasSubmenu = item.classList.contains("has-submenu");
+    //
+    //         // Мобільне підменю (Клік-Акордеон)
+    //         if (window.innerWidth <= 1080 && hasSubmenu) {
+    //             e.preventDefault();
+    //             e.stopPropagation();
+    //
+    //             document.querySelectorAll(".menu__item.has-submenu").forEach(i => {
+    //                 if (i !== item) i.classList.remove("is-open");
+    //             });
+    //
+    //             item.classList.toggle("is-open");
+    //             return;
+    //         }
+    //
+    //         // Клік по звичайному посиланню
+    //         if (!hasSubmenu) {
+    //             links.forEach(l => l.classList.remove("active"));
+    //             link.classList.add("active");
+    //
+    //             // Якщо екран мобільний — закриваємо меню
+    //             if (window.innerWidth <= 1080) {
+    //                 nav.classList.remove("is-open");
+    //                 burger.classList.remove("active");
+    //                 document.body.classList.remove("menu-open");
+    //                 document.querySelectorAll(".menu__item.has-submenu").forEach(i => i.classList.remove("is-open"));
+    //             } else if (activeBg) {
+    //                 // Якщо десктоп — рухаємо блоб через GSAP
+    //                 moveBlob(link);
+    //             }
+    //         }
+    //     });
+    // }
+    //
+    // // Глобальне закриття через ESC
+    // document.addEventListener("keydown", (e) => {
+    //     if (e.key === "Escape" && nav && burger) {
+    //         nav.classList.remove("is-open");
+    //         burger.classList.remove("active");
+    //         document.body.classList.remove("menu-open");
+    //         document.querySelectorAll(".menu__item.has-submenu").forEach(i => i.classList.remove("is-open"));
+    //     }
+    // });
+    //
+    // // ========================================================
+    // // 3. ЛОГІКА ДЕСКТОПНОГО БЛОБА (GSAP ХОВЕРИ)
+    // // ========================================================
+    // if (activeBg && nav && links.length > 0) {
+    //     // Початкова позиція блобу при завантаженні (тільки для десктопа)
+    //     const initialActive = document.querySelector(".menu__link.active");
+    //     if (initialActive && window.innerWidth > 1080) {
+    //         moveBlob(initialActive);
+    //     }
+    //
+    //     // Ховер події
+    //     links.forEach(link => {
+    //         link.addEventListener("mouseenter", () => {
+    //             if (window.innerWidth <= 1080) return;
+    //             moveBlob(link);
+    //         });
+    //     });
+    //
+    //     // Повернення блобу на активний лінк, коли мишка йде з меню
+    //     nav.addEventListener("mouseleave", () => {
+    //         if (window.innerWidth <= 1080) return;
+    //         const currentActive = document.querySelector(".menu__link.active");
+    //         if (currentActive) moveBlob(currentActive);
+    //     });
+    // }
+    //
+    // // Глобальна функція розрахунку координат для блоба
+    // function moveBlob(target) {
+    //     if (!target || !activeBg || !nav || window.innerWidth <= 1080) return;
+    //
+    //     const item = target.closest(".menu__item");
+    //     if (!item) return;
+    //
+    //     const navRect = nav.getBoundingClientRect();
+    //     const itemRect = item.getBoundingClientRect();
+    //
+    //     gsap.to(activeBg, {
+    //         x: itemRect.left - navRect.left,
+    //         width: itemRect.width,
+    //         duration: 0.35,
+    //         ease: "power2.out"
+    //     });
+    // }
+
+//    ==============
+//     test menu
+//    ================
     const nav = document.querySelector(".header__nav");
     const burger = document.querySelector(".burger");
     const activeBg = document.querySelector(".nav-active-bg");
     const links = document.querySelectorAll(".menu__link");
 
-    // ========================================================
-    // 2. СИСТЕМА КЛІКІВ (ПРАЦЮЄ НА ВСІХ ЕКРАНАХ БЕЗ GSAP)
-    // ========================================================
+// Створюємо медіа-запит в JS, який в точності дорівнює твоєму variables.$lg в SCSS
+// (Якщо $lg це 991px, постав тут 991px)
+    const isMobileMQL = window.matchMedia("(max-width: 1080px)");
+
+// ========================================================
+// 2. СИСТЕМА КЛІКІВ (ПРАЦЮЄ НА ВСІХ ЕКРАНАХ БЕЗ GSAP)
+// ========================================================
     if (burger && nav) {
+        // Клік по бургеру
         // Клік по бургеру
         burger.addEventListener("click", (e) => {
             e.stopPropagation();
-            console.log(22222)
 
-            nav.classList.toggle("is-open");
-            burger.classList.toggle("active");
-            document.body.classList.toggle("menu-open");
+            if (!nav.classList.contains("is-visible")) {
+                // ВІДКРИВАЄМО МЕНЮ:
+                nav.classList.add("is-visible"); // 1. Миттєво робимо display: flex
+
+                // 2. Даємо браузеру 10 мілісекунд, щоб він зафіксував display, і запускаємо рух transform
+                setTimeout(() => {
+                    nav.classList.add("is-open");
+                    burger.classList.add("active");
+                    document.body.classList.add("menu-open");
+                }, 10);
+
+            } else {
+                // ЗАКРИВАЄМО МЕНЮ:
+                nav.classList.remove("is-open"); // 1. Спочатку плавно ховаємо через transform
+                burger.classList.remove("active");
+                document.body.classList.remove("menu-open");
+
+                // 2. Чекаємо 400мс (час твоєї CSS анімації) і повністю вимикаємо display: none
+                setTimeout(() => {
+                    nav.classList.remove("is-visible");
+                }, 400);
+            }
         });
 
-        // Кліки всередині меню (Посилання та мобільні підменю)
+        // Кліки всередині меню
         nav.addEventListener("click", (e) => {
+            // Мобільне підменю: перевіряємо клік по лінку АБО по стрілочці поруч
+            const isArrow = e.target.closest(".arrow");
             const link = e.target.closest(".menu__link");
-            if (!link) return;
 
-            const item = link.closest(".menu__item");
+            if (!link && !isArrow) return;
+
+            const item = (link || isArrow).closest(".menu__item");
             if (!item) return;
 
             const hasSubmenu = item.classList.contains("has-submenu");
 
-            // Мобільне підменю (Клік-Акордеон)
-            if (window.innerWidth <= 1080 && hasSubmenu) {
-                e.preventDefault();
+            // Мобільний акордеон (спрацьовує чітко синхронно з CSS медичкою)
+            if (isMobileMQL.matches && hasSubmenu) {
+                // Якщо клікнули по лінку (а не по стрілочці), скасовуємо перехід
+                if (link) e.preventDefault();
                 e.stopPropagation();
 
+                // Закриваємо інші підменю
                 document.querySelectorAll(".menu__item.has-submenu").forEach(i => {
                     if (i !== item) i.classList.remove("is-open");
                 });
 
+                // Тогл поточного (тепер воно і закривається назад!)
                 item.classList.toggle("is-open");
                 return;
             }
 
-            // Клік по звичайному посиланню
-            if (!hasSubmenu) {
+            // Клік по звичайному посиланню (без сабменю)
+            if (link && !hasSubmenu) {
                 links.forEach(l => l.classList.remove("active"));
                 link.classList.add("active");
 
-                // Якщо екран мобільний — закриваємо меню
-                if (window.innerWidth <= 1080) {
+                // Якщо екран мобільний — закриваємо меню повністю
+                if (isMobileMQL.matches) {
                     nav.classList.remove("is-open");
                     burger.classList.remove("active");
                     document.body.classList.remove("menu-open");
                     document.querySelectorAll(".menu__item.has-submenu").forEach(i => i.classList.remove("is-open"));
                 } else if (activeBg) {
-                    // Якщо десктоп — рухаємо блоб через GSAP
                     moveBlob(link);
                 }
             }
         });
     }
 
-    // Глобальне закриття через ESC
+// Глобальне закриття через ESC
     document.addEventListener("keydown", (e) => {
         if (e.key === "Escape" && nav && burger) {
             nav.classList.remove("is-open");
@@ -103,35 +249,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // ========================================================
-    // 3. ЛОГІКА ДЕСКТОПНОГО БЛОБА (GSAP ХОВЕРИ)
-    // ========================================================
+// ========================================================
+// 3. ЛОГІКА ДЕСКТОПНОГО БЛОБА (GSAP ХОВЕРИ)
+// ========================================================
     if (activeBg && nav && links.length > 0) {
         // Початкова позиція блобу при завантаженні (тільки для десктопа)
         const initialActive = document.querySelector(".menu__link.active");
-        if (initialActive && window.innerWidth > 1080) {
+        if (initialActive && !isMobileMQL.matches) {
             moveBlob(initialActive);
         }
 
         // Ховер події
         links.forEach(link => {
             link.addEventListener("mouseenter", () => {
-                if (window.innerWidth <= 1080) return;
+                if (isMobileMQL.matches) return;
                 moveBlob(link);
             });
         });
 
-        // Повернення блобу на активний лінк, коли мишка йде з меню
+        // Повернення блобу на активний лінк
         nav.addEventListener("mouseleave", () => {
-            if (window.innerWidth <= 1080) return;
+            if (isMobileMQL.matches) return;
             const currentActive = document.querySelector(".menu__link.active");
             if (currentActive) moveBlob(currentActive);
         });
     }
 
-    // Глобальна функція розрахунку координат для блоба
+// Глобальна функція розрахунку координат для блоба
     function moveBlob(target) {
-        if (!target || !activeBg || !nav || window.innerWidth <= 1080) return;
+        if (!target || !activeBg || !nav || isMobileMQL.matches) return;
 
         const item = target.closest(".menu__item");
         if (!item) return;
@@ -146,6 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
             ease: "power2.out"
         });
     }
+
 
 // =========================
 // LIQUIDS BTNS
