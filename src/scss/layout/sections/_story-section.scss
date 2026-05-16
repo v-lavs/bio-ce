@@ -31,62 +31,10 @@
 
 }
 
-.story-top {
-  position: absolute;
-
-  top: 40px;
-  left: 50px;
-  right: 50px;
-
-  z-index: 30;
-}
-
-.story-progress {
-  position: relative;
-
-  width: 100%;
-  height: 2px;
-
-  background: rgba(231, 241, 255, 0.4);
-
-  overflow: hidden;
-}
-
-.story-progress__bar {
-  position: absolute;
-
-  inset: 0;
-  background: #990B6E;
-
-  transform: scaleX(0);
-  transform-origin: left center;
-
-  will-change: transform;
-}
-
-.story-meta {
-  margin-top: 32px;
-}
-
-.story-fraction {
-  display: flex;
-  gap: 2px;
-  font-weight: 300;
-  font-size: 24px;
-  line-height: 1.50;
-  color: #9A9A9A;
-}
-
-.story-current {
-  color: #000;
-}
-
 .story-slides {
   position: relative;
-
   width: 100%;
   height: 100%;
-
 }
 
 .story-slide {
@@ -100,11 +48,7 @@
   visibility: hidden;
 }
 
-.story-slide .heading_xl {
-  color: #990B6E;
-  margin-bottom: 24px;
-}
-
+//=== anim ===========
 .story-line {
   overflow: hidden;
 }
@@ -115,33 +59,82 @@
   will-change: opacity, transform;
 }
 
-@include mixins.respond-to(variables.$xl) {
-  .story-section .text_xl {
-    font-size: 24px;
-  }
+
+
+// ====================
+.story-slide .heading_xl {
+  color: #990B6E;
+  margin-bottom: 24px;
 }
 
-@include mixins.respond-to(variables.$sm) {
-  .story-section {
-    height: 100vh;
+.story-progress {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: rgba(231, 241, 255, 0.4);
+  overflow: hidden;
 
-    .text_xl {
-      font-size: 20px;
+ &__bar {
+    position: absolute;
+    inset: 0;
+    background: #990B6E;
+    transform: scaleX(0);
+    transform-origin: left center;
+    will-change: transform;
+  }
+}
+  .story-top {
+    position: absolute;
+    top: 40px;
+    left: 50px;
+    right: 50px;
+    z-index: 30;
+  }
+
+  .story-meta {
+    margin-top: 32px;
+  }
+
+  .story-fraction {
+    display: flex;
+    gap: 2px;
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 1.50;
+    color: #9A9A9A;
+  }
+
+  .story-current {
+    color: #000;
+  }
+
+  @include mixins.respond-to(variables.$xl) {
+    .story-section .text_xl {
+      font-size: 24px;
     }
   }
-  .story-slide {
-    padding: 20px 40px;
-  }
-  .story-top {
-    top: 0;
-  }
-  .story-meta {
-    margin-top: 10px;
-  }
-}
 
-@include mixins.respond-to(variables.$xs) {
-  .story-fraction{
-    font-size: 18px;
+  @include mixins.respond-to(variables.$sm) {
+    .story-section {
+      height: 100vh;
+
+      .text_xl {
+        font-size: 20px;
+      }
+    }
+    .story-slide {
+      padding: 20px 40px;
+    }
+    .story-top {
+      top: 0;
+    }
+    .story-meta {
+      margin-top: 10px;
+    }
   }
-}
+
+  @include mixins.respond-to(variables.$xs) {
+    .story-fraction {
+      font-size: 18px;
+    }
+  }
