@@ -2,10 +2,13 @@
 @use "../../base/variables";
 
 .section-work {
-.container{
-  position: relative;
-}
-  &__bg{
+  overflow: hidden;
+
+  .container {
+    position: relative;
+  }
+
+  &__bg {
     display: block;
     position: absolute;
     left: 50px;
@@ -22,14 +25,15 @@
     .slide-inner {
       padding: 30px 25px;
     }
-    .description{
+
+    .description {
       font-size: 16px;
     }
   }
 }
 
 @include mixins.respond-to(variables.$sm) {
-  .section-work{
+  .section-work {
 
   }
 }
