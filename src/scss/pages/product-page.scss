@@ -1,14 +1,10 @@
-@use "../utils/mixins";
-@use "../utils/variables";
+@use "../base/mixins";
+@use "../base/variables";
 
 //product-page
 
 
 @include mixins.respond-to(variables.$xl) {
-
-}
-
-@include mixins.respond-to(variables.$screen-md) {
 
 }
 

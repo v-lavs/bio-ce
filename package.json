@@ -1,37 +1,34 @@
 {
-  "name": "iLavs-gulp-starter",
+  "name": "gulp-setup",
   "version": "1.0.0",
-  "description": "Easy start to build WP and HTML themes",
+  "description": "Production-grade Gulp setup for HTML website development",
   "scripts": {
-    "start": "node --max-old-space-size=8192 node_modules/gulp/bin/gulp.js default",
-    "build": "gulp build"
+    "dev": "gulp",
+    "build": "gulp build --prod",
+    "clean": "gulp clean"
   },
-  "author": "vLavs",
-  "license": "ISC",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "devDependencies": {
-    "autoprefixer": "^10.4.21",
-    "clean-css": "^4.2.3",
-    "gulp": "^4.0.2",
-    "gulp-autoprefixer": "4.1.0",
-    "gulp-clean-css": "^4.3.0",
-    "gulp-group-css-media-queries": "^1.2.2",
-    "gulp-include": "^2.4.1",
-    "gulp-minify-css": "1.2.4",
-    "gulp-postcss": "^9.0.1",
-    "gulp-sass": "^6.0.0",
-    "gulp-sourcemaps": "^2.6.4",
-    "gulp-uglify": "^3.0.0",
-    "gulp-util": "3.0.8",
-    "gulp-watch": "5.0.0",
-    "minimatch": "^3.1.2",
-    "postcss": "^8.5.6",
-    "rimraf": "^2.6.2",
-    "sass": "^1.89.2"
-  },
-  "dependencies": {
-    "bootstrap-4-grid": "^2.4.1",
-    "jquery": "^3.7.1",
-    "jquery-scrollify": "^1.0.21",
-    "swiper": "^7.0.3"
+    "autoprefixer": "^10.5.0",
+    "browser-sync": "^3.0.4",
+    "cssnano": "^7.1.9",
+    "del": "^8.0.1",
+    "esbuild": "^0.28.0",
+    "gulp": "^5.0.1",
+    "gulp-if": "^3.0.0",
+    "gulp-newer": "^1.4.0",
+    "gulp-notify": "^5.0.0",
+    "gulp-nunjucks-render": "^2.2.3",
+    "gulp-plumber": "^1.2.1",
+    "gulp-postcss": "^10.0.0",
+    "gulp-sass": "^6.0.1",
+    "postcss": "^8.5.14",
+    "postcss-sort-media-queries": "^6.6.1",
+    "sass": "1.70.0",
+    "sharp": "^0.34.5"
   }
 }

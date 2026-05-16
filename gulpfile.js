@@ -1,104 +1,32 @@
-'use strict';
+import gulp from 'gulp';
+import { clean } from './gulp/tasks/clean.js';
+import { html } from './gulp/tasks/html.js';
+import { styles } from './gulp/tasks/styles.js';
+import { scripts } from './gulp/tasks/scripts.js';
+import { images } from './gulp/tasks/images.js';
+import { fonts } from './gulp/tasks/fonts.js';
+import { static_files } from './gulp/tasks/static.js';
+import { serve } from './gulp/tasks/server.js';
+import { watcher } from './gulp/tasks/watcher.js';
 
-const gulp = require('gulp'),
-    sourcemaps = require('gulp-sourcemaps'),
-    uglify = require('gulp-uglify'),
-    include = require('gulp-include'),
-    dartSass = require('sass'),
-    sass = require('gulp-sass')(dartSass),
-    gcmq = require('gulp-group-css-media-queries'),
-    postcss = require('gulp-postcss'),
-    autoprefixer = require('autoprefixer'),
-    cleanCSS = require('gulp-clean-css'),
-    { promisify } = require('util'),
-    rimraf = require('rimraf');
+// Parallel asset compilation
+const compile = gulp.parallel(html, styles, scripts, images, fonts, static_files);
 
-const rimrafAsync = promisify(rimraf);
+// Development: clean → compile → serve → watch
+const dev = gulp.series(clean, compile, serve, watcher);
 
-const path = {
-    build: {
-        js: './dist/',
-        css: './dist/'
-    },
-    src: {
-        js: './src/js/main.js',
-        style: './src/scss/main.scss'
-    },
-    watch: {
-        js: './src/js/**/*.js',
-        style: './src/scss/**/*.scss'
-    },
-    clean: './dist'
-};
+// Production: clean → compile (with --prod flag)
+const build = gulp.series(clean, compile);
 
-// Error handler
-function handleError(err) {
-    console.error(err.toString());
-    this.emit('end');
-}
+// Export tasks
+export { clean };
+export { html };
+export { styles };
+export { scripts };
+export { images };
+export { fonts };
+export { static_files };
+export { build };
 
-// Clean task
-function clean() {
-    return rimrafAsync(path.clean);
-}
-
-// JavaScript development task
-function jsDev() {
-    return gulp.src(path.src.js)
-        .pipe(sourcemaps.init())
-        .pipe(include({ extensions: 'js', hardFail: true }))
-        .on('error', handleError)
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.build.js));
-}
-
-// JavaScript build task
-function jsBuild() {
-    return gulp.src(path.src.js)
-        .pipe(include({ extensions: 'js', hardFail: true }))
-        .on('error', handleError)
-        .pipe(uglify())
-        .pipe(gulp.dest(path.build.js));
-}
-
-// Styles development task
-function styleDev() {
-    return gulp.src(path.src.style)
-        .pipe(sourcemaps.init())
-        .pipe(sass({ sourceMap: true, errLogToConsole: true }).on('error', sass.logError))
-        .pipe(postcss([autoprefixer()]))
-        .pipe(gcmq())
-        .pipe(sourcemaps.write('.'))
-        .pipe(gulp.dest(path.build.css));
-}
-
-// Styles build task
-function styleBuild() {
-    return gulp.src(path.src.style)
-        .pipe(sass({ sourceMap: false, errLogToConsole: true }).on('error', sass.logError))
-        .pipe(postcss([autoprefixer()]))
-        .pipe(gcmq())
-        .pipe(cleanCSS())
-        .pipe(gulp.dest(path.build.css));
-}
-
-// Watch tasks
-function watchStyles() {
-    gulp.watch(path.watch.style, styleDev);
-}
-
-function watchJs() {
-    gulp.watch(path.watch.js, jsDev);
-}
-
-// Build and development tasks
-const build = gulp.series(clean, gulp.parallel(jsBuild, styleBuild));
-const dev = gulp.series(clean, gulp.parallel(jsDev, styleDev));
-const watch = gulp.parallel(watchStyles, watchJs);
-
-// Register tasks
-gulp.task('clean', clean);
-gulp.task('build', build);
-gulp.task('dev', dev);
-gulp.task('watch', watch);
-gulp.task('default', gulp.series(dev, watch));
+// Default task (development)
+export default dev;

@@ -1,5 +1,5 @@
-@use "../../utils/mixins";
-@use "../../utils/variables";
+@use "../../base/mixins";
+@use "../../base/variables";
 
 .advantages-section{
   background-repeat: no-repeat;
@@ -146,11 +146,11 @@
 }
 
 .nav-btn_left {
-  background-image: url(../assets/img/arrow-left.svg);
+  background-image: url(../images/img/arrow-left.svg);
 }
 
 .nav-btn_right {
-  background-image: url(../assets/img/arrow-right.svg);
+  background-image: url(../images/img/arrow-right.svg);
 }
 
 .nav-btn:hover {

@@ -1,8 +1,9 @@
-@use "../utils/mixins";
-@use "../utils/variables";
+@use "../base/mixins";
+@use "../base/variables";
 
 .footer {
   position: relative;
+  overflow: hidden;
   background-color: #0F3F71;
   padding-top: 110px;
   padding-bottom: 58px;

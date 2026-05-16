@@ -1,5 +1,5 @@
-@use "../../utils/mixins";
-@use "../../utils/variables";
+@use "../../base/mixins";
+@use "../../base/variables";
 
 .section-contacts {
   background-color: #FFFFFF;
@@ -84,12 +84,12 @@
   }
 
   &.phone:before {
-    background-image: url(../assets/img/phone.svg);
+    background-image: url(../images/img/phone.svg);
   }
 
   &.address:before,
   &.email:before {
-    background-image: url(../assets/img/email.svg);
+    background-image: url(../images/img/email.svg);
   }
 }
 
