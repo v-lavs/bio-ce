@@ -1,0 +1,65 @@
+# Workflow for building a frontend project from a 'dist' folder and deploying to GitHub Pages
+name: Deploy dist to GitHub Pages
+
+on:
+  # Runs on pushes targeting the default branch
+  push:
+    branches: ["main"]
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Allow only one concurrent deployment, skipping runs queued between the run in-progress and latest queued.
+# However, do NOT cancel in-progress runs as we want to allow these production deployments to complete.
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
+
+jobs:
+  # Build job
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      # --- Added Node.js Environment Setup ---
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20 # Adjust version if your project requires a specific one
+          cache: 'npm'     # Caches node_modules for faster subsequent runs
+
+      # --- Added Install and Build Steps ---
+      - name: Install dependencies
+        run: npm ci        # Clean install based strictly on package-lock.json
+
+      - name: Build project
+        run: npm run build # Assumes this script generates the "dist" folder
+
+      # --- Modified Artifact Upload to Target "dist" ---
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'   # Targets your compiled assets instead of Jekyll's _site
+
+  # Deployment job
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4 # Reverted to v4 for broad stability, v5 works too if preferred
