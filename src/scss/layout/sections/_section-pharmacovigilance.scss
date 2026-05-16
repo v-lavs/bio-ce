@@ -1,5 +1,5 @@
-@use "../../utils/mixins";
-@use "../../utils/variables";
+@use "../../base/mixins";
+@use "../../base/variables";
 
 .section-pharmacovigilance {
   padding-top: 100px;
@@ -15,7 +15,7 @@
       top: -50px;
       width: 687px;
       height: 718px;
-      background-image: url("../assets/img/logo-bg.svg");
+      background-image: url("../images/img/logo-bg.svg");
       background-repeat: no-repeat;
       background-position: left bottom;
       background-size: cover;
