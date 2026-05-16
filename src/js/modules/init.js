@@ -1025,7 +1025,7 @@ export function init() {
     }
 
     initAccordion();
-    initTabs();
+    initTabs();  //
     initLiquidButtons();
 
 
