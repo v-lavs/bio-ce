@@ -36,7 +36,6 @@
   border-radius: 50px;
   z-index: -1;
   pointer-events: none;
-
   will-change: transform, width;
 }
 
@@ -64,7 +63,19 @@
     }
   }
 }
+.has-submenu:before {
+  position: absolute;
+  content: url('data:image/svg+xml,<svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.397766 0.427124L3.77309 3.80245L7.71097 0.427124" stroke="white" stroke-width="1.12511"/></svg>');
+  display: block;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  transform-origin: center;
+  transition: .35s;
+  font-size: 10px;
+  z-index: 1;
 
+}
 .has-submenu:hover {
   &:before{
     transform: translateY(-50%) rotate(180deg);
@@ -88,19 +99,7 @@
   display: none;
 }
 
-.has-submenu:before {
-  position: absolute;
-  content: url('data:image/svg+xml,<svg width="9" height="5" viewBox="0 0 9 5" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M0.397766 0.427124L3.77309 3.80245L7.71097 0.427124" stroke="white" stroke-width="1.12511"/></svg>');
-  display: block;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%) rotate(0deg);
-  transform-origin: center;
-  transition: .35s;
-  font-size: 10px;
-  z-index: 1;
 
-}
 
 
 @include mixins.respond-to(variables.$xxl){
@@ -124,23 +123,35 @@
     font-size: 24px;
     padding: 0;
   }
+  .menu__link:hover,
   .menu__link.active {
-    color: #2A2A2A!important;
+    color: #2A2A2A;
   }
   .submenu {
     opacity: 0;
-    transform: translateY(-10px);
     pointer-events: none;
     visibility: hidden;
-    transition: 0.3s ease;
+    background-color: #fff;
+    position: static;
+    padding: 0 20px;
+    max-height: 0;
+    transform: none;
+    overflow: hidden;
+    transition: max-height 0.55s, opacity 0.55s, visibility 0.6s;
   }
-
+  .submenu li{
+    color: #2A2A2A;
+  }
   .menu__item.is-open .submenu {
     opacity: 1;
     transform: translateY(0);
     pointer-events: auto;
     visibility: visible;
     position: static;
+    margin-top: 20px;
+    padding: 20px;
+    height: auto;
+    max-height: 350px;
   }
 
   .arrow {
@@ -159,9 +170,22 @@
 
   }
   .has-submenu:hover .submenu {
-    opacity: initial;
-    transform: initial;
+    transform: none;
+
+    opacity: 0;
+    visibility: hidden;
+    max-height: 0;
+    padding: 0 20px;
   }
+
+  .menu__item.is-open.has-submenu:hover .submenu {
+    opacity: 1;
+    visibility: visible;
+    max-height: 200px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+  }
+
   .has-submenu:before {
     display: none;
   }

@@ -246,6 +246,10 @@ body.menu-open {
   }
   .section__title-gb:not(.section-activity .section__title-gb) {
     margin-bottom: 30px;
+    font-size: clamp(16px, -0.163rem + 3.21vw, 22px);
+  }
+  .section__content h3{
+    font-size: clamp(24px, 0.337rem + 3.21vw, 30px);
   }
 }
 

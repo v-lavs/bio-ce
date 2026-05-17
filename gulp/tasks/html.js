@@ -5,7 +5,7 @@ import { plumber } from '../utils/plumber.js';
 import { logger } from '../utils/logger.js';
 
 const templateData = {
-  siteName: 'My Site',
+  siteName: 'Bioscience',
   year: new Date().getFullYear(),
 };
 

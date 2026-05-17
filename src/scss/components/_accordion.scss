@@ -1,15 +1,17 @@
 @use "../base/mixins";
 @use "../base/variables";
 
-.accordion{
+.accordion {
   width: 100%;
   counter-reset: accordion-counter;
-  &__item{
+
+  &__item {
     border-bottom: 1px solid rgba(216, 216, 216, 0.4);
     margin-bottom: 44px;
     counter-increment: accordion-counter;
     position: relative;
-    &:before{
+
+    &:before {
       position: absolute;
       content: counter(accordion-counter, decimal-leading-zero) ".";
       left: 0;
@@ -19,35 +21,41 @@
       line-height: 1;
       color: #C9CBBD;
     }
-    &:last-child{
+
+    &:last-child {
       margin-bottom: 0;
     }
-    &.active{
+
+    &.active {
       .accordion__item-display {
         max-height: 1500px;
         transition: max-height 1.2s ease;
         will-change: max-height;
         overflow: hidden
       }
+
       .plus-vertical {
         transform: rotate(90deg);
       }
     }
   }
+
   &__tab-container {
     display: flex;
     padding: 0 120px 32px 77px;
     position: relative;
     min-height: 100px;
   }
-  &__item-display{
+
+  &__item-display {
     max-height: 0;
     padding: 0;
     overflow: hidden;
     transition: max-height 1.2s ease;
     will-change: max-height;
   }
-  &__content-icon{
+
+  &__content-icon {
     width: 78px;
     height: 85px;
     background-position: center;
@@ -55,40 +63,48 @@
     background-size: contain;
     margin: 0 auto;
   }
-  .split-layout{
+
+  .split-layout {
     align-items: center;
     padding: 73px 0 95px;
   }
-  &__caret{
+
+  &__caret {
     position: absolute;
     right: 60px;
     top: 12px;
     width: 40px;
     height: auto;
-    svg{
+
+    svg {
       display: block;
       width: 100%;
     }
   }
 }
+
 .plus-vertical,
 .plus-horizontal {
   transform-origin: center;
   transition: .8s ease;
 }
+
 @include mixins.respond-to(variables.$lg) {
-  .accordion br{
+  .accordion br {
     display: none;
   }
-.accordion__item:before{
-  font-size: 34px;
+  .accordion__item:before {
+    font-size: 34px;
+  }
 }
+
+@include mixins.respond-to(variables.$sm) {
+  .accordion .heading_xl {
+    font-size: clamp(26px, 0.074rem + 4.28vw, 34px);
+  }
 }
 
 @include mixins.respond-to(variables.$xs) {
-
-}
-@include mixins.respond-to(variables.$xs){
   .accordion__item:before {
     font-size: 24px;
     top: 4px;
@@ -101,10 +117,14 @@
   .accordion__tab-container {;
     padding: 0 40px 32px;
   }
-  .accordion__item{
+  .accordion__item {
     margin-bottom: 32px;
   }
-  .accordion  .heading_xl {
+  .accordion .heading_xl {
     font-size: 26px;
+  }
+  .accordion__content-icon {
+    width: 58px;
+    height: 65px;
   }
 }

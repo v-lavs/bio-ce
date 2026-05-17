@@ -104,11 +104,16 @@ strong {
 
 
 @include mixins.respond-to(variables.$xs) {
-
+  .heading_xl {
+    font-size: clamp(32px, 1.612rem + 1.07vw, 34px);
+  }
+  .heading_lg{
+    font-size: clamp(26px, 0.462rem + 3.21vw, 32px);
+  }
 }
 
 @include mixins.respond-to(variables.$xs) {
-  .heading_xl{
+  .heading_xl {
     font-size: 32px;
   }
   .heading_lg {

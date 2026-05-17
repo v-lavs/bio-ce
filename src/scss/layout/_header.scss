@@ -8,6 +8,9 @@
   right: 0;
   z-index: 2;
 
+  transform: translateY(-24px);
+  opacity: 0;
+
   .container {
     display: flex;
     justify-content: space-between;
@@ -18,9 +21,6 @@
     max-width: 323px;
     height: auto;
   }
-
-  transform: translateY(-24px);
-  opacity: 0;
 }
 
 .header__nav {
@@ -42,6 +42,25 @@
   border: none;
   cursor: pointer;
 
+  &.active {
+    .burger__line {
+      background-color: #2A2A2A;
+      width: 28px;
+    }
+
+    .burger__line:first-child {
+      transform: rotate(45deg) translate(6px, 7px);
+    }
+
+    .burger__line:nth-child(2) {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+
+    .burger__line:last-child {
+      transform: rotate(-45deg) translate(5px, -5px);
+    }
+  }
 }
 
 .burger__line {
@@ -56,29 +75,28 @@
 
 }
 
-@include  mixins.respond-to(variables.$xl) {
+@include mixins.respond-to(variables.$xl) {
   .header__logo {
     max-width: 225px;
   }
 }
 
-// Модифікуйте ваш медіазапит у файлі стилів:
 @include mixins.respond-to(variables.$lg) {
   .burger {
     display: flex;
-    z-index: 1000; // Піднімаємо бургер на самий верхній шар
-    position: relative;        // Гарантує роботу z-index
+    z-index: 1000;
+    position: relative;
   }
 
   .nav-active-bg {
     display: none;
   }
-.header{
-  contain: layout;
-}
+  .header {
+    contain: layout;
+  }
   .header__nav {
     position: fixed;
-    top: 0;
+    top: -60px;
     right: 0;
     left: auto;
     bottom: 0;
@@ -88,14 +106,15 @@
     height: 100vh;
     background: #FFFFFF;
     flex-direction: column;
-    padding: 100px 40px;
+    padding: 120px 40px;
     border-radius: 0;
     transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1), visibility 0.4s;
-    display: none;
-     }
-.header__nav.is-visible{
-  display: flex;
-}
+    display: flex;
+    //display: none;
+  }
+  //.header__nav.is-visible {
+  //  display: flex;
+  //}
   .header__nav.is-open {
     transform: translateX(0);
     visibility: visible;
@@ -108,9 +127,10 @@
     max-width: 224px;
   }
 }
+
 @include mixins.respond-to(variables.$xs) {
-.header__logo{
-  max-width: 160px;
-}
+  .header__logo {
+    max-width: 160px;
+  }
 }
 

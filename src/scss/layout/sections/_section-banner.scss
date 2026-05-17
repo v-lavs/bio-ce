@@ -3,7 +3,6 @@
 
 .section-banner {
   height: 100vh;
-  padding: 18px 16px;
   display: flex;
   align-items: flex-end;
   position: relative;
@@ -14,7 +13,7 @@
 
   .container {
     position: relative;
-    padding: 0 35px 56px;
+    padding-bottom: 56px;
     z-index: 2;
   }
 
@@ -88,6 +87,9 @@
 @include mixins.respond-to(variables.$xs) {
   .section-banner {
     margin-bottom: 50px;
+    &__img {
+      inset: 16px 13px;
+    }
   }
 }
 

@@ -174,6 +174,9 @@
     width: 100%;
   }
 }
+@include mixins.respond-to(variables.$sm){
+
+}
 @include mixins.respond-to(variables.$xs) {
   .contacts-list {
     padding: 28px 24px;
