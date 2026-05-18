@@ -126,11 +126,13 @@
   .accordion__content-icon {
     width: 58px;
     height: 65px;
+    margin-bottom: 32px;
   }
   .accordion__tab-container{
     min-height: 0;
   }
   .accordion .split-layout {
-    padding: 0 0 55px;
+    padding: 0 0 60px;
+    flex-direction: column;
   }
 }
