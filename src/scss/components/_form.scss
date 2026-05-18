@@ -112,7 +112,18 @@ form {
 }
 
 @include mixins.respond-to(variables.$xs) {
+  form {
+    input {
+      padding-top: 13px;
+      padding-bottom: 13px;
+      padding-left: 20px;
+    }
 
+    .label {
+      font-size: 14px;
+      margin-bottom: 0;
+    }
+  }
 }
 
 @include mixins.respond-to(variables.$xxs) {

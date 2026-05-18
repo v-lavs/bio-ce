@@ -173,24 +173,51 @@
   .section-contacts .tabs__content{
     width: 100%;
   }
+
 }
 @include mixins.respond-to(variables.$sm){
 
 }
 @include mixins.respond-to(variables.$xs) {
   .contacts-list {
-    padding: 28px 24px;
+    padding: 24px 12px;
+    gap: 16px;
     &__item{
-      padding-left: 60px;
+      padding-left: 80px;
       font-size: 16px;
+      padding-top: 26px;
+      padding-bottom: 26px;
       &:before {
-        width: 24px;
-        height: 24px;
+        width: 30px;
+        height: 30px;
         left: 24px;
       }
     }
     &__title{
       font-size: 16px;
+    }
+  }
+  .inner-form-contact {
+    font-size: 14px;
+    padding: 24px 12px;
+  }
+  .section-contacts .form__footer {
+    padding-top: 32px;
+  }
+}
+
+@media screen and (max-width: 389px){
+  .contacts-list {
+    &__item{
+      padding-left: 60px;
+      font-size: 14px;
+      &:before {
+        width: 24px;
+        height: 24px;
+      }
+    }
+    &__title {
+      font-size: 14px;
     }
   }
 }

@@ -23,16 +23,19 @@
     transition: color .35s ease;
     background-color: transparent;
     padding-left: 0;
+
     &.active {
       color: #990B6E;
     }
   }
-  &__content{
+
+  &__content {
     position: relative;
     min-height: 516px;
     width: 76%;
   }
 }
+
 .tab-content {
   position: absolute;
   top: 0;
@@ -41,16 +44,14 @@
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition:
-          opacity .8s ease,
-          visibility .35s;
+  transition: opacity .8s ease,
+  visibility .35s;
 
   &.active {
     opacity: 1;
     visibility: visible;
     pointer-events: auto;
-    transition:
-            opacity 1.6s;
+    transition: opacity 1.6s;
   }
 }
 
@@ -65,12 +66,25 @@
   will-change: transform, width;
   transition: transform .8s ease, width .35s ease;
 }
-
+@media screen and (max-width: 870px){
+  .tabs-nav__link.heading_md {
+    font-size: 24px;
+  }
+}
 
 @include mixins.respond-to(variables.$sm) {
 
 }
 
 @include mixins.respond-to(variables.$xs) {
-
+  .tabs-nav__link.heading_md {
+    font-size: 18px;
+  }
+  .tabs-nav__link{
+    padding-bottom: 20px;
+    padding-right: 20px;
+  }
+  .tabs__content {
+    min-height: 636px;
+  }
 }
