@@ -12,33 +12,28 @@
   z-index: 1;
 
   &__grid {
-    display: grid;
-    grid-template-columns: repeat(8, 1fr);
-    grid-template-rows: auto auto;
-    gap: 0;
+    display: flex;
+    column-gap: 16px;
   }
 
   &__logo {
-    grid-area: 1 / 1 / 3 / 3;
+    width: 25%;
+    padding: 0 30px;
   }
 
-  &__top-row {
-    grid-area: 1 / 3 / 2 / 9;
-    justify-content: space-between;
+  &__row {
+    width: 75%;
     .footer__part{
-      width: auto;
+      width: 33.33%;
+      padding: 0 20px;
     }
   }
-
-  &__bottom-row {
-    grid-area: 2 / 3 / 3 / 9;
+&__top{
+  gap: 18px;
+}
+  &__bottom {
     padding-top: 110px;
     font-size: 18px;
-  }
-
-  &__part {
-    padding-left: 20px;
-    width: 33.33%;
   }
 
   &__logo {
@@ -69,45 +64,6 @@
       display: inline-block;
     }
   }
-  //.btn_submit {
-  //  .btn__icon{
-  //    margin-left: 2px;
-  //  }
-  //  .btn__text-block {
-  //    display: none;
-  //  }
-  //}
-
-
-
-  /* Базові стилі для контейнера іконки (щоб ховер спрацьовував на всю кнопку) */
-  //.btn_submit {
-  //  background: transparent;
-  //  border: none;
-  //  cursor: pointer;
-  //  padding: 0;
-  //}
-  //
-  ///* Налаштування початкового стану та швидкості анімації */
-  //.btn__svg-path {
-  //  transition: d 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-  //}
-  //
-  ///* Ефект ховеру: лівий нижній кут стає рівним (вертикальним),
-  //   а правий верхній випирає та отримує плавний скіс */
-  //.btn_submit:hover .btn__svg-path {
-  //  d: path("M10 0.5H32.835C37.1684 0.699243 40.8471 3.81546 41.7216 8.10059L47.6405 37.1006C48.8422 42.9893 44.342 48.5 38.332 48.5H10C4.7533 48.5 0.5 44.2467 0.5 39V10C0.5 4.7533 4.7533 0.5 10 0.5Z");
-  //}
-  //
-  ///* Додатково: легкий ефект для стрілочки при ховері (за бажанням) */
-  //.btn__icon svg path:last-of-type {
-  //  transition: transform 0.8s ease;
-  //  transform-origin: center;
-  //}
-  //.btn_submit:hover .btn__icon svg path:last-of-type {
-  //  transform: translateX(2px);
-  //}
-
 }
 
 .form_footer {
