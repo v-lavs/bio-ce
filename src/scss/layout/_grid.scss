@@ -29,14 +29,6 @@
   @include mixins.respond-to(variables.$xs) {
     max-width: 100%;
   }
-  //@include mixins.respond-to(variables.$xxs) {
-  //
-  //
-  //}
-  //
-  //@media screen and (max-width: 340px) {
-  //
-  //}
 }
 //
 //.container {
