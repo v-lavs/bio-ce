@@ -79,7 +79,7 @@
   font-weight: 700;
   font-size: 20px;
   line-height: 1.44;
-  padding-top: 24px;
+  padding-top: 10px;
 }
 
 .slider-advantages .description-wrap {
@@ -190,5 +190,17 @@
     .heading_xl {
       font-size: 28px;
     }
+  }
+  .slider-advantages .icon {
+    width: 120px;
+    height: 120px;
+    margin: 0 auto auto;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .slider-advantages .icon {
+    width: 100px;
+    height: 100px;
   }
 }
