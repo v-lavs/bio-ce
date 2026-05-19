@@ -220,10 +220,6 @@
     }
     &__menu-item {
       margin-bottom: 4px;
-      //font-size: 16px;
-      a {
-        padding: 4px;
-      }
     }
   }
 }
@@ -238,19 +234,21 @@
   }
 .footer__bottom{
   font-size: 18px;
-  padding-top: 50px;
+  padding-top: 0;
+
 }
   .footer__menu-item{
-    font-size: 20px;
+    font-size: 18px;
   }
   .footer__top{
     width: 100%;
+    order: -1;
   }
   .footer__logo{
     width: 100%;
-    max-width: 344px;
-    padding-top: 0;
-    margin: 0 auto 50px;
+    max-width: 195px;
+    padding: 0;
+    margin: 50px auto;
   }
   .footer__top .footer__part{
     width: 100%;
@@ -258,6 +256,10 @@
   }
   .footer__label{
     flex-grow: 1;
+  }
+  .form_footer input {
+    padding-left: 30px;
+    font-size: 18px;
   }
 }
 
