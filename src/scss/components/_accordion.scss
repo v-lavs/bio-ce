@@ -57,10 +57,11 @@
 
   &__content-icon {
     width: 78px;
-    height: 85px;
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: contain;
+    height: 78px;
+    border-radius: 50%;
+    background-size: 234px 80px;
+    background-repeat: repeat-x;
+    animation: rotateEarth 3.5s linear infinite;
     margin: 0 auto;
   }
 
@@ -82,7 +83,15 @@
     }
   }
 }
-
+@keyframes rotateEarth {
+  0% {
+    background-position: 0 0;
+  }
+  100% {
+    /* Зміщуємо фон рівно на його ширину, щоб анімація була безшовною */
+    background-position: -234px 0;
+  }
+}
 .plus-vertical,
 .plus-horizontal {
   transform-origin: center;
@@ -126,7 +135,7 @@
   }
   .accordion__content-icon {
     width: 58px;
-    height: 65px;
+    height: 60px;
     margin-bottom: 32px;
   }
   .accordion .split-layout {
