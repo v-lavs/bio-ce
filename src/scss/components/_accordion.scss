@@ -115,10 +115,11 @@
     width: 20px;
   }
   .accordion__tab-container {;
-    padding: 0 40px 32px;
+    padding: 0 40px 30px;
+    min-height: 0;
   }
   .accordion__item {
-    margin-bottom: 32px;
+    margin-bottom: 30px;
   }
   .accordion .heading_xl {
     font-size: 26px;
@@ -128,11 +129,8 @@
     height: 65px;
     margin-bottom: 32px;
   }
-  .accordion__tab-container{
-    min-height: 0;
-  }
   .accordion .split-layout {
-    padding: 0 0 60px;
+    padding: 30px 0;
     flex-direction: column;
   }
 }
