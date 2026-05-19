@@ -25,7 +25,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    img{
+
+    img {
       max-width: 100%;
     }
   }
@@ -169,20 +170,23 @@
 
 @include mixins.respond-to(variables.$lg) {
   .footer {
-    &__grid{
+    &__grid {
       display: flex;
       flex-wrap: wrap;
       justify-content: space-between;
       gap: 0;
     }
-    &__logo{
+
+    &__logo {
       width: 30%;
     }
+
     &__top {
       flex-wrap: wrap;
       width: 65%;
     }
-    &__bottom{
+
+    &__bottom {
       width: 100%;
     }
   }
@@ -191,7 +195,7 @@
     margin-bottom: 9px;
     font-size: 18px;
   }
-  .footer__bottom{
+  .footer__bottom {
     font-size: 16px;
   }
   .footer__top .footer__part {
@@ -209,15 +213,18 @@
     &__bottom {
       //font-size: 14px;
       flex-wrap: wrap;
-      .footer__part{
+
+      .footer__part {
         width: 100%;
         text-align: center;
         margin-bottom: 12px;
-        &:last-child{
+
+        &:last-child {
           margin-bottom: 0;
         }
       }
     }
+
     &__menu-item {
       margin-bottom: 4px;
     }
@@ -229,32 +236,35 @@
 }
 
 @include mixins.respond-to(variables.$xs) {
-  .footer{
-    padding-top: 80px;
+  .footer {
+    padding-top: 72px;
   }
-.footer__bottom{
-  font-size: 18px;
-  padding-top: 0;
+  .footer__bottom {
+    font-size: 18px;
+    padding-top: 0;
 
-}
-  .footer__menu-item{
+    .footer__part {
+      margin-bottom: 4px;
+    }
+  }
+  .footer__menu-item {
     font-size: 18px;
   }
-  .footer__top{
+  .footer__top {
     width: 100%;
     order: -1;
   }
-  .footer__logo{
+  .footer__logo {
     width: 100%;
     max-width: 195px;
     padding: 0;
     margin: 50px auto;
   }
-  .footer__top .footer__part{
+  .footer__top .footer__part {
     width: 100%;
     padding: 0 20px;
   }
-  .footer__label{
+  .footer__label {
     flex-grow: 1;
   }
   .form_footer input {
