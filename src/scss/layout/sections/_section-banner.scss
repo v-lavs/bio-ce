@@ -87,6 +87,9 @@
 @include mixins.respond-to(variables.$xs) {
   .section-banner {
     margin-bottom: 50px;
+    .container{
+      padding-bottom: 32px;
+    }
     &__img {
       inset: 8px;
     }
