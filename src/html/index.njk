@@ -2,25 +2,17 @@
 
 {% block title %}Home — {{ siteName }}{% endblock %}
 
-{% block content %}
-  <section class="section-banner">
-    <div class="section-banner__img">
-      <picture>
-        <source media="(max-width: 610px)" srcset="images/img/banner-mob.png">
-        <img class="img_desk" src="images/img/banner-img-home.png" alt="">
-      </picture>
-    </div>
+{% block main_class %}home{% endblock %}
 
-    <div class="container">
-      <h1 class="heading_xl section-banner__title"
-          data-reveal="lines"
-          data-stagger="0.14"
-          data-duration="1.4"
-          data-ease="power1.out">
-        <strong>Bioscience GROUP</strong> - ми допоможемо твоєму бізнесу розширитись
-      </h1>
-    </div>
-  </section>
+{% block content %}
+
+{#section banner#}
+  {% from "macros/section-banner.njk" import render_section_banner as section_banner with context %}
+  {{section_banner(
+    img_url="images/img/banner-img-home.png",
+    img_mob_url="images/img/banner-mob.png",
+    title="<strong>Bioscience GROUP</strong> - ми допоможемо твоєму бізнесу розширитись"
+  ) }}
 
   <section class="section-work">
     <div class="container">
@@ -202,8 +194,6 @@
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   </section>

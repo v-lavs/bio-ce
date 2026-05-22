@@ -1,0 +1,22 @@
+{# src/html/macros/breadcrumbs.njk #}
+
+{% macro render_breadcrumbs(items) %}
+<div class="breadcrumbs" aria-label="Хлібні крихти">
+    <div class="container">
+        <ul class="breadcrumbs__list">
+            <li class="breadcrumbs__item">
+                <a href="/" class="breadcrumbs__link">Головна</a>
+            </li>
+            {% for item in items %}
+            <li class="breadcrumbs__item">
+                {% if item.url %}
+                <a href="{{ item.url }}" class="breadcrumbs__link">{{ item.title }}</a>
+                {% else %}
+                <span class="breadcrumbs__current" aria-current="page">{{ item.title }}</span>
+                {% endif %}
+            </li>
+            {% endfor %}
+        </ul>
+    </div>
+</div>
+{% endmacro %}

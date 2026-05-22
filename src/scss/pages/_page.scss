@@ -1,0 +1,18 @@
+.page{
+  position: relative;
+  background-color: #fff;
+  border-radius: 0 0 30px 30px;
+  overflow: hidden;
+  z-index: 2;
+  .section-banner{
+    height: 544px;
+    margin-bottom: 0;
+  }
+  .heading_xl{
+    font-weight: 500;
+    font-size: 30px;
+    line-height: 1.2;
+    text-transform: uppercase;
+    color: #FFFFFF;
+  }
+}

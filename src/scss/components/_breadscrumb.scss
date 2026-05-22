@@ -1,23 +1,23 @@
 @use "../base/mixins";
 @use "../base/variables";
 
-.breadcrumb {
-  padding: 50px 0;
+.breadcrumbs {
+  padding-top: 22px;
+  padding-bottom: 77px;
 
-  ul {
+  &__list {
     display: flex;
     flex-wrap: wrap;
   }
 
   &__item {
+    color: #B8B8B8;
     position: relative;
-    margin-right: 20px;
-    padding-right: 37px;
-    font-weight: 200;
-    font-size: 20px;
+    margin-right: 6px;
+    padding-right: 6px;
+    font-weight: 400;
+    font-size: 14px;
     line-height: 1.2;
-    letter-spacing: 0;
-  
     white-space: nowrap;
 
     a {
@@ -51,10 +51,6 @@
       z-index: 1;
     }
   }
-}
-
-@include mixins.respond-to(variables.$screen-md) {
- 
 }
 
 @include mixins.respond-to(variables.$sm) {

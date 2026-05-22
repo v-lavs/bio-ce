@@ -1,0 +1,27 @@
+{# src/html/macros/section-banner.njk #}
+
+{% macro render_section_banner(img_url, img_mob_url, title="") %}
+
+<section class="section-banner">
+    <div class="section-banner__img">
+        <picture>
+            {% if img_mob_url %}
+                <source media="(max-width: 610px)" srcset="{{ img_mob_url }}">
+            {% endif %}
+            <img class="img_desk" src="{{ img_url }}" alt="{{ title_img }}">
+        </picture>
+    </div>
+
+    <div class="container">
+        {% if title %}
+            <h1 class="heading_xl section-banner__title"
+                data-reveal="lines"
+                data-stagger="0.14"
+                data-duration="1.4"
+                data-ease="power1.out">
+                {{ title | safe }}
+            </h1>
+        {% endif %}
+    </div>
+</section>
+{% endmacro %}

@@ -29,7 +29,7 @@
       {% include "partials/header.njk" %}
     {% endblock %}
 
-    <main class="main  home">
+    <main class="main  {% block main_class %}{% endblock %}">
     {% block content %}{% endblock %}
     </main>
 
