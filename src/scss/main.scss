@@ -34,8 +34,10 @@
 
 @use 'pages/page';
 @use 'pages/page-catalog';
-//@use 'pages/blog';
-//@use 'pages/product-page';
+@use 'pages/page-news';
+@use 'pages/blog';
+//@use 'pages/page-';
+@use 'pages/page-single-product';
 
 @import "../../node_modules/@splidejs/splide/dist/css/splide.min.css";
 

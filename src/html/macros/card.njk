@@ -1,6 +1,6 @@
 {# src/html/macros/card.njk #}
 
-{% macro card(title, text, imgUrl='', link='#', type='default') %}
+{% macro card(title, text, imgUrl='', link='#', type='default', date='') %}
     <a href="{{ link }}" class="card card_{{ type }}">
 
         {# Перевіряємо, чи передали шлях до картинки #}
@@ -12,8 +12,13 @@
 
         <div class="card__content">
             <h3 class="card__title">{{ title }}</h3>
+            {% if text  %}
             <p class="card__text">{{ text }}</p>
-            <span class="card__btn">Детальніше...</span>
+            {% endif %}
+            {% if date  %}
+            <span class="card__date">{{ date }}</span>
+            {% endif %}
+            <span class="card__btn">Детальніше... <span class="card__btn-icon"></span></span>
         </div>
     </a>
 {% endmacro %}

@@ -1,7 +1,7 @@
 {# src/html/catalog.njk #}
 
 {% extends "layouts/base.njk" %}
-{% block main_class %}page page-catalog{% endblock %}
+{% block main_class %} page page-catalog {% endblock %}
 
 {% block title %}Наші препарати — {{ siteName }}{% endblock %}
 
@@ -15,7 +15,8 @@
     ) }}
 
     {{ breadcrumbs ([
-        {title: "Каталог"}
+        {title: "Наші препарати"},
+        {title: "Гінекологія"}
     ]) }}
 
     <div class="container">
@@ -28,21 +29,21 @@
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
                     imgUrl: "images/img/preparat.png",
-                    link: "product.html",
+                    link: "single-product.html",
                     type: "default"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
                     imgUrl: "images/img/preparat.png",
-                    link: "product.html",
+                    link: "single-product.html",
                     type: "default"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
                     imgUrl: "images/img/preparat.png",
-                    link: "product.html",
+                    link: "single-product.html",
                     type: "default"
                 }
             ] %}

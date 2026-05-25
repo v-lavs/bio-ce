@@ -1,6 +1,6 @@
 {# src/html/macros/section-banner.njk #}
 
-{% macro render_section_banner(img_url, img_mob_url, title="") %}
+{% macro render_section_banner(img_url, img_mob_url, title="", tag="h1") %}
 
 <section class="section-banner">
     <div class="section-banner__img">
@@ -14,13 +14,13 @@
 
     <div class="container">
         {% if title %}
-            <h1 class="heading_xl section-banner__title"
+            <{{ tag }} class="heading_xl section-banner__title"
                 data-reveal="lines"
                 data-stagger="0.14"
                 data-duration="1.4"
                 data-ease="power1.out">
                 {{ title | safe }}
-            </h1>
+            </{{ tag }}>
         {% endif %}
     </div>
 </section>

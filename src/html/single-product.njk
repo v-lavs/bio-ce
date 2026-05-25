@@ -1,0 +1,96 @@
+{# src/html/single-product.njk #}
+
+{% extends "layouts/base.njk" %}
+
+{% block main_class %} page page-single-product {% endblock %}
+
+{% block title %}Clindamycin — {{ siteName }}{% endblock %}
+
+{% block content %}
+    {% from "macros/section-banner.njk" import render_section_banner as section_banner with context %}
+    {% from "macros/breadcrumbs.njk" import render_breadcrumbs as breadcrumbs with context %}
+    {{ section_banner(
+        img_url="images/img/banner-catalog.png",
+        title="наші препарати",
+        tag = "div"
+    ) }}
+
+    {{ breadcrumbs ([
+        {title: "Наші препарати", url: "/catalog.html"},
+        {title: "Гінекологія", url: "#"},
+        {title: "Clindamycin"}
+    ]) }}
+    <section class="single-product">
+        <div class="container">
+            <div class="single-product__inner">
+                <div class="single-product__media">
+                    <div class="product-single__media-wrapper">
+                        {% if product_video_url %}
+                            <video class="product-single__video" autoplay loop muted playsinline
+                                   poster="images/img/product-pack.png">
+                                <source src="{{ product_video_url }}" type="video/mp4">
+                                Ваш браузер не підтримує тег відео.
+                            </video>
+                        {% else %}
+                            <img src="images/img/product-pack.png" alt="Препарат Clindamycin"
+                                 class="product-single__img">
+                        {% endif %}
+                    </div>
+                </div>
+                <div class="single-product__info">
+                    <h2 class="heading_md single-product__title">Clindamycin</h2>
+                    <div class="single-product__descr">
+                        Кліндаміцин — це сучасний антибактеріальний препарат, розроблений для ефективної боротьби зі
+                        складними інфекціями. Він глибоко проникає в тканини, забезпечуючи швидку дію безпосередньо у
+                        вогнищі запалення. Ідеальний вибір для терапії інфекцій, спричинених чутливими до препарату
+                        мікроорганізмами, коли потрібен надійний та перевірений часом результат
+                    </div>
+                    <div class="single-product__download">
+                        <div class="single-product__download-icon">
+                            <img src="images/img/icons-pdf.svg" alt="" aria-hidden="true" class="">
+                        </div>
+                        <a href="#" class="link-download" download>
+                            <span class="link-download__text">Завантажити інструкцію</span>
+                            <span class="btn btn_main btn_download">
+                                <svg width="51" height="49" viewBox="0 0 51 49" fill="none"
+              xmlns="http://www.w3.org/2000/svg" class="btn__svg">
+        <g filter="url(#liquid)">
+          <path class="btn__svg-path path-left"
+                d="M18.165 0.5H41C46.2467 0.5 50.5 4.7533 50.5 10V39C50.5 44.2467 46.2467 48.5 41 48.5H12.2471C6.23701 48.5 1.73687 42.9893 2.93848 37.1006L8.85742 8.10059C9.73194 3.81546 13.4107 0.699243 17.7441 0.508789L18.165 0.5Z"
+                fill="url(#paint0_linear_572_10241)"
+                stroke="url(#paint1_linear_572_10241)" />
+
+          <path class="btn__svg-path path-right"
+                d="M10 0.5H32.835C37.1684 0.699243 40.8471 3.81546 41.7216 8.10059L47.6405 37.1006C48.8422 42.9893 44.342 48.5 38.332 48.5H10C4.7533 48.5 0.5 44.2467 0.5 39V10C0.5 4.7533 4.7533 0.5 10 0.5Z"
+                fill="url(#paint0_linear_572_10241)"
+                stroke="url(#paint1_linear_572_10241)" />
+        </g>
+        <path d="M26.72 19.9508C26.6463 19.8821 26.5872 19.7993 26.5462 19.7073C26.5052 19.6153 26.4832 19.516 26.4814 19.4153C26.4796 19.3146 26.4981 19.2146 26.5359 19.1212C26.5736 19.0278 26.6297 18.943 26.701 18.8718C26.7722 18.8006 26.857 18.7444 26.9504 18.7067C27.0438 18.669 27.1438 18.6504 27.2445 18.6522C27.3452 18.654 27.4445 18.676 27.5365 18.717C27.6285 18.758 27.7113 18.8171 27.78 18.8908L31.78 22.8908C31.9204 23.0314 31.9993 23.2221 31.9993 23.4208C31.9993 23.6196 31.9204 23.8102 31.78 23.9508L27.78 27.9508C27.7113 28.0245 27.6285 28.0836 27.5365 28.1246C27.4445 28.1656 27.3452 28.1876 27.2445 28.1894C27.1438 28.1912 27.0438 28.1727 26.9504 28.1349C26.857 28.0972 26.7722 28.0411 26.701 27.9698C26.6297 27.8986 26.5736 27.8138 26.5359 27.7204C26.4981 27.627 26.4796 27.527 26.4814 27.4263C26.4832 27.3256 26.5052 27.2263 26.5462 27.1343C26.5872 27.0423 26.6463 26.9595 26.72 26.8908L29.44 24.1708H19.75C19.5511 24.1708 19.3603 24.0918 19.2197 23.9511C19.079 23.8105 19 23.6197 19 23.4208C19 23.2219 19.079 23.0311 19.2197 22.8905C19.3603 22.7498 19.5511 22.6708 19.75 22.6708H29.44L26.72 19.9508Z"
+              fill="white" />
+
+        <defs>
+          <filter id="liquid">
+            <feGaussianBlur in="SourceGraphic" stdDeviation="4" result="blur" />
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 18 -7" result="goo" />
+            <feComposite in="SourceGraphic" in2="goo" operator="atop" />
+          </filter>
+
+          <linearGradient id="paint0_linear_572_10241" x1="0" y1="0" x2="0" y2="100%" gradientUnits="objectBoundingBox">
+            <stop stop-color="#056AFD" />
+            <stop offset="1" stop-color="#89FBC1" />
+          </linearGradient>
+          <linearGradient id="paint1_linear_572_10241" x1="0" y1="0" x2="0" y2="100%" gradientUnits="objectBoundingBox">
+            <stop stop-color="#056AFD" />
+            <stop offset="1" stop-color="#89FBC1" />
+          </linearGradient>
+        </defs>
+      </svg>
+                            </span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+

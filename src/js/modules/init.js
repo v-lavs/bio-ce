@@ -98,16 +98,64 @@ export function init() {
         });
 
         // Кліки всередині меню
+        // nav.addEventListener("click", (e) => {
+        //     // 1. ПЕРЕВІРКА: Клік по лінці ВСЕРЕДИНІ субменю
+        //     const submenuLink = e.target.closest(".submenu a");
+        //     if (submenuLink && isMobileMQL.matches) {
+        //         // Клікнули по лінці в підменю — дозволяємо перехід і закриваємо все мобільне меню
+        //         closeMobileMenu();
+        //         return; // Виходимо, щоб код нижче не перехопив цей клік
+        //     }
+        //
+        //     // Мобільне підменю: перевіряємо клік по лінку АБО по стрілочці поруч
+        //     const isArrow = e.target.closest(".arrow");
+        //     const link = e.target.closest(".menu__link");
+        //
+        //     if (!link && !isArrow) return;
+        //
+        //     const item = (link || isArrow).closest(".menu__item");
+        //     if (!item) return;
+        //
+        //     const hasSubmenu = item.classList.contains("has-submenu");
+        //
+        //     // Мобільний акордеон (спрацьовує ТІЛЬКИ на батьківський лінк або стрілку)
+        //     if (isMobileMQL.matches && hasSubmenu) {
+        //         if (link) e.preventDefault(); // Блокуємо перехід лише для батьківського лінка-дропдауна
+        //
+        //         // Тогл поточного акордеону
+        //         item.classList.toggle("is-open");
+        //         return;
+        //     }
+        //
+        //     // Клік по звичайному посиланню верхнього рівня (без сабменю)
+        //     if (link && !hasSubmenu) {
+        //         links.forEach(l => l.classList.remove("active"));
+        //         link.classList.add("active");
+        //
+        //         // Якщо екран мобільний — закриваємо меню повністю
+        //         if (isMobileMQL.matches) {
+        //             closeMobileMenu();
+        //         } else if (activeBg) {
+        //             moveBlob(link); // Ваша функція для плаваючого фону
+        //         }
+        //     }
+        // });
         nav.addEventListener("click", (e) => {
-            // 1. ПЕРЕВІРКА: Клік по лінці ВСЕРЕДИНІ субменю
+            // 1. ПЕРЕВІРКА: Клік по лінці ВСЕРЕДИНІ підменю (субменю)
             const submenuLink = e.target.closest(".submenu a");
             if (submenuLink && isMobileMQL.matches) {
-                // Клікнули по лінці в підменю — дозволяємо перехід і закриваємо все мобільне меню
-                closeMobileMenu();
-                return; // Виходимо, щоб код нижче не перехопив цей клік
+                e.preventDefault(); // Блокуємо миттєвий перехід
+                const targetUrl = submenuLink.getAttribute("href");
+
+                closeMobileMenu(); // Запускаємо красиве закриття меню
+
+                // Чекаємо 300 мілісекунд, поки меню закриється, і переходимо
+                setTimeout(() => {
+                    window.location.href = targetUrl;
+                }, 300);
+                return;
             }
 
-            // Мобільне підменю: перевіряємо клік по лінку АБО по стрілочці поруч
             const isArrow = e.target.closest(".arrow");
             const link = e.target.closest(".menu__link");
 
@@ -118,28 +166,58 @@ export function init() {
 
             const hasSubmenu = item.classList.contains("has-submenu");
 
-            // Мобільний акордеон (спрацьовує ТІЛЬКИ на батьківський лінк або стрілку)
+            // ========================================================
+            // 2. МОБІЛЬНИЙ АКОРДЕОН (СТРІЛОЧКА ТА ЛІНК З СУБМЕНЮ)
+            // ========================================================
             if (isMobileMQL.matches && hasSubmenu) {
-                if (link) e.preventDefault(); // Блокуємо перехід лише для батьківського лінка-дропдауна
+                if (isArrow) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    item.classList.toggle("is-open");
+                    return;
+                }
 
-                // Тогл поточного акордеону
-                item.classList.toggle("is-open");
-                return;
+                if (link && !isArrow) {
+                    e.preventDefault(); // Блокуємо миттєвий перехід батьківського лінка
+                    const targetUrl = link.getAttribute("href");
+
+                    closeMobileMenu(); // Запускаємо анімацію закриття бургера
+
+                    // Перехід після завершення анімації
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 300);
+                    return;
+                }
             }
 
-            // Клік по звичайному посиланню верхнього рівня (без сабменю)
+            // ========================================================
+            // 3. КЛІК ПО ЗВИЧАЙНОМУ ПОСИЛАННЮ ВЕРХНЬОГО РІВНЯ (БЕЗ СУБМЕНЮ)
+            // ========================================================
             if (link && !hasSubmenu) {
-                links.forEach(l => l.classList.remove("active"));
-                link.classList.add("active");
-
-                // Якщо екран мобільний — закриваємо меню повністю
                 if (isMobileMQL.matches) {
-                    closeMobileMenu();
-                } else if (activeBg) {
-                    moveBlob(link); // Ваша функція для плаваючого фону
+                    e.preventDefault(); // Блокуємо для мобілки
+                    const targetUrl = link.getAttribute("href");
+
+                    links.forEach(l => l.classList.remove("active"));
+                    link.classList.add("active");
+
+                    closeMobileMenu(); // Закриваємо
+
+                    setTimeout(() => {
+                        window.location.href = targetUrl;
+                    }, 300);
+                } else {
+                    // На десктопі перехід залишається миттєвим за замовчуванням
+                    links.forEach(l => l.classList.remove("active"));
+                    link.classList.add("active");
+                    if (activeBg) moveBlob(link);
                 }
             }
         });
+
+
+
     }
 
 // Глобальне закриття через ESC

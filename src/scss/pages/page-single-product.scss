@@ -1,0 +1,95 @@
+@use "../base/mixins";
+@use "../base/variables";
+
+.single-product {
+  font-size: 18px;
+  &__inner {
+    display: flex;
+  }
+
+  &__media {
+    width: 46.25%;
+  }
+
+  &__info {
+    width: 57.75%;
+  }
+
+  &__download {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding-top: 45px;
+  }
+
+  &__download-icon {
+    width: 56px;
+    height: 56px;
+    flex-shrink: 0;
+
+    img {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .heading_md {
+    color: #2A81E5;
+    font-weight: 700;
+  }
+}
+
+/* Базові стилі для шляхів SVG (універсальні) */
+.btn__svg-path {
+  transform-origin: center;
+  transition: transform 0.35s cubic-bezier(0.25, 1, 0.5, 1),
+  opacity 0.3s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.path-left {
+  opacity: 1;
+  transform: scaleX(1);
+  transition-delay: 0s;
+}
+
+.path-right {
+  opacity: 0;
+  transform: scaleX(0.88);
+  transition-delay: 0.05s;
+}
+
+/* Флекс-контейнер для вирівнювання тексту та іконки в один рядок */
+.link-download {
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  gap: 11px;
+  color: #383838;
+  font-size: 16px;
+  cursor: pointer;
+  max-width: 177px;
+  text-align: center;
+  padding: 8px;
+}
+
+.btn_download {
+  display: inline-flex;
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.link-download:hover .btn__svg-path {
+  transition: transform 0.55s cubic-bezier(0.6, -0.28, 0.1, 1.35),
+  opacity 0.35s ease;
+  transition-delay: 0s;
+}
+
+.link-download:hover .path-left {
+  opacity: 0;
+  transform: scaleX(0.88);
+}
+
+.link-download:hover .path-right {
+  opacity: 1;
+  transform: scaleX(1);
+}

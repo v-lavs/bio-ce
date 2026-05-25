@@ -162,7 +162,7 @@
     right: 0;
     top: 4px;
     transform-origin: center;
-    z-index: -1;
+    z-index: 1;
     transition: 0.35s;
   }
   .menu__item.is-open .arrow {
