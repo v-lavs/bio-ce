@@ -1,45 +1,102 @@
 @use "../base/mixins";
 @use "../base/variables";
 
-//swiper pagination-bullets
-.swiper-pagination.swiper-pagination-bullets{
-  display: none;
-  justify-content: center;
-  gap: 3px;
+.splide__arrow {
+  padding: 0;
+  width: 51px;
+  height: 46px;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+
+  svg {
+    width: 100%;
+    height: auto;
+    display: block;
+    fill: #FFFFFF;
+  }
+}
+
+.splide__arrows--ttb .splide__arrow--prev {
+  left: 0;
+  top: 0;
+  transform: none;
+}
+
+.splide__arrows--ttb .splide__arrow--next {
+  left: 0;
   bottom: 0;
+  transform: translateX(0) rotate(180deg);
 }
 
-.swiper-pagination-bullet {
-  width: 50px;
-  height: 2px;
-  background-color: #E4E4E4;
-  border-radius: 2px;
-  opacity: 1;
-  transition: background-color 0.3s ease;
-}
+.slider-category {
+  padding-top: 60px;
+  padding-bottom: 60px;
 
-.swiper-pagination-bullet-active {
-  background-color: #7EA68C;
-}
-.swiper-button-next svg, .swiper-button-prev svg {
-  display: none;
-}
+  .splide__track {
+    padding:  2px!important;
+  }
 
-.swiper-button-next:after, .swiper-button-prev:after {
-  color: #5B8869;
-}
+  .splide__slide {
+    display: flex;
+    background-color: #fff;
+    align-items: center;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: 14px 26px;
+    border-radius: 30px;
+    position: relative;
+    z-index: 1;
+    //border: 1px solid;
+    a {
+      display: block;
+    }
 
-.swiper-button-next:after, .swiper-button-prev:after {
-  font-size: 30px;
-  font-weight: 600;
+    * {
+      position: relative;
+      z-index: 1;
+    }
+
+    &:before,
+    &:after {
+      border-radius: 30px;
+      position: absolute;
+      content: '';
+      opacity: 0;
+      //transition: opacity .35s;
+    }
+
+    &:before {
+      inset: -2px;
+      background-image: linear-gradient(180deg, #056AFD 0%, #89FBC1 100%);
+      z-index: -1;
+    }
+
+    &:after {
+      inset: 0;
+      background-color: #FFFFFF;
+      z-index: 0;
+    }
+
+    &.is-custom-active {
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05),
+      0 1px 3px rgba(0, 0, 0, 0.02);
+    }
+
+    &.is-selected-category {
+      font-weight: 700;
+      font-size: 14px;
+      text-transform: uppercase;
+      justify-content: center;
+
+      &:after,
+      &:before {
+        opacity: 1;
+      }
+    }
+  }
 }
 
 @include mixins.respond-to(variables.$xs) {
-  .swiper-button-next,
-  .swiper-button-prev {
-    display: none;
-  }
-  .swiper-pagination.swiper-pagination-bullets{
-    display: flex!important;
-  }
+
 }

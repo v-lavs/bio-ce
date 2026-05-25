@@ -30,5 +30,8 @@
     "postcss-sort-media-queries": "^6.6.1",
     "sass": "1.70.0",
     "sharp": "^0.34.5"
+  },
+  "dependencies": {
+    "@splidejs/splide": "^4.1.4"
   }
 }

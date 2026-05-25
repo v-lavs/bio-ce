@@ -1,7 +1,7 @@
 {# src/html/macros/card.njk #}
 
-{% macro card(title, text, imgUrl='', link='#') %}
-    <div class="card {{ 'card--no-image' if not imgUrl }}">
+{% macro card(title, text, imgUrl='', link='#', type='default') %}
+    <a href="{{ link }}" class="card card_{{ type }}">
 
         {# Перевіряємо, чи передали шлях до картинки #}
         {% if imgUrl %}
@@ -13,8 +13,7 @@
         <div class="card__content">
             <h3 class="card__title">{{ title }}</h3>
             <p class="card__text">{{ text }}</p>
-            <a href="{{ link }}" class="card__btn">Детальніше...</a>
+            <span class="card__btn">Детальніше...</span>
         </div>
-
-    </div>
+    </a>
 {% endmacro %}

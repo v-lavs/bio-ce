@@ -1,8 +1,12 @@
+@use "../base/mixins";
+@use "../base/variables";
+
 .page{
   position: relative;
   background-color: #fff;
   border-radius: 0 0 30px 30px;
   overflow: hidden;
+  padding-bottom: 134px;
   z-index: 2;
   .section-banner{
     height: 544px;

@@ -1,3 +1,4 @@
+
 // Base
 @use 'base/variables';
 @use 'base/reset';
@@ -7,11 +8,11 @@
 // Components
 @use 'components/button';
 @use 'components/nav';
-//@use 'components/slider';
+@use 'components/slider';
 //@use 'components/popup';
 @use 'components/search';
 //@use 'components/video';
-//@use 'components/card-product';
+@use 'components/card';
 @use 'components/tabs';
 //@use 'components/card-post';
 @use 'components/accordion';
@@ -32,9 +33,11 @@
 @use 'layout/sections/section-contacts';
 
 @use 'pages/page';
-//@use 'pages/catalog';
+@use 'pages/page-catalog';
 //@use 'pages/blog';
 //@use 'pages/product-page';
+
+@import "../../node_modules/@splidejs/splide/dist/css/splide.min.css";
 
 
 

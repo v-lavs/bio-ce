@@ -1,4 +1,7 @@
 // Initialization module
+import Splide from '@splidejs/splide';
+
+
 export function init() {
     gsap.registerPlugin(Flip, SplitText, MorphSVGPlugin, ScrollTrigger);
 
@@ -30,9 +33,30 @@ export function init() {
     const activeBg = document.querySelector(".nav-active-bg");
     const links = document.querySelectorAll(".menu__link");
 
-// Створюємо медіа-запит в JS, який в точності дорівнює твоєму variables.$lg в SCSS
-// (Якщо $lg це 991px, постав тут 991px)
     const isMobileMQL = window.matchMedia("(max-width: 1080px)");
+// ========================================================
+// 0. АВТОМАТИЧНЕ ВИЗНАЧЕННЯ АКТИВНОЇ СТОРІНКИ ПРИ СТАРТІ
+// ========================================================
+    function initActiveMenuItem() {
+        const currentPath = window.location.pathname;
+
+        links.forEach(link => {
+            const linkPath = link.getAttribute("href");
+
+            // Перевіряємо, чи збігається шлях у браузері з href посилання
+            // Додаткова перевірка на головну сторінку (корінь або index.html)
+            if (currentPath === linkPath ||
+                (currentPath === "/" && linkPath === "/index.html") ||
+                (currentPath.includes(linkPath) && linkPath !== "/")) {
+
+                // Знімаємо active з першого пункту та вішаємо на поточний
+                links.forEach(l => l.classList.remove("active"));
+                link.classList.add("active");
+            }
+        });
+    }
+// Запускаємо пошук активної сторінки відразу при завантаженні скрипта
+    initActiveMenuItem();
 
     function toggleLenisScroll(disable) {
         if (window.lenis) {
@@ -54,7 +78,7 @@ export function init() {
         document.querySelectorAll(".menu__item.has-submenu").forEach(i => i.classList.remove("is-open"));
     }
 // ========================================================
-// 2. СИСТЕМА КЛІКІВ (ПРАЦЮЄ НА ВСІХ ЕКРАНАХ БЕЗ GSAP)
+// 2. СИСТЕМА КЛІКІВ
 // ========================================================
     if (burger && nav) {
         // Клік по бургеру
@@ -106,7 +130,7 @@ export function init() {
             // Клік по звичайному посиланню верхнього рівня (без сабменю)
             if (link && !hasSubmenu) {
                 links.forEach(l => l.classList.remove("active"));
-                link.classList.add("add");
+                link.classList.add("active");
 
                 // Якщо екран мобільний — закриваємо меню повністю
                 if (isMobileMQL.matches) {
@@ -132,7 +156,9 @@ export function init() {
         // Початкова позиція блобу при завантаженні (тільки для десктопа)
         const initialActive = document.querySelector(".menu__link.active");
         if (initialActive && !isMobileMQL.matches) {
-            moveBlob(initialActive);
+            setTimeout(() => {
+                moveBlob(initialActive);
+            }, 50);
         }
 
         // Ховер події
@@ -904,10 +930,73 @@ export function init() {
         updateSlider(false);
     }
 
-    initAccordion();
-    initTabs();  //
-    initLiquidButtons();
+// =========================
+// SLIDER CATEGORY
+// =========================
+    function initCategorySlider() {
+        const sliderCatEl = document.querySelector('.slider-category');
+        if (!sliderCatEl) return;
 
+        const totalSlides = sliderCatEl.querySelectorAll('.splide__slide').length;
+
+        const sliderCategory = new Splide('.slider-category', {
+            direction   : 'ttb',
+            height      : '396px',
+            fixedHeight : '46px',
+            perPage     : 7,
+            perMove     : 1,
+            type        : 'slide',
+            focus       : 0,
+            trimSpace   : true,
+            omitEnd     : true,
+            pagination  : false,
+            updateOnMove: true,
+            arrows      : true,
+            gap         : '6px',
+            wheel       : true,
+            releaseWheel: true,
+            waitForTransition: true,
+            classes: {
+                arrows: 'splide__arrows custom__arrows',
+                arrow : 'splide__arrow',
+                prev  : 'splide__arrow--prev',
+                next  : 'splide__arrow--next',
+            },
+        });
+
+        sliderCategory.mount();
+
+        const activeIndex = Array.from(sliderCatEl.querySelectorAll('.splide__slide'))
+            .findIndex(slide => slide.classList.contains('is-selected-category'));
+
+        if (activeIndex !== -1) {
+            sliderCategory.go(activeIndex);
+        }
+
+        initSelectionLogic(sliderCatEl, sliderCategory);
+    }
+
+    function initSelectionLogic(container, splideInstance = null) {
+        const links = container.querySelectorAll('.splide__slide a');
+
+        links.forEach((link, index) => {
+            link.addEventListener('click', function (e) {
+                // e.preventDefault();
+
+                const currentSlide = link.closest('.splide__slide');
+
+                container.querySelector('.is-selected-category')?.classList.remove('is-selected-category');
+
+                currentSlide.classList.add('is-selected-category');
+            });
+        });
+    }
+
+
+    initAccordion();
+    initTabs();
+    initLiquidButtons();
+    initCategorySlider();
 
     window.addEventListener("load", () => {
         initHeroAnimation();

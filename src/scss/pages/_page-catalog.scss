@@ -1,0 +1,36 @@
+@use "../base/mixins";
+@use "../base/variables";
+
+.page-catalog {
+
+}
+
+.catalog-wrap {
+  display: flex;
+}
+
+.category-filter {
+  padding-right: 33px;
+  width: 293px;
+  flex-shrink: 0;
+}
+
+.category-filter__title {
+  font-weight: 400;
+  font-size: 30px;
+  line-height: 1.2;
+  color: #000;
+  margin-bottom: 33px;
+}
+
+.catalog-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  flex-grow: 1;
+  min-width: 0;
+  .card{
+    max-width: 323px;
+    width: 30%;
+  }
+}
