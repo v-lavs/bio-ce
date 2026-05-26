@@ -24,12 +24,14 @@ body.menu-open {
   overflow: hidden;
 }
 
-.color_blue{
+.color_blue {
   color: #2B82E4;
 }
-.text_uppercase{
+
+.text_uppercase {
   text-transform: uppercase;
 }
+
 .wrapper {
   min-height: 100%;
   display: flex;
@@ -104,6 +106,10 @@ body.menu-open {
 
   &__col3 {
     width: 43.30%;
+  }
+
+  &__col4 {
+    width: 50%;
   }
 
   &__col5 {
@@ -257,7 +263,7 @@ body.menu-open {
     margin-bottom: 30px;
     font-size: clamp(16px, -0.163rem + 3.21vw, 22px);
   }
-  .section__content h3{
+  .section__content h3 {
     font-size: clamp(24px, 0.337rem + 3.21vw, 30px);
   }
 }
@@ -274,7 +280,7 @@ body.menu-open {
       font-size: 16px;
     }
   }
-  .section__content h3{
+  .section__content h3 {
     font-size: 24px;
   }
   .note {

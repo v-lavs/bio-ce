@@ -1,0 +1,56 @@
+@use "../base/mixins";
+@use "../base/variables";
+
+.page-contacts {
+  .heading_lg {
+    font-weight: 500;
+    font-size: 35px;
+    line-height: 1.2;
+    color: #990B6E;
+    margin-bottom: 65px;
+    max-width: 583px;
+  }
+
+  .form_contact {
+    max-width: 546px;
+    width: 100%;
+  }
+
+  textarea {
+    height: 204px;
+  }
+}
+
+.contacts {
+  .container {
+    position: relative;
+
+    &:before {
+      position: absolute;
+      content: '';
+      background-image: url(../images/img/logo-bg.svg);
+      background-repeat: no-repeat;
+      background-position: left bottom;
+      background-size: cover;
+      left: -25px;
+      top: -163px;
+      width: 687px;
+      height: 718px;
+      z-index: -1;
+
+    }
+  }
+}
+
+.contact__item {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.2;
+  margin-bottom: 24px;
+
+  .small-text {
+    font-weight: 300;
+    font-size: 16px;
+    color: #4A4A4A;
+  }
+}

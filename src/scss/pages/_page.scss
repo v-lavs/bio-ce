@@ -1,31 +1,40 @@
 @use "../base/mixins";
 @use "../base/variables";
 
-.page{
+.page {
   position: relative;
   background-color: #fff;
   border-radius: 0 0 30px 30px;
   overflow: hidden;
   padding-bottom: 134px;
   z-index: 2;
-  .section-banner{
+
+  .section-banner {
     height: 544px;
     margin-bottom: 0;
   }
-  .heading_xl{
+
+  .heading_xl {
     font-weight: 500;
     font-size: 30px;
     line-height: 1.2;
     text-transform: uppercase;
     color: #FFFFFF;
   }
-  .section__title{
+
+  .section__title {
     color: #990B6E;
     margin-bottom: 32px;
     text-transform: uppercase;
   }
-  .heading_md{
+
+  .heading_md {
     margin-bottom: 28px;
+  }
+
+  .form__footer {
+    padding-top: 56px;
+    text-align: right;
   }
 }
 
