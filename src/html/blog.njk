@@ -1,0 +1,98 @@
+{# src/html/blog.njk #}
+
+{% extends "layouts/base.njk" %}
+{% block main_class %} page page-blog page-news {% endblock %}
+
+{% block title %}Блог — {{ siteName }}{% endblock %}
+
+{% block content %}
+    {% from "macros/section-banner.njk" import render_section_banner as section_banner with context %}
+    {% from "macros/breadcrumbs.njk" import render_breadcrumbs as breadcrumbs with context %}
+    {% from "macros/card.njk" import card with context %}
+    {{ section_banner(
+        img_url="images/img/banner-news.png",
+        title="Блог"
+    ) }}
+
+    {{ breadcrumbs ([
+        {title: "Новини", url: "#"},
+        {title: "Блог"}
+    ]) }}
+
+    <div class="container">
+        {% include "partials/search.njk" %}
+    </div>
+    <section class="section-news">
+        <div class="container">
+            {% set post_list = [
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    link: "single-product.html",
+                    type: "without-img"
+                }
+            ] %}
+            <h2 class="section__title">Новини</h2>
+            <div class="section-news__grid">
+                {% for item in post_list %}
+                    {{ card(
+                        title = item.title,
+                        text = item.text,
+                        link = item.link,
+                        type = item.type
+                    ) }}
+                {% endfor %}
+            </div>
+            {% include "partials/pagination.njk" %}
+        </div>
+    </section>
+
+{% endblock %}

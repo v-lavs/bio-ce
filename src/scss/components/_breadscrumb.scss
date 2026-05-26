@@ -2,8 +2,8 @@
 @use "../base/variables";
 
 .breadcrumbs {
-  padding-top: 22px;
-  padding-bottom: 77px;
+  padding-top: 40px;
+  padding-bottom: 48px;
 
   &__list {
     display: flex;
@@ -50,6 +50,9 @@
       bottom: -6px;
       z-index: 1;
     }
+  }
+  &__current{
+    color: #686868;
   }
 }
 

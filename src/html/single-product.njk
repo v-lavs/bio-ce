@@ -17,7 +17,6 @@
 
     {{ breadcrumbs ([
         {title: "Наші препарати", url: "/catalog.html"},
-        {title: "Гінекологія", url: "#"},
         {title: "Clindamycin"}
     ]) }}
     <section class="single-product">
@@ -25,21 +24,20 @@
             <div class="single-product__inner">
                 <div class="single-product__media">
                     <div class="product-single__media-wrapper">
-                        {% if product_video_url %}
-                            <video class="product-single__video" autoplay loop muted playsinline
-                                   poster="images/img/product-pack.png">
-                                <source src="{{ product_video_url }}" type="video/mp4">
-                                Ваш браузер не підтримує тег відео.
-                            </video>
-                        {% else %}
-                            <img src="images/img/product-pack.png" alt="Препарат Clindamycin"
-                                 class="product-single__img">
-                        {% endif %}
+                        <!--
+                        <video class="product-single__video" autoplay loop muted playsinline
+                               poster="images/img/product-pack.png">
+                            <source src="images/img/product-pack.mp4" type="video/mp4">
+                            Ваш браузер не підтримує тег відео.
+                        </video>-->
+
+                        <img src="images/img/product-pack.png" alt="Препарат Clindamycin"
+                             class="product-single__img">
                     </div>
                 </div>
                 <div class="single-product__info">
                     <h2 class="heading_md single-product__title">Clindamycin</h2>
-                    <div class="single-product__descr">
+                    <div class="single-product__descr text_md">
                         Кліндаміцин — це сучасний антибактеріальний препарат, розроблений для ефективної боротьби зі
                         складними інфекціями. Він глибоко проникає в тканини, забезпечуючи швидку дію безпосередньо у
                         вогнищі запалення. Ідеальний вибір для терапії інфекцій, спричинених чутливими до препарату
@@ -53,7 +51,7 @@
                             <span class="link-download__text">Завантажити інструкцію</span>
                             <span class="btn btn_main btn_download">
                                 <svg width="51" height="49" viewBox="0 0 51 49" fill="none"
-              xmlns="http://www.w3.org/2000/svg" class="btn__svg">
+                                     xmlns="http://www.w3.org/2000/svg" class="btn__svg">
         <g filter="url(#liquid)">
           <path class="btn__svg-path path-left"
                 d="M18.165 0.5H41C46.2467 0.5 50.5 4.7533 50.5 10V39C50.5 44.2467 46.2467 48.5 41 48.5H12.2471C6.23701 48.5 1.73687 42.9893 2.93848 37.1006L8.85742 8.10059C9.73194 3.81546 13.4107 0.699243 17.7441 0.508789L18.165 0.5Z"

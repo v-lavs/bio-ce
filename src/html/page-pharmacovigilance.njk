@@ -1,0 +1,90 @@
+{# src/html/catalog.njk #}
+
+{% extends "layouts/base.njk" %}
+{% block main_class %} page page-pharmacovigilance {% endblock %}
+
+{% block title %}Фармаконагляд — {{ siteName }}{% endblock %}
+
+{% block content %}
+    {% from "macros/section-banner.njk" import render_section_banner as section_banner with context %}
+    {% from "macros/breadcrumbs.njk" import render_breadcrumbs as breadcrumbs with context %}
+
+    {% call section_banner(
+        img_url="images/img/banner-farmnaglyad.png",
+        title="Фармаконагляд"
+        ) %}
+<div class="section-banner__content"
+     data-reveal="fade"
+     data-delay="0.6"
+     data-duration="1.2">
+
+    <p class="section-banner__subtitle">Форми звернення онлайн:</p>
+
+    <div class="section-banner__buttons">
+        <a href="#" class="btn btn_outline">Для пацієнтів</a>
+        <a href="#" class="btn btn_outline">Для медичних працівників</a>
+    </div>
+    {% endcall %}
+    {{ breadcrumbs ([
+        {title: "Фармаконагляд"}
+    ]) }}
+    <section class="section-what-it">
+        <div class="container">
+            <div class="split-layout">
+                <div class="split-layout__col2">
+                    <div class="section__header">
+                        <h2 class="section__title-gb">Що це</h2>
+                    </div>
+                </div>
+                <div class="split-layout__col6">
+
+                    <div class="section__content">
+                        <p>
+                            Безпека пацієнтів є найвищим пріоритетом для компанії <span class="color_blue"><strong>BIOSCIENCE LAB</strong>.</span>
+                            З метою забезпечення контролю безпеки та ефективності лікарських засобів, в компанії
+                            функціонує
+                            система фармаконагляду відповідно до вимог чинного законодавства, міжнародних стандартів та
+                            етичних принципів компанії.</p>
+                        <p>Якщо Ви бажаєте повідомити про виникнення побічної реакції та/або відсутність ефективності
+                            при
+                            медичному застосуванні лікарських засобів виробництва нашої компанії, будь ласка,
+                            проінформуйте
+                            менеджера з фармаконагляду у зручний для Вас спосіб.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="covigilance-contacts">
+        <div class="container">
+            <h3 class="heading_md">Служба фармаконагляду ТОВ <strong>«BIOSCIENCE LAB»</strong> :</h3>
+            <ul class="covigilance-contacts__list">
+                <li class="covigilance-contacts__list-item">
+                    <div class="covigilance-contacts__icon"
+                         style="background-image: url(images/img/phone-black.svg);"></div>
+                    <h4>Основний телефон для консультації</h4>
+                    <a href="tel:+380432523049">+38 043 252 30 49</a>
+                </li>
+                <li class="covigilance-contacts__list-item">
+                    <div class="covigilance-contacts__icon"
+                         style="background-image: url(images/img/black-email.svg);"></div>
+                    <h4>Пошта:</h4>
+                    <a href="mailto:office@bsc-bioscience.co.uk">office@bsc-bioscience.co.uk</a>
+                </li>
+                <li class="covigilance-contacts__list-item">
+                    <div class="covigilance-contacts__icon"
+                         style="background-image: url(images/img/location.svg);"></div>
+                    <h4>Адреса:</h4>
+                    <p>03126, м. Київ, бульвар Вацлава Гавела, 40 А</p>
+                </li>
+            </ul>
+        </div>
+    </section>
+    {% endblock %}
+
+
+
+
+
+

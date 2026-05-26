@@ -14,7 +14,7 @@
 //@use 'components/video';
 @use 'components/card';
 @use 'components/tabs';
-//@use 'components/card-post';
+@use 'components/pagination';
 @use 'components/accordion';
 @use 'components/form';
 @use 'components/breadscrumb';
@@ -36,8 +36,9 @@
 @use 'pages/page-catalog';
 @use 'pages/page-news';
 @use 'pages/blog';
-//@use 'pages/page-';
+@use 'pages/page-pharmacovigilance';
 @use 'pages/page-single-product';
+@use 'pages/page-publications';
 
 @import "../../node_modules/@splidejs/splide/dist/css/splide.min.css";
 

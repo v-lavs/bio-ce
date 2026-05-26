@@ -78,18 +78,21 @@
     vector-effect: non-scaling-stroke;
   }
 
-  //
-  //&_outline {
-  //  background-color: transparent;
-  //  border-radius: 5px;
-  //  padding: 14px 69px 15px;
-  //  box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
-  //
-  //  &:hover,
-  //  &:focus {
-  //
-  //  }
-  //}
+
+  &_outline {
+    background-color: transparent;
+    border-radius: 40px;
+    border: 1px solid #FFFFFF;
+    font-size: 16px;
+    padding: 16px 22px;
+    font-weight: 400;
+    transition: .35s;
+    &:hover,
+    &:focus {
+      background-color: #fff;
+      color: #000;
+    }
+  }
   //
   //&_secondary {
   //  border-radius: 5px;

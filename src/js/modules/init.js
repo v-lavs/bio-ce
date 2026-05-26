@@ -273,7 +273,6 @@ export function init() {
         });
     }
 
-
 // =========================
 // LIQUIDS BTNS
 // =========================
@@ -1019,7 +1018,7 @@ export function init() {
 
         const sliderCategory = new Splide('.slider-category', {
             direction   : 'ttb',
-            height      : '396px',
+            height      : '416px',
             fixedHeight : '46px',
             perPage     : 7,
             perMove     : 1,

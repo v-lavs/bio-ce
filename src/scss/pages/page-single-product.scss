@@ -2,17 +2,17 @@
 @use "../base/variables";
 
 .single-product {
-  font-size: 18px;
   &__inner {
     display: flex;
   }
 
   &__media {
-    width: 46.25%;
+    width: 46.65%;
+    flex-shrink: 0;
   }
 
   &__info {
-    width: 57.75%;
+    width: 53.35%;
   }
 
   &__download {
@@ -37,7 +37,24 @@
     color: #2A81E5;
     font-weight: 700;
   }
+  &__media-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 618px;
+    aspect-ratio: 618 / 344;
+    overflow: hidden;
+  }
+  &__img,
+  &__video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
 }
+
 
 /* Базові стилі для шляхів SVG (універсальні) */
 .btn__svg-path {

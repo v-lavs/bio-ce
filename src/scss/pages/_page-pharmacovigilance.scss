@@ -1,0 +1,84 @@
+@use "../base/mixins";
+@use "../base/variables";
+
+.page-pharmacovigilance {
+  .section__content {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  .section-banner__title {
+    margin-bottom: 24px;
+  }
+
+  .section-banner__subtitle {
+    font-size: 20px;
+    line-height: 1.36;
+    font-weight: 400;
+    margin-bottom: 24px;
+  }
+  .btn_outline{
+    margin-right: 17px;
+    &:last-child{
+      margin-right: 0;
+    }
+  }
+}
+
+.section-what-it {
+  padding-bottom: 77px;
+}
+
+.covigilance-contacts {
+  &__list {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__list-item {
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 1.38;
+    width: 30%;
+    flex-grow: 1;
+    padding: 56px 56px 64px 56px;
+    border-radius: 15px;
+    box-shadow: 1px 1px 4px 0 rgba(0, 0, 0, .05);
+    backdrop-filter: blur(20px);
+    background: linear-gradient(to top, #d9e5f5 0%, #e2eff2 40%, #e0f2f1 100%);
+
+    &:nth-child(2) {
+      background: linear-gradient(135deg, #e8ebe0 0%, #dadede 50%, #caced0 100%);
+    }
+
+    a {
+      transition: .35s;
+
+      &:hover {
+        color: #2B82E4;
+      }
+    }
+  }
+
+  &__icon {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 32px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: contain;
+  }
+
+  .heading_md {
+    font-weight: 400;
+    margin-bottom: 57px;
+    text-align: center;
+    color: #990B6E;
+  }
+
+  h4 {
+    font-weight: 700;
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+}

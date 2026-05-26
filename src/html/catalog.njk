@@ -15,7 +15,7 @@
     ) }}
 
     {{ breadcrumbs ([
-        {title: "Наші препарати"},
+        {title: "Наші препарати",  url: "#"},
         {title: "Гінекологія"}
     ]) }}
 
@@ -25,6 +25,27 @@
     <section class="section-catalog">
         <div class="container">
             {% set products_list = [
+                {
+                    title: "Клиндамицин",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    imgUrl: "images/img/preparat.png",
+                    link: "single-product.html",
+                    type: "default"
+                },
+                {
+                    title: "Лінкоміцину гідрохлорид капсули",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    imgUrl: "images/img/preparat.png",
+                    link: "single-product.html",
+                    type: "default"
+                },
+                {
+                    title: "Clindamycin",
+                    text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
+                    imgUrl: "images/img/preparat.png",
+                    link: "single-product.html",
+                    type: "default"
+                },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
@@ -47,7 +68,7 @@
                     type: "default"
                 }
             ] %}
-            <div class="catalog-wrap">
+            <div class="section-catalog__inner">
                 <div class="sidebar category-filter">
                     <h3 class="category-filter__title">Категорії</h3>
                     <div class="splide slider-category" aria-label="Фільтр категорій">
@@ -112,6 +133,7 @@
                         </div>
                     </div>
                 </div>
+                <div class="catalog-wrap">
                 <div class="catalog-grid">
                     {% for item in products_list %}
                         {{ card(
@@ -123,7 +145,10 @@
                         ) }}
                     {% endfor %}
                 </div>
+                    {% include "partials/pagination.njk" %}
+                </div>
             </div>
+
         </div>
     </section>
 

@@ -1,0 +1,10 @@
+@use "../base/mixins";
+@use "../base/variables";
+
+.publications-list {
+  .card_long {
+    width: 100%;
+    margin-bottom: 16px;
+
+  }
+}

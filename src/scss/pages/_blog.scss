@@ -1,0 +1,19 @@
+@use "../base/mixins";
+@use "../base/variables";
+
+.section-news{
+  &__grid{
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+  }
+  .card_without-img{
+    width: 30%;
+    flex-grow: 1;
+    background-color: #fff;
+    margin-bottom: 16px;
+    &:before{
+      opacity: 1;
+    }
+  }
+}

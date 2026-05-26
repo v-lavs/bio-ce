@@ -1,11 +1,7 @@
 @use "../base/mixins";
 @use "../base/variables";
 
-.page-catalog {
-
-}
-
-.catalog-wrap {
+.section-catalog__inner {
   display: flex;
   align-items: flex-start;
 }
@@ -24,14 +20,20 @@
   margin-bottom: 33px;
 }
 
+.catalog-wrap {
+  flex-grow: 1;
+  min-width: 0;
+  padding-left: 45px;
+}
+
 .catalog-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 28px;
-  flex-grow: 1;
-  min-width: 0;
-  .card{
+  gap: 16px;
+
+  .card {
     max-width: 323px;
-    width: 30%;
+    width: 32%;
+    margin-bottom: 16px;
   }
 }

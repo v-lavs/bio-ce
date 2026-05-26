@@ -1,0 +1,42 @@
+@use "../base/mixins";
+@use "../base/variables";
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  padding-top: 64px;
+  gap: 16px;
+  &__arrow {
+    width: 51px;
+    height: 46px;
+  }
+
+  &__prev {
+    transform: scaleX(-1);
+  }
+
+  &__list {
+    display: flex;
+    gap: 16px;
+  }
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 45px;
+    line-height: 1;
+    font-weight: 500;
+    font-size: 16px;
+    a {
+      display: block;
+      &.is-active{
+        color: #990B6E;
+        text-decoration: underline;
+        text-decoration-thickness: 2px;
+        text-underline-offset: 4px;
+      }
+    }
+  }
+}
