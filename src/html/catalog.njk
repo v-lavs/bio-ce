@@ -2,9 +2,7 @@
 
 {% extends "layouts/base.njk" %}
 {% block main_class %} page page-catalog {% endblock %}
-
 {% block title %}Наші препарати — {{ siteName }}{% endblock %}
-
 {% block content %}
     {% from "macros/section-banner.njk" import render_section_banner as section_banner with context %}
     {% from "macros/breadcrumbs.njk" import render_breadcrumbs as breadcrumbs with context %}
@@ -13,12 +11,10 @@
         img_url="images/img/banner-catalog.png",
         title="наші препарати"
     ) }}
-
     {{ breadcrumbs ([
         {title: "Наші препарати",  url: "#"},
         {title: "Гінекологія"}
     ]) }}
-
     <div class="container">
         {% include "partials/search.njk" %}
     </div>
@@ -148,8 +144,6 @@
                     {% include "partials/pagination.njk" %}
                 </div>
             </div>
-
         </div>
     </section>
-
 {% endblock %}

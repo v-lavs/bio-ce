@@ -2,9 +2,7 @@
 
 {% extends "layouts/base.njk" %}
 {% block main_class %} page page-pharmacovigilance {% endblock %}
-
 {% block title %}Фармаконагляд — {{ siteName }}{% endblock %}
-
 {% block content %}
     {% from "macros/section-banner.njk" import render_section_banner as section_banner with context %}
     {% from "macros/breadcrumbs.njk" import render_breadcrumbs as breadcrumbs with context %}
@@ -13,17 +11,16 @@
         img_url="images/img/banner-farmnaglyad.png",
         title="Фармаконагляд"
         ) %}
-<div class="section-banner__content"
-     data-reveal="fade"
-     data-delay="0.6"
-     data-duration="1.2">
-
-    <p class="section-banner__subtitle">Форми звернення онлайн:</p>
-
-    <div class="section-banner__buttons">
-        <a href="#" class="btn btn_outline">Для пацієнтів</a>
-        <a href="#" class="btn btn_outline">Для медичних працівників</a>
-    </div>
+        <div class="section-banner__content"
+             data-reveal="fade"
+             data-delay="0.6"
+             data-duration="1.2">
+            <p class="section-banner__subtitle">Форми звернення онлайн:</p>
+            <div class="section-banner__buttons">
+                <a href="#" class="btn btn_outline">Для пацієнтів</a>
+                <a href="#" class="btn btn_outline">Для медичних працівників</a>
+            </div>
+        </div>
     {% endcall %}
     {{ breadcrumbs ([
         {title: "Фармаконагляд"}
@@ -37,7 +34,6 @@
                     </div>
                 </div>
                 <div class="split-layout__col6">
-
                     <div class="section__content">
                         <p>
                             Безпека пацієнтів є найвищим пріоритетом для компанії <span class="color_blue"><strong>BIOSCIENCE LAB</strong>.</span>
@@ -81,7 +77,7 @@
             </ul>
         </div>
     </section>
-    {% endblock %}
+{% endblock %}
 
 
 

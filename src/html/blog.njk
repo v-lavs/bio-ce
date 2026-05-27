@@ -2,9 +2,7 @@
 
 {% extends "layouts/base.njk" %}
 {% block main_class %} page page-blog page-news {% endblock %}
-
 {% block title %}Блог — {{ siteName }}{% endblock %}
-
 {% block content %}
     {% from "macros/section-banner.njk" import render_section_banner as section_banner with context %}
     {% from "macros/breadcrumbs.njk" import render_breadcrumbs as breadcrumbs with context %}
@@ -13,12 +11,10 @@
         img_url="images/img/banner-news.png",
         title="Блог"
     ) }}
-
     {{ breadcrumbs ([
         {title: "Новини", url: "#"},
         {title: "Блог"}
     ]) }}
-
     <div class="container">
         {% include "partials/search.njk" %}
     </div>
@@ -28,55 +24,55 @@
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 },
                 {
                     title: "Clindamycin",
                     text: "напівсинтетичний препарат з групи лінкозамідів для перорального, парентерального та місцевого застосування. Кліндаміцин застосовується у ...",
-                    link: "single-product.html",
+                    link: "single-news.html",
                     type: "without-img"
                 }
             ] %}
@@ -94,5 +90,4 @@
             {% include "partials/pagination.njk" %}
         </div>
     </section>
-
 {% endblock %}

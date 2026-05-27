@@ -121,110 +121,145 @@ body.menu-open {
   }
 }
 
-//.dynamic-content {
-//  p {
-//    margin-bottom: 15px;
-//    line-height: 1.1;
-//  }
-//
-//  img {
-//    max-width: 100%;
-//    height: auto;
-//
-//    &.alignleft {
-//      float: left;
-//      margin: 4px 25px 25px 0;
-//    }
-//
-//    &.alignright {
-//      float: right;
-//      margin: 4px 0 25px 25px;
-//    }
-//
-//    &.aligncenter {
-//      display: block;
-//      margin: 50px auto;
-//      clear: both;
-//    }
-//
-//    &.alignfull {
-//      width: 100%;
-//      height: auto;
-//      display: block;
-//      margin: 50px 0;
-//    }
-//  }
-//
-//
-//  h1, h2,
-//  h3, h4, h5, h6 {
-//  }
-//
-//  h3, h4, h5, h6 {
-//
-//  }
-//
-//  h1, h2 {
-//
-//  }
-//
-//  h3 {
-//
-//  }
-//
-//  h4 {
-//
-//  }
-//
-//  ul, ol {
-//
-//  }
-//
-//  ol {
-//    counter-reset: list;
-//
-//    li {
-//      overflow-wrap: anywhere;
-//      position: relative;
-//      list-style: inherit;
-//      padding-left: 35px;
-//
-//      &:before {
-//        position: absolute;
-//        top: 0;
-//        left: 8px;
-//        counter-increment: list;
-//        content: counter(list) '.';
-//      }
-//    }
-//  }
-//
-//  ul {
-//    li {
-//      &:before {
-//        content: ".";
-//        display: block;
-//        position: absolute;
-//        left: 17px;
-//        top: -8px;
-//      }
-//    }
-//  }
-//
-//  li {
-//    position: relative;
-//    padding-left: 34px;
-//    margin-bottom: 5px;
-//  }
-//
-//  a {
-//
-//    &:hover,
-//    &:focus {
-//
-//    }
-//  }
-//}
+.btn-back {
+  position: absolute;
+  display: inline-block;
+  padding-left: 93px;
+  left: 0;
+  top: 0;
+
+  &:before {
+    position: absolute;
+    content: '';
+    background-image: url('data:image/svg+xml,<svg width="92" height="8" viewBox="0 0 92 8" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M91.7425 4.03519C91.9378 3.83993 91.9378 3.52335 91.7425 3.32809L88.5606 0.146107C88.3653 -0.0491555 88.0487 -0.0491555 87.8534 0.146107C87.6582 0.341369 87.6582 0.657951 87.8534 0.853214L90.6819 3.68164L87.8534 6.51007C87.6582 6.70533 87.6582 7.02191 87.8534 7.21717C88.0487 7.41244 88.3653 7.41244 88.5606 7.21717L91.7425 4.03519ZM0 3.68164V4.18164H91.389V3.68164V3.18164H0V3.68164Z" fill="currentColor"/></svg>');
+    background-repeat: no-repeat;
+    background-position: 0 center;
+    background-size: contain;
+    width: 73px;
+    height: 8px;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%) scaleX(-1);
+    transition: .35s;
+  }
+
+  &:hover {
+    color: #990B6E;
+    text-shadow: 0.4px 0 0 currentColor, -0.4px 0 0 currentColor;
+
+    &:before {
+      filter: invert(41%) sepia(13%) saturate(2469%) hue-rotate(256deg) brightness(89%) contrast(83%);
+    }
+  }
+}
+
+.dynamic-content {
+  p {
+    margin: 30px 0;
+    line-height: 1.95;
+  }
+
+  img {
+    max-width: 100%;
+    height: auto;
+
+    &.alignleft {
+      float: left;
+      margin: 8px 24px 24px 0;
+    }
+
+    &.alignright {
+      float: right;
+      margin: 8px 0 24px 24px;
+    }
+
+    &.aligncenter {
+      display: block;
+      margin: 24px auto;
+      clear: both;
+    }
+
+    &.alignfull {
+      width: 100%;
+      height: auto;
+      display: block;
+      margin: 25px 0;
+    }
+  }
+
+  h2,
+  h3, h4, h5, h6 {
+    line-height: 1.2;
+    margin-top: 54px;
+    margin-bottom: 32px;
+    font-weight: 500;
+  }
+
+  h2 {
+    font-size: 36px;
+  }
+
+  h3 {
+    font-size: 30px;
+  }
+
+  h4 {
+    font-size: 24px;
+  }
+
+  ul, ol {
+    margin: 30px 0;
+  }
+
+  ol {
+    counter-reset: list;
+
+    li {
+      overflow-wrap: anywhere;
+      position: relative;
+      list-style: inherit;
+      padding-left: 40px;
+
+      &:before {
+        position: absolute;
+        top: 0;
+        left: 16px;
+        counter-increment: list;
+        content: counter(list) '.';
+      }
+    }
+  }
+
+  ul {
+    li {
+      &:before {
+        content: ".";
+        display: block;
+        position: absolute;
+        left: 17px;
+        top: -16px;
+        font-size: 40px;
+        line-height: 1;
+      }
+    }
+  }
+
+  li {
+    position: relative;
+    padding-left: 34px;
+    margin-bottom: 5px;
+  }
+
+  a {
+    color: #990B6E;
+
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+      text-underline-offset: 4px;
+    }
+  }
+}
 
 /* =========================
    REVEAL SYSTEM

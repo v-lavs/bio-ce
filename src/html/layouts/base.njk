@@ -13,12 +13,10 @@
   <title>{% block title %}{{ siteName }}{% endblock %}</title>
 
   <link rel="stylesheet" href="https://unpkg.com/lenis@1.3.23/dist/lenis.css">
-
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
         rel="stylesheet">
-
   <link rel="stylesheet" href="css/main.css">
   {% block head %}{% endblock %}
 </head>
@@ -29,18 +27,16 @@
       {% include "partials/header.njk" %}
     {% endblock %}
 
-    <main class="main  {% block main_class %}{% endblock %}">
-    {% block content %}{% endblock %}
+  <main class="main  {% block main_class %}{% endblock %}">
+     {% block content %}{% endblock %}
     </main>
 
     {% block footer %}
       {% include "partials/footer.njk" %}
     {% endblock %}
-
-    </div>
+</div>
     <a href="tel:+380504638266" class="btn_call"><img src="images/img/btn-call.svg" alt="" aria-hidden="true" width="75"
                                                       height="75"></a>
-
     <!-- TEMPLATE RESERVOIR FOR BTN -->
     <svg style="display: none;">
       <path id="text-hover-target"
@@ -49,7 +45,6 @@
             d="M43.0883 0.5H18.6522C13.0645 0.5 8.5 5.0305 8.5 10.5913V38.2826C8.5 43.8434 13.0645 48.3739 18.6522 48.3739H49.1352C55.5819 48.3737 60.3862 42.4124 59.0152 36.1058L52.9949 8.41473C51.9837 3.76387 47.8675 0.5 43.0883 0.5Z" />
     </svg>
 
-    {#    Scripts #}
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/gsap.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/Flip.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/gsap@3.15/dist/SplitText.min.js"></script>

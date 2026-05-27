@@ -2,9 +2,6 @@
 @use "../base/variables";
 
 .heading {
-  &_xxl {
-
-  }
 
   &_xl {
     font-weight: 400;
@@ -22,6 +19,9 @@
     font-weight: 500;
     font-size: 32px;
     line-height: 1.24;
+  }
+  &_sm{
+    font-size: 24px;
   }
 }
 

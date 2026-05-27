@@ -1,17 +1,16 @@
 {# src/html/macros/section-banner.njk #}
 
-{% macro render_section_banner(img_url, img_mob_url, title="", tag="h1") %}
-
-    <section class="section-banner">
+{% macro render_section_banner(img_url, img_mob_url, title="", tag="h1", extra_class="") %}
+    <section class="section-banner {{ extra_class }}">
         <div class="section-banner__img">
             <picture>
                 {% if img_mob_url %}
                     <source media="(max-width: 610px)" srcset="{{ img_mob_url }}">
                 {% endif %}
-                <img class="img_desk" src="{{ img_url }}" alt="{{ title_img }}">
+                {# Зверніть увагу: змінна title_img у вас не передається в аргументи, можливо краще використати title #}
+                <img class="img_desk" src="{{ img_url }}" alt="{{ title | striptags }}">
             </picture>
         </div>
-
         <div class="container">
             {% if title %}
             <{{ tag }} class="heading_xl section-banner__title"
@@ -21,8 +20,9 @@
             data-ease="power1.out">
             {{ title | safe }}
         </{{ tag }}>
-        {{ caller() if caller }}
         {% endif %}
+
+        {{ caller() if caller }}
         </div>
     </section>
 {% endmacro %}
