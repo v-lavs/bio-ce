@@ -58,11 +58,14 @@
 }
 
 @include mixins.respond-to(variables.$sm) {
-
+  .breadcrumbs {
+    padding-top: 32px;
+  }
 }
 
 @include mixins.respond-to(variables.$xs) {
   .breadcrumbs {
-    padding-top: 32px;
+    padding-top: 24px;
+    padding-bottom: 32px;
   }
 }
