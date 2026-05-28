@@ -1,0 +1,89 @@
+{% macro render_form_item(type="text", label="", text="",  name="", placeholder="", required=false, options=[], value="", rows=4, extra_class="") %}
+    <div class="form-group {{ extra_class }}">
+        {% if text %}<p>{{ text }}</p>{% endif %}
+        {# 1. Текстові поля, Email, Телефон ТА ДАТИ #}
+        {% if type == "text" or type == "email" or type == "tel" or type == "date" %}
+            {% if label %}
+                <label for="{{ name }}" class="label">
+                    {{ label }} {% if required %}<span class="required-star">*</span>{% endif %}
+                </label>
+            {% endif %}
+            <input
+                    type="{{ type }}"
+                    id="{{ name }}"
+                    name="{{ name }}"
+                    class="form-item__input"
+                    placeholder="{{ placeholder }}"
+                    {% if required %}required{% endif %}
+            >
+
+            {# 2. Велика текстова область #}
+            {% elif type == "textarea" %}
+            {% if label %}
+                <label for="{{ name }}" class="label">
+                    {{ label }} {% if required %}<span class="required-star">*</span>{% endif %}
+                </label>
+            {% endif %}
+            <textarea
+                    id="{{ name }}"
+                    name="{{ name }}"
+                    class="form-group__textarea"
+                    placeholder="{{ placeholder }}"
+                    rows="{{ rows }}"
+                    {% if required %}required{% endif %}
+        ></textarea>
+
+            {# 3. Група радіобатонів БЕЗ id (інпут всередині label) #}
+            {% elif type == "radio" %}
+            <fieldset class="pv-form__section">
+                {% if label %}
+                    <p>
+                        {{ label }} {% if required %}<span class="required-star">*</span>{% endif %}
+                    </p>
+                {% endif %}
+
+                <div class="form-item__options-list">
+                    {% for opt in options %}
+                        <label class="label label-radio">
+                            <input
+                                    type="radio"
+                                    name="{{ name }}"
+                                    value="{{ opt.value }}"
+                                    {% if required %}required{% endif %}
+                            />
+                            <span class="radio-btn__text">{{ opt.label }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+            </fieldset>
+
+            {# 4. ГРУПА ЧЕКБОКСІВ (інпут всередині label + семантичний fieldset) #}
+            {% elif type == "checkbox-group" %}
+            <fieldset class="pv-form__section">
+                {% if label %}
+                    <p>
+                        {{ label }} {% if required %}<span class="required-star">*</span>{% endif %}
+                    </p>
+                {% endif %}
+
+                <div class="form-group__options-list">
+                    {% for opt in options %}
+                        <label class="label label-checkbox">
+                            <input type="checkbox" name="{{ name }}[]" value="{{ opt.value }}">
+                            <span class="checkbox-btn__text">{{ opt.label }}</span>
+                        </label>
+                    {% endfor %}
+                </div>
+            </fieldset>
+
+            {# 5. ПООДИНКИЙ ЧЕКБОКС (згода — fieldset не потрібен, це окремий елемент) #}
+            {% elif type == "checkbox" %}
+            <label class="label single-agreement">
+                <input type="checkbox" name="{{ name }}" value="{{ value or 'yes' }}" {% if required %}required{% endif %}>
+                <span class="checkbox-btn__text">
+                    {{ label | safe }}
+                </span>
+            </label>
+        {% endif %}
+    </div>
+{% endmacro %}

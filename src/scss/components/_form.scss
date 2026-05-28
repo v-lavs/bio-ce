@@ -36,6 +36,26 @@ form {
     display: block;
     width: 100%;
   }
+  input[type="checkbox"],
+  input[type="radio"] {
+    accent-color: #2B82E4;
+    width: 15px;
+    height: 15px;
+    margin-bottom: 0;
+    margin-right: 10px;
+    margin-top: 2px;
+    flex-shrink: 0;
+  }
+  .label-radio,
+  .label-checkbox{
+    display: flex;
+    font-weight: 400;
+    margin-bottom: 16px;
+    padding: 0;
+    &:last-child{
+      margin-bottom: 0;
+    }
+  }
 }
 
 ::placeholder {
