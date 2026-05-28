@@ -61,8 +61,16 @@
   .search-box {
     padding-bottom: 40px;
   }
-  .search-box__form .btn_submit {
-    display: none;
+  .search-box__form .hide-on-tablet {
+    position: absolute !important;
+    clip: rect(0, 0, 0, 0) !important;
+    width: 1px !important;
+    height: 1px !important;
+    overflow: hidden !important;
+    white-space: nowrap !important;
+    margin: -1px !important;
+    padding: 0 !important;
+    border: 0 !important;
   }
 }
 

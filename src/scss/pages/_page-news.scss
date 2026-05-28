@@ -20,3 +20,29 @@
     width: 66%;
   }
 }
+
+@include mixins.respond-to(variables.$xl) {
+  .page-news .split-layout{
+    flex-wrap: wrap;
+  }
+  .page-news .split-layout__col2 {
+    width: 100%;
+    padding-right: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 32px;
+  }
+  .page-news .split-layout__col6{
+    width: 100%;
+  }
+  .section-publications {
+    .section__title {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@include mixins.respond-to(variables.$md) {
+
+}

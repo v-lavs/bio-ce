@@ -19,7 +19,7 @@
     display: flex;
     align-items: center;
     gap: 6px;
-    padding-top: 45px;
+    padding-top: 48px;
   }
 
   &__download-icon {
@@ -117,5 +117,12 @@
   }
   .single-product__inner{
     flex-wrap: wrap;
+    padding-top: 16px;
+  }
+  .single-product__media{
+    margin-bottom: 48px;
+  }
+  .single-product__download {
+    justify-content: center;
   }
 }

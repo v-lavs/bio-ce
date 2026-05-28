@@ -62,9 +62,17 @@
   .page .section-banner_small {
     height: 100px;
   }
- .page .heading_md{
-  font-size: 25px;
-}
+  .page .heading_xl {
+    font-weight: 400;
+  }
+
+  .page .heading_md {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  .page .text_md{
+    font-size: 16px;
+  }
   .section-banner_small .container {
     padding-bottom: 0;
   }

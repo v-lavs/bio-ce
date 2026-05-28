@@ -93,17 +93,6 @@
       color: #000;
     }
   }
-  //
-  //&_secondary {
-  //  border-radius: 5px;
-  //  padding-left: 60px;
-  //  padding-right: 60px;
-  //
-  //  &:hover,
-  //  &:focus {
-  //
-  //  }
-  //}
 }
 
 .btn_call{
@@ -123,23 +112,6 @@
   }
 }
 
-//.load_more {
-//  display: inline-block;
-//  width: 67px;
-//  height: 67px;
-//  border-radius: 50%;
-//  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, .25);
-//  background-image: url(../images/img/plus-green.svg);
-//  background-position: center center;
-//  background-repeat: no-repeat;
-//  background-size: 45px 45px;
-//  transition: transform .35s;
-//
-//  &:hover,
-//  &:focus {
-//    transform: scale(1.05);
-//  }
-//}
 
 @include mixins.respond-to(variables.$sm) {
 
