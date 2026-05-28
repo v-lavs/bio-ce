@@ -218,8 +218,6 @@ export function init() {
                 }
             }
         });
-
-
     }
 
 // Глобальне закриття через ESC
@@ -1031,64 +1029,122 @@ export function init() {
 // =========================
 // SLIDER CATEGORY
 // =========================
+// Виносимо змінну для екземпляра слайдера наверх, щоб контролювати його стан
+    let sliderCategoryInstance = null;
+
     function initCategorySlider() {
         const sliderCatEl = document.querySelector('.slider-category');
         if (!sliderCatEl) return;
 
-        const totalSlides = sliderCatEl.querySelectorAll('.splide__slide').length;
+        function handleSliderResponsive() {
+            // Перевіряємо, чи ширина екрана більша за 991px
+            if (window.innerWidth > 991) {
 
-        const sliderCategory = new Splide('.slider-category', {
-            direction: 'ttb',
-            height: '416px',
-            fixedHeight: '46px',
-            perPage: 7,
-            perMove: 1,
-            type: 'slide',
-            focus: 0,
-            trimSpace: true,
-            omitEnd: true,
-            pagination: false,
-            updateOnMove: true,
-            arrows: true,
-            gap: '6px',
-            wheel: true,
-            releaseWheel: true,
-            waitForTransition: true,
-            classes: {
-                arrows: 'splide__arrows custom__arrows',
-                arrow: 'splide__arrow',
-                prev: 'splide__arrow--prev',
-                next: 'splide__arrow--next',
-            },
-        });
+                // Якщо слайдер ще не створений — ініціалізуємо його
+                if (!sliderCategoryInstance) {
+                    sliderCategoryInstance = new Splide('.slider-category', {
+                        direction: 'ttb',
+                        height: '416px',
+                        fixedHeight: '46px',
+                        perPage: 7,
+                        perMove: 1,
+                        type: 'slide',
+                        focus: 0,
+                        trimSpace: true,
+                        omitEnd: true,
+                        pagination: false,
+                        updateOnMove: true,
+                        arrows: true,
+                        gap: '6px',
+                        wheel: true,
+                        releaseWheel: true,
+                        waitForTransition: true,
+                        classes: {
+                            arrows: 'splide__arrows custom__arrows',
+                            arrow: 'splide__arrow',
+                            prev: 'splide__arrow--prev',
+                            next: 'splide__arrow--next',
+                        },
+                    });
 
-        sliderCategory.mount();
+                    sliderCategoryInstance.mount();
 
-        const activeIndex = Array.from(sliderCatEl.querySelectorAll('.splide__slide'))
-            .findIndex(slide => slide.classList.contains('is-selected-category'));
+                    // Позиціонування на активному індексі при першій ініціалізації
+                    const activeIndex = Array.from(sliderCatEl.querySelectorAll('.splide__slide'))
+                        .findIndex(slide => slide.classList.contains('is-selected-category'));
 
-        if (activeIndex !== -1) {
-            sliderCategory.go(activeIndex);
+                    if (activeIndex !== -1) {
+                        sliderCategoryInstance.go(activeIndex);
+                    }
+                }
+            } else {
+                // Якщо екран <= 991px і слайдер існує — повністю вбиваємо його функціонал і стилі
+                if (sliderCategoryInstance) {
+                    sliderCategoryInstance.destroy(true); // true повністю очищає DOM від стилів каруселі
+                    sliderCategoryInstance = null;
+                }
+            }
         }
 
-        initSelectionLogic(sliderCatEl, sliderCategory);
+        // Запускаємо перевірку відразу при завантаженні сторінки
+        handleSliderResponsive();
+
+        // Запускаємо логіку вибору категорій (вона має працювати ЗАВЖДИ, незалежно від наявності слайдера)
+        // Передаємо актуальний стан інстансу (null на мобільному, об'єкт на десктопі)
+        initSelectionLogic(sliderCatEl);
+
+        // Відстежуємо зміну розміру екрана (resize)
+        let resizeTimeout;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(handleSliderResponsive, 150);
+        });
     }
 
-    function initSelectionLogic(container, splideInstance = null) {
+    function initSelectionLogic(container) {
         const links = container.querySelectorAll('.splide__slide a');
 
         links.forEach((link, index) => {
-            link.addEventListener('click', function (e) {
-                // e.preventDefault();
-
-                const currentSlide = link.closest('.splide__slide');
-
-                container.querySelector('.is-selected-category')?.classList.remove('is-selected-category');
-
-                currentSlide.classList.add('is-selected-category');
-            });
+            // Щоб події не дублювалися при ресайзах, спочатку знімаємо старий слухач (якщо він був)
+            link.removeEventListener('click', handleCategoryClick);
+            link.addEventListener('click', handleCategoryClick);
         });
+
+        function handleCategoryClick(e) {
+            // e.preventDefault();
+            const currentSlide = e.currentTarget.closest('.splide__slide');
+
+            container.querySelector('.is-selected-category')?.classList.remove('is-selected-category');
+            currentSlide.classList.add('is-selected-category');
+            if (window.innerWidth <= 991) {
+                closeSidebarFilter();
+            }
+        }
     }
+
+    // =========================
+    // OPEN SIDEBAR FILTER
+    // =========================
+    const btnOpenFilter = document.querySelector('.btn-open-sidebar');
+    const sidebarFilter = document.querySelector('.category-filter');
+    const backdrop = document.querySelector('.backdrop');
+    const headerElement = document.querySelector('.header');
+
+    function closeSidebarFilter() {
+        if (sidebarFilter) sidebarFilter.classList.remove('open');
+        if (backdrop) backdrop.classList.remove('is-visible');
+        if (headerElement) headerElement.style.zIndex = '3';
+    }
+
+  if(btnOpenFilter && sidebarFilter && backdrop)  {
+      btnOpenFilter.addEventListener('click',  () => {
+          sidebarFilter.classList.add('open');
+          backdrop.classList.add('is-visible');
+          if (headerElement) headerElement.style.zIndex = '2';
+      });
+
+      backdrop.addEventListener('click', closeSidebarFilter);
+  }
 
 
     initAccordion();

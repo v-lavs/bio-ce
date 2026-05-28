@@ -37,47 +37,70 @@
     margin-bottom: 16px;
   }
 }
-
+.btn-open-sidebar{
+  display: none;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  padding: 0;
+  border: none;
+}
 @include mixins.respond-to(variables.$xl) {
-  .catalog-wrap{
+  .catalog-wrap {
     padding-left: 16px;
   }
-  .catalog-grid .card{
+  .catalog-grid .card {
     width: 31%;
   }
 }
 
 @include mixins.respond-to(variables.$lg) {
-  .catalog-wrap{
+  .catalog-wrap {
     padding-left: 45px;
   }
-  .catalog-grid .card{
+  .catalog-grid .card {
     width: 48%;
   }
 }
+
 @include mixins.respond-to(variables.$md) {
-  .catalog-wrap{
+  .section-catalog__inner {
+    position: relative;
+  }
+  .catalog-wrap {
     padding-left: 0;
   }
-  .catalog-grid .card{
+  .catalog-grid .card {
     width: 31%;
   }
-  .category-filter{
-    position: absolute;
+  .category-filter {
+    position: fixed;
+    background-color: #fff;
     transform: translateX(-150%);
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    height: 100vh;
+    z-index: 100;
+    max-width: 287px;
+    padding: 60px 16px 16px;
+    transition: transform .35s;
+    &.open{
+      transform: translateX(0);
+    }
+  }
+  .btn-open-sidebar{
+    display: block;
   }
 }
-@include mixins.respond-to(variables.$md) {
+
+@include mixins.respond-to(variables.$sm) {
   .catalog-grid .card {
     width: 48%;
     max-width: 377px;
   }
 }
-@include mixins.respond-to(variables.$sm) {
+
+@include mixins.respond-to(variables.$xs) {
   .catalog-grid .card {
     width: 100%;
     margin: 0 auto;

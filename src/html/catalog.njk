@@ -17,8 +17,10 @@
     ]) }}
     <div class="container">
         {% include "partials/search.njk" %}
+        <button type="button" class="btn-open-sidebar"><img src="images/img/filter.svg" alt="" aria-hidden="true"></button>
     </div>
     <section class="section-catalog">
+        <div class="backdrop"></div>
         <div class="container">
             {% set products_list = [
                 {
