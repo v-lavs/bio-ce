@@ -20,7 +20,7 @@
             {# 2. Велика текстова область #}
             {% elif type == "textarea" %}
             {% if label %}
-                <label for="{{ name }}" class="label">
+                <label for="{{ name }}" class="label label-textarea">
                     {{ label }} {% if required %}<span class="required-star">*</span>{% endif %}
                 </label>
             {% endif %}

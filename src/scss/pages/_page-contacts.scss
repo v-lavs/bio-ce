@@ -11,6 +11,10 @@
     max-width: 583px;
   }
 
+  .split-layout__col4:first-child {
+    padding-right: 16px;
+  }
+
   .form_contact {
     max-width: 546px;
     width: 100%;
@@ -52,5 +56,37 @@
     font-weight: 300;
     font-size: 16px;
     color: #4A4A4A;
+  }
+}
+
+@include mixins.respond-to(variables.$xl) {
+  .page-contacts .heading_lg {
+    font-size: 30px;
+  }
+}
+
+@include mixins.respond-to(variables.$sm) {
+  .page-contacts{
+    .heading_lg{
+      margin-bottom: 32px;
+    }
+    .split-layout__col4:nth-child(n){
+      width: 100%;
+      padding-right: 0;
+    }
+  }
+
+  .contact__item {
+    margin-bottom: 16px;
+    font-size: 16px;
+    .small-text {
+      font-size: 14px;
+    }
+  }
+}
+
+@include mixins.respond-to(variables.$xs) {
+  .page-contacts .heading_lg {
+    font-size: 28px;
   }
 }
