@@ -7,6 +7,7 @@
   padding-bottom: 80px;
   &__header {
     display: flex;
+    align-items: center;
     flex-wrap: wrap;
     margin-bottom: 80px;
   }
@@ -14,7 +15,6 @@
   &__date {
     line-height: 1.2;
     color: #828282;
-    margin-bottom: 60px;
     margin-left: auto;
   }
 
@@ -24,6 +24,7 @@
     line-height: 1.2;
     color: #990B6E;
     width: 100%;
+    padding-top: 45px;
   }
   &__content{
     line-height: 1.95;
@@ -34,5 +35,33 @@
   }
   p{
     margin: 30px 0;
+  }
+  &__category{
+    display: flex;
+    align-items: center;
+    ////width: 50vw;
+    //width: 90%;
+    //margin: auto;
+    //max-width: 22em;
+
+    position: relative;
+    padding: 12px 16px;
+    box-sizing: border-box;
+
+    color:  #000000;
+    background: #FFFFFF;
+    background-clip: padding-box; /* !importanté */
+    border: 1px solid  transparent; /* !importanté */
+    border-radius: 30px;
+
+    &:before {
+      content: '';
+      position: absolute;
+      top: 0; right: 0; bottom: 0; left: 0;
+      z-index: -1;
+      margin: -1px; /* !importanté */
+      border-radius: 30px; /* !importanté */
+      background: linear-gradient(90.42deg, #0A6DFC 3.06%, #89FDC1 99.64%);
+    }
   }
 }
