@@ -44,6 +44,10 @@
   background-color: transparent;
   padding: 0;
   border: none;
+  img{
+    width: 100%;
+    height: auto;
+  }
 }
 @include mixins.respond-to(variables.$xl) {
   .catalog-wrap {
