@@ -17,9 +17,11 @@
     font-weight: 400;
     margin-bottom: 24px;
   }
-  .btn_outline{
+
+  .btn_outline {
     margin-right: 17px;
-    &:last-child{
+
+    &:last-child {
       margin-right: 0;
     }
   }
@@ -81,4 +83,72 @@
     font-size: 18px;
     margin-bottom: 8px;
   }
+}
+
+@include mixins.respond-to(variables.$lg) {
+  .covigilance-contacts__list-item {
+    padding: 40px;
+    font-size: 14px;
+  }
+  .covigilance-contacts__icon {
+    width: 34px;
+    height: 34px;
+  }
+  .covigilance-contacts h4 {
+    font-size: 14px;
+  }
+}
+
+@include mixins.respond-to(variables.$md) {
+  .covigilance-contacts__list {
+    display: flex;
+    gap: 16px;
+    flex-wrap: wrap;
+  }
+  .covigilance-contacts__list-item {
+    padding: 32px;
+  }
+}
+
+@include mixins.respond-to(variables.$sm) {
+  .covigilance-contacts__list-item {
+    width: 48%;
+    font-size: 16px;
+    padding: 48px;
+  }
+  .covigilance-contacts h4 {
+    font-size: 16px;
+  }
+}
+
+@include mixins.respond-to(variables.$xs) {
+  .covigilance-contacts__list-item {
+    width: 100%;
+    max-width: 380px;
+    margin: 0 auto;
+    font-size: 18px;
+    h4{
+      font-size: 18px;
+    }
+  }
+  .section-what-it {
+    padding-bottom: 56px;
+  }
+  .covigilance-contacts .heading_md {
+    margin-bottom: 32px;
+  }
+  .page-pharmacovigilance .section__content {
+    font-size: 18px;
+  }
+  .page-pharmacovigilance .section-banner__subtitle{
+    font-size: 16px;
+    margin-bottom: 16px;
+  }
+ .section-banner__content .btn_outline{
+   margin-right: 0;
+   margin-bottom: 8px;
+   &:last-child{
+     margin-bottom: 0;
+   }
+ }
 }
