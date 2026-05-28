@@ -110,3 +110,12 @@
   opacity: 1;
   transform: scaleX(1);
 }
+@include mixins.respond-to(variables.$sm) {
+  .single-product__media,
+  .single-product__info{
+    width: 100%;
+  }
+  .single-product__inner{
+    flex-wrap: wrap;
+  }
+}
