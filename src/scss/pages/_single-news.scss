@@ -39,19 +39,13 @@
   &__category{
     display: flex;
     align-items: center;
-    ////width: 50vw;
-    //width: 90%;
-    //margin: auto;
-    //max-width: 22em;
-
     position: relative;
     padding: 12px 16px;
     box-sizing: border-box;
-
     color:  #000000;
     background: #FFFFFF;
-    background-clip: padding-box; /* !importanté */
-    border: 1px solid  transparent; /* !importanté */
+    background-clip: padding-box;
+    border: 1px solid  transparent;
     border-radius: 30px;
 
     &:before {
@@ -59,8 +53,8 @@
       position: absolute;
       top: 0; right: 0; bottom: 0; left: 0;
       z-index: -1;
-      margin: -1px; /* !importanté */
-      border-radius: 30px; /* !importanté */
+      margin: -1px;
+      border-radius: 30px;
       background: linear-gradient(90.42deg, #0A6DFC 3.06%, #89FDC1 99.64%);
     }
   }

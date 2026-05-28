@@ -55,6 +55,7 @@ export function init() {
             }
         });
     }
+
 // Запускаємо пошук активної сторінки відразу при завантаженні скрипта
     initActiveMenuItem();
 
@@ -70,6 +71,7 @@ export function init() {
             document.body.classList.toggle("menu-open", disable);
         }
     }
+
     function closeMobileMenu() {
         if (!nav || !burger) return;
         nav.classList.remove("is-open");
@@ -77,6 +79,7 @@ export function init() {
         toggleLenisScroll(false); // Вмикаємо скрол назад
         document.querySelectorAll(".menu__item.has-submenu").forEach(i => i.classList.remove("is-open"));
     }
+
 // ========================================================
 // 2. СИСТЕМА КЛІКІВ
 // ========================================================
@@ -217,15 +220,14 @@ export function init() {
         });
 
 
-
     }
 
 // Глобальне закриття через ESC
-        document.addEventListener("keydown", (e) => {
-            if (e.key === "Escape") {
-                closeMobileMenu();
-            }
-        });
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "Escape") {
+            closeMobileMenu();
+        }
+    });
 
 // ========================================================
 // 3. ЛОГІКА ДЕСКТОПНОГО БЛОБА (GSAP ХОВЕРИ)
@@ -549,6 +551,22 @@ export function init() {
             const textRevealTL = createRevealTimeline(heroRevealElements);
             heroTL.add(textRevealTL, "-=1.4"); // Вставляємо з тим самим таймінгом 1:1
         }
+        const myNewBlock = document.querySelector(".section-banner__content"); // Замініть на ваш клас
+        if (myNewBlock) {
+            heroTL.fromTo(myNewBlock,
+                {
+                    opacity: 0,
+                    y: 30
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 1.2,
+                    ease: "expo.out"
+                },
+                "-=1.2"
+            );
+        }
     }
 
 // =========================
@@ -690,6 +708,9 @@ export function init() {
 // SLIDER ADVANTAGE
 // =========================
     function initAdvantageSlider() {
+        const sliderAdvantage = document.querySelector('.slider-advantages');
+        if (!sliderAdvantage) return;
+
         const track = document.getElementById('sliderTrack');
         const viewport = document.getElementById('sliderViewport');
         const prevBtn = document.getElementById('prevBtn');
@@ -1017,27 +1038,27 @@ export function init() {
         const totalSlides = sliderCatEl.querySelectorAll('.splide__slide').length;
 
         const sliderCategory = new Splide('.slider-category', {
-            direction   : 'ttb',
-            height      : '416px',
-            fixedHeight : '46px',
-            perPage     : 7,
-            perMove     : 1,
-            type        : 'slide',
-            focus       : 0,
-            trimSpace   : true,
-            omitEnd     : true,
-            pagination  : false,
+            direction: 'ttb',
+            height: '416px',
+            fixedHeight: '46px',
+            perPage: 7,
+            perMove: 1,
+            type: 'slide',
+            focus: 0,
+            trimSpace: true,
+            omitEnd: true,
+            pagination: false,
             updateOnMove: true,
-            arrows      : true,
-            gap         : '6px',
-            wheel       : true,
+            arrows: true,
+            gap: '6px',
+            wheel: true,
             releaseWheel: true,
             waitForTransition: true,
             classes: {
                 arrows: 'splide__arrows custom__arrows',
-                arrow : 'splide__arrow',
-                prev  : 'splide__arrow--prev',
-                next  : 'splide__arrow--next',
+                arrow: 'splide__arrow',
+                prev: 'splide__arrow--prev',
+                next: 'splide__arrow--next',
             },
         });
 

@@ -13,9 +13,11 @@
     height: 544px;
     margin-bottom: 0;
   }
-  .section-banner_small{
-    height: 178px;
+
+  .section-banner_small {
+    height: 202px;
   }
+
   .heading_xl {
     font-weight: 500;
     font-size: 30px;
@@ -39,4 +41,20 @@
     text-align: right;
   }
 }
+.section-banner_small .container{
+  padding-bottom: 0;
+}
+@include mixins.respond-to(variables.$xxl) {
+  .page .section-banner_small {
+    height: 178px;
+  }
+}
 
+@include mixins.respond-to(variables.$xs) {
+  .page .section-banner_small {
+    height: 100px;
+  }
+  .section-banner_small .container{
+    padding-bottom: 0;
+  }
+}

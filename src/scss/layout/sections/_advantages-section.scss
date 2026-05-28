@@ -134,6 +134,7 @@
 }
 
 .nav-btn {
+  background-image: url(../images/img/arrow-left.svg);
   background-color: transparent;
   background-repeat: no-repeat;
   background-position: center;
@@ -145,12 +146,8 @@
   transition: all 0.35s;
 }
 
-.nav-btn_left {
-  background-image: url(../images/img/arrow-left.svg);
-}
-
 .nav-btn_right {
-  background-image: url(../images/img/arrow-right.svg);
+  transform: scaleX(-1);
 }
 
 .nav-btn:hover {

@@ -40,3 +40,8 @@
     }
   }
 }
+@include mixins.respond-to(variables.$sm) {
+  .pagination__item{
+    width: 20px;
+  }
+}

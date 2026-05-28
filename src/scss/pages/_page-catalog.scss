@@ -37,3 +37,49 @@
     margin-bottom: 16px;
   }
 }
+
+@include mixins.respond-to(variables.$xl) {
+  .catalog-wrap{
+    padding-left: 16px;
+  }
+  .catalog-grid .card{
+    width: 31%;
+  }
+}
+
+@include mixins.respond-to(variables.$lg) {
+  .catalog-wrap{
+    padding-left: 45px;
+  }
+  .catalog-grid .card{
+    width: 48%;
+  }
+}
+@include mixins.respond-to(variables.$md) {
+  .catalog-wrap{
+    padding-left: 0;
+  }
+  .catalog-grid .card{
+    width: 31%;
+  }
+  .category-filter{
+    position: absolute;
+    transform: translateX(-150%);
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+  }
+}
+@include mixins.respond-to(variables.$md) {
+  .catalog-grid .card {
+    width: 48%;
+    max-width: 377px;
+  }
+}
+@include mixins.respond-to(variables.$sm) {
+  .catalog-grid .card {
+    width: 100%;
+    margin: 0 auto;
+  }
+}
