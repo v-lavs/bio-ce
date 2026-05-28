@@ -41,12 +41,20 @@
     text-align: right;
   }
 }
-.section-banner_small .container{
+
+.section-banner_small .container {
   padding-bottom: 0;
 }
+
 @include mixins.respond-to(variables.$xxl) {
   .page .section-banner_small {
     height: 178px;
+  }
+}
+
+@include mixins.respond-to(variables.$sm) {
+  .page {
+    padding-bottom: 100px;
   }
 }
 
@@ -54,7 +62,7 @@
   .page .section-banner_small {
     height: 100px;
   }
-  .section-banner_small .container{
+  .section-banner_small .container {
     padding-bottom: 0;
   }
 }

@@ -57,10 +57,17 @@
 }
 
 
-@include mixins.respond-to(variables.$sm) {
-
+@include mixins.respond-to(variables.$md) {
+  .search-box {
+    padding-bottom: 40px;
+  }
+  .search-box__form .btn_submit {
+    display: none;
+  }
 }
 
 @include mixins.respond-to(variables.$xs) {
-
+  .search-box {
+    padding-bottom: 32px;
+  }
 }

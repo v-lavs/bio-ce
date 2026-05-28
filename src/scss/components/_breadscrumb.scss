@@ -51,7 +51,8 @@
       z-index: 1;
     }
   }
-  &__current{
+
+  &__current {
     color: #686868;
   }
 }
@@ -61,5 +62,7 @@
 }
 
 @include mixins.respond-to(variables.$xs) {
-
+  .breadcrumbs {
+    padding-top: 32px;
+  }
 }
