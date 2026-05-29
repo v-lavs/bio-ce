@@ -64,7 +64,10 @@ form {
 ::placeholder {
   color: rgba(0, 0, 0, 0.49);
 }
-
+input[type="date"] {
+  -webkit-appearance: none;
+  appearance: none;
+}
 .home {
   form {
     font-size: 18px;
