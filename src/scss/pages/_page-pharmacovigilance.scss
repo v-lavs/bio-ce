@@ -123,13 +123,29 @@
 
 @include mixins.respond-to(variables.$xs) {
   .covigilance-contacts__list-item {
+    display: flex;
+    flex-wrap: wrap;
     width: 100%;
     max-width: 380px;
     margin: 0 auto;
-    font-size: 18px;
-    h4{
-      font-size: 18px;
+    font-size: 16px;
+    padding: 32px;
+    align-items: center;
+
+    h4 {
+      font-size: 16px;
+      width: 60%;
+      flex-grow: 1;
+      margin-bottom: 0;
     }
+
+    a, p {
+      padding-top: 8px;
+    }
+  }
+  .covigilance-contacts__icon {
+    margin-bottom: 0;
+    margin-right: 8px;
   }
   .section-what-it {
     padding-bottom: 56px;
@@ -140,15 +156,16 @@
   .page-pharmacovigilance .section__content {
     font-size: 18px;
   }
-  .page-pharmacovigilance .section-banner__subtitle{
+  .page-pharmacovigilance .section-banner__subtitle {
     font-size: 16px;
     margin-bottom: 16px;
   }
- .section-banner__content .btn_outline{
-   margin-right: 0;
-   margin-bottom: 8px;
-   &:last-child{
-     margin-bottom: 0;
-   }
- }
+  .section-banner__content .btn_outline {
+    margin-right: 0;
+    margin-bottom: 8px;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
 }

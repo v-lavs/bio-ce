@@ -87,6 +87,7 @@
     padding: 16px 22px;
     font-weight: 400;
     transition: .35s;
+    min-width: 0;
     &:hover,
     &:focus {
       background-color: #fff;
