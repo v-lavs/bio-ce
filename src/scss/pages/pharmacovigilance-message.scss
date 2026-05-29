@@ -128,7 +128,11 @@
     font-size: 14px;
   }
 }
-
+@include mixins.respond-to(variables.$md){
+  .pv-form .single-agreement input[type=checkbox] {
+    margin-right: 16px;
+  }
+}
 @include mixins.respond-to(variables.$xs) {
   .section-message-card .section__sub-title {
     margin-bottom: 32px;
@@ -150,6 +154,12 @@
   }
   form .label.label-radio, form .label.label-checkbox{
     margin-bottom: 8px;
+  }
+  .pv-form .single-agreement input[type=checkbox] {
+    margin-right: 10px;
+  }
+  .single-agreement {
+    font-size: 14px!important;
   }
 }
 
