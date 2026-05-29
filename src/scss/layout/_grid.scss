@@ -31,23 +31,23 @@
   }
 }
 //
-//.container {
-//  @include mixins.respond-to(variables.$xl) {
-//    border: 2px solid red;
-//  }
-//  @include mixins.respond-to(variables.$lg) {
-//    border: 2px solid blue;
-//  }
-//  @include mixins.respond-to(variables.$md) {
-//    border: 2px solid goldenrod;
-//  }
-//  @include mixins.respond-to(variables.$sm) {
-//    border: 2px solid greenyellow;
-//  }
-//  @include mixins.respond-to(variables.$xs) {
-//    border: 2px solid fuchsia;
-//  }
-//  @include mixins.respond-to(variables.$xxs) {
-//    border: 2px solid blueviolet;
-//  }
-//}
+.container {
+  @include mixins.respond-to(variables.$xl) {
+    border: 2px solid red;
+  }
+  @include mixins.respond-to(variables.$lg) {
+    border: 2px solid blue;
+  }
+  @include mixins.respond-to(variables.$md) {
+    border: 2px solid goldenrod;
+  }
+  @include mixins.respond-to(variables.$sm) {
+    border: 2px solid greenyellow;
+  }
+  @include mixins.respond-to(variables.$xs) {
+    border: 2px solid fuchsia;
+  }
+  @include mixins.respond-to(variables.$xxs) {
+    border: 2px solid blueviolet;
+  }
+}
