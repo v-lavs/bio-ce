@@ -71,11 +71,14 @@ input[type="date"] {
   display: block;
   padding: 16px 10px 16px 20px;
   line-height: 1.1;
+  box-sizing: border-box;
+  min-height: calc(1.1em + 32px);
 }
 input[type="date"]::-webkit-date-and-time-value {
   line-height: 1.1;
   min-height: 1.1em;
   margin: 0;
+  display: block;
 }
 .home {
   form {
