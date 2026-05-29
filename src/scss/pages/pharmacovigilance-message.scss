@@ -103,7 +103,7 @@
   }
 
   .form__footer {
-    padding-top: 28px;
+    padding-top: 26px;
   }
 
   .pv-form__fieldset .sub-title {
@@ -121,7 +121,9 @@
     font-size: 16px;
   }
 }
-
+.form-group_with-padding{
+  padding-left: 28px;
+}
 .pv-form__fieldset:has(.form-group_single-checkbox) {
   .pv-form__section p {
     font-weight: 400;
