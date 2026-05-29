@@ -240,7 +240,7 @@
     padding-top: 72px;
   }
   .footer__bottom {
-    font-size: 18px;
+    font-size: 16px;
     padding-top: 0;
 
     .footer__part {
@@ -249,6 +249,10 @@
   }
   .footer__menu-item {
     font-size: 16px;
+    a{
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
   }
   .footer__top {
     width: 100%;
