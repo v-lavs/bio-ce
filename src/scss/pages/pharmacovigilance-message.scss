@@ -130,17 +130,26 @@
 }
 
 @include mixins.respond-to(variables.$xs) {
-  section-message-card .section__sub-title {
+  .section-message-card .section__sub-title {
     margin-bottom: 32px;
   }
   .pv-form .form-group {
-    margin-bottom: 24px;
+    margin-bottom: 16px;
   }
   .pv-form__fieldset {
     padding-bottom: 40px;
   }
   .pv-form .form__footer {
     padding-top: 8px;
+  }
+  .pv-form__fieldset-title{
+    margin-bottom: 24px;
+  }
+  .pv-form .form-group p, .pv-form__section p{
+    margin-bottom: 16px;
+  }
+  form .label.label-radio, form .label.label-checkbox{
+    margin-bottom: 8px;
   }
 }
 
