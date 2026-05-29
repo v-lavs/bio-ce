@@ -79,10 +79,12 @@
     padding-bottom: 56px;
     &__title{
       padding-top: 32px;
+      font-size: 28px;
     }
     &__header{
       font-size: 14px;
       margin-bottom: 32px;
+      padding-top: 0;
     }
     &__content {
       margin-bottom: 32px;
@@ -91,6 +93,10 @@
 }
 @include mixins.respond-to(variables.$xs){
   .post-news{
+    padding-left: 0;
+    &__title{
+      font-size: 26px;
+    }
     &__header{
       padding-top: 32px;
       margin-bottom: 24px;

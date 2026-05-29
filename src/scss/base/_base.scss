@@ -335,6 +335,9 @@ body.menu-open {
 }
 
 @include mixins.respond-to(variables.$sm) {
+  .btn-back{
+    display: none;
+  }
   .split-layout {
     flex-wrap: wrap;
   }
@@ -372,7 +375,6 @@ body.menu-open {
     p, ul, ol {
       margin: 16px 0;
       line-height: 1.65;
-      font-size: 14px;
     }
 
     h2,
