@@ -67,6 +67,13 @@ form {
 input[type="date"] {
   -webkit-appearance: none;
   appearance: none;
+  border-radius: 30px;
+  background-color: transparent;
+  margin-bottom: 8px;
+  width: 100%;
+  display: block;
+  padding: 16px 10px 16px 20px;
+  line-height: 1.1;
 }
 .home {
   form {
