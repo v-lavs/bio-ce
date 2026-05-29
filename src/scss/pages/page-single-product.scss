@@ -126,3 +126,6 @@
     justify-content: center;
   }
 }
+@include mixins.respond-to(variables.$sm) {
+
+}
