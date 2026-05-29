@@ -119,6 +119,20 @@
             <div class="split-layout">
                 <div class="split-layout__col2">
                     <h2 class="section__title text_uppercase">Публікації</h2>
+                </div>
+                <div class="split-layout__col6">
+                    <div class="publications-list">
+                        {% for item in publik_list %}
+                            {{ card(
+                                title = item.title,
+                                link = item.link,
+                                type = item.type,
+                                date = item.date
+                            ) }}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="section__footer">
                     <a href="page-publications.html" class="btn">
                         <span class="btn__inner">
                             <span class="btn__text-block">
@@ -158,18 +172,6 @@
                             </span>
                         </span>
                     </a>
-                </div>
-                <div class="split-layout__col6">
-                    <div class="publications-list">
-                        {% for item in publik_list %}
-                            {{ card(
-                                title = item.title,
-                                link = item.link,
-                                type = item.type,
-                                date = item.date
-                            ) }}
-                        {% endfor %}
-                    </div>
                 </div>
             </div>
         </div>
