@@ -240,6 +240,9 @@
 }
 
 @include mixins.respond-to(variables.$xs) {
+  .card__title{
+    min-height: 0;
+  }
   .page-news {
     .section-news {
       padding-bottom: 50px;
