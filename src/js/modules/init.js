@@ -547,11 +547,11 @@ export function init() {
         const heroRevealElements = document.querySelectorAll('.section-banner [data-reveal="lines"]');
         if (heroRevealElements.length > 0) {
             const textRevealTL = createRevealTimeline(heroRevealElements);
-            heroTL.add(textRevealTL, "-=1.4"); // Вставляємо з тим самим таймінгом 1:1
+            heroTL.add(textRevealTL, "-=1.4");
         }
-        const myNewBlock = document.querySelector(".section-banner__content"); // Замініть на ваш клас
-        if (myNewBlock) {
-            heroTL.fromTo(myNewBlock,
+        const bannerContentBlock = document.querySelector(".section-banner__content");
+        if (bannerContentBlock) {
+            heroTL.fromTo(bannerContentBlock,
                 {
                     opacity: 0,
                     y: 30
