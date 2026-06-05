@@ -1,13 +1,18 @@
-<svg width="25" height="59" viewBox="193 0 25 59" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M193 0.5H208.047C211.088 0.500075 213.754 2.23289 215.481 4.92383C217.209 7.61503 217.973 11.235 217.197 14.9141L209.837 49.832C208.748 54.9977 204.937 58.5 200.687 58.5H193"
-          fill="#ffffff"
-          stroke="url(#paint_grad)"
-          stroke-width="1"/>
-    <defs>
-        <linearGradient id="paint_grad" x1="0" y1="0" x2="0" y2="100%">
-            <stop stop-color="#056AFD"/>
-            <stop offset="1" stop-color="#89FBC1"/>
-        </linearGradient>
-    </defs>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="_Слой_1" data-name="Слой_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" viewBox="0 0 33 66.5">
+  <!-- Generator: Adobe Illustrator 29.1.0, SVG Export Plug-In . SVG Version: 2.1.0 Build 142)  -->
+  <defs>
+    <style>
+      .st0 {
+        fill: #fff;
+        stroke: url(#_Безымянный_градиент);
+        stroke-width: 3px;
+      }
+    </style>
+    <linearGradient id="_Безымянный_градиент" data-name="Безымянный градиент" x1="-1.5" y1="39.6" x2="-1.5" y2="37.6" gradientTransform="translate(55.9 2272) scale(24.5 -58)" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#056afd"/>
+      <stop offset="1" stop-color="#89fbc1"/>
+    </linearGradient>
+  </defs>
+  <path class="st0" d="M2.6,1.7h15c3,0,5.7,1.9,7.4,4.8,1.7,2.9,2.5,6.8,1.7,10.8l-7.4,37.8c-1.1,5.6-4.9,9.4-9.2,9.4H2.6"/>
 </svg>
-

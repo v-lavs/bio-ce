@@ -597,7 +597,7 @@ export function init() {
 
             // 2. Розрахунок висоти (для мобільних робимо трохи менший скрол-фактор, щоб не затягувати)
             const isMobile = window.innerWidth < 768;
-            const scrollFactor = isMobile ? 1.8 : 2.8;
+            const scrollFactor = isMobile ? 1.6 : 1.2;
             const scrollDistance = window.innerHeight * slides.length * scrollFactor;
 
             gsap.set(stickyTrigger, {height: `${scrollDistance}px`});

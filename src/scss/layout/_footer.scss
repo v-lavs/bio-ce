@@ -21,7 +21,7 @@
 
   &__logo {
     grid-area: 1 / 1 / 3 / 3;
-    padding: 24px;
+    padding: 24px 24px 0 24px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -141,12 +141,16 @@
   }
 
 }
-
+@include mixins.respond-to(variables.$xxl) {
+  .footer__bottom{
+    padding-top: 64px;
+  }
+}
 @include mixins.respond-to(variables.$xl) {
   .footer {
     &__bottom {
       font-size: 16px;
-      padding-top: 60px;
+      padding-top: 50px;
     }
 
     &__bottom,
@@ -211,7 +215,6 @@
 @include mixins.respond-to(variables.$md) {
   .footer {
     &__bottom {
-      //font-size: 14px;
       flex-wrap: wrap;
 
       .footer__part {
@@ -232,10 +235,6 @@
 }
 
 @include mixins.respond-to(variables.$sm) {
-
-}
-
-@include mixins.respond-to(variables.$xs) {
   .footer {
     padding-top: 72px;
   }
@@ -245,13 +244,6 @@
 
     .footer__part {
       margin-bottom: 4px;
-    }
-  }
-  .footer__menu-item {
-    font-size: 16px;
-    a{
-      padding-top: 4px;
-      padding-bottom: 4px;
     }
   }
   .footer__top {
@@ -275,8 +267,11 @@
     padding-left: 20px;
     font-size: 16px;
   }
-}
-
-@include mixins.respond-to(variables.$xxs) {
-
+  .footer__menu-item {
+    font-size: 16px;
+    a{
+      padding-top: 4px;
+      padding-bottom: 4px;
+    }
+  }
 }
