@@ -112,6 +112,14 @@
     padding-right: 16px;
     padding-left: 16px;
   }
+  .has-submenu {
+    &:before {
+      right: 8px;
+    }
+    .menu__link {
+      padding-right: 24px;
+    }
+  }
 }
 @include mixins.respond-to(variables.$lg) {
   .menu {

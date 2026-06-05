@@ -98,11 +98,9 @@
 }
 
 @media screen and (max-width: 1200px) {
-  .header__logo {
-    max-width: 190px;
-  }
   .header__languages {
     margin-left: 16px;
+    font-size: 14px;
   }
 }
 
@@ -112,6 +110,7 @@
     margin-left: 0;
     margin-top: auto;
     text-align: center;
+    padding-top: 40px;
     li {
       color: #2a2a2a;
       font-size: 24px;
