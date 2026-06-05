@@ -20,6 +20,18 @@
   &__logo {
     max-width: 323px;
     height: auto;
+    margin-right: auto;
+  }
+}
+
+.header__languages {
+  margin-left: 24px;
+
+  li {
+    display: inline-block;
+    padding: 5px 3px;
+    color: #FFFFFF;
+    text-transform: uppercase;
   }
 }
 
@@ -32,6 +44,10 @@
   background: linear-gradient(126.02deg, rgba(249, 244, 241, 0.4) -32.43%, rgba(255, 255, 255, 0.08) 146.07%);
   border-radius: 50px;
   z-index: 300;
+}
+
+.header__languages-mob {
+  display: none;
 }
 
 .burger {
@@ -81,7 +97,30 @@
   }
 }
 
+@media screen and (max-width: 1200px) {
+  .header__logo {
+    max-width: 190px;
+  }
+  .header__languages {
+    margin-left: 16px;
+  }
+}
+
 @include mixins.respond-to(variables.$lg) {
+  .header__languages-mob {
+    display: block;
+    margin-left: 0;
+    margin-top: auto;
+    text-align: center;
+    li {
+      color: #2a2a2a;
+      font-size: 24px;
+      font-weight: 500;
+    }
+  }
+  .header__languages-desk {
+    display: none;
+  }
   .burger {
     display: flex;
     z-index: 1000;
@@ -111,7 +150,7 @@
     transition: transform 0.4s cubic-bezier(0.7, 0, 0.3, 1), visibility 0.4s;
     display: flex;
   }
-   .header__nav.is-open {
+  .header__nav.is-open {
     transform: translateX(0);
     visibility: visible;
   }
@@ -126,10 +165,12 @@
 @include mixins.respond-to(variables.$xs) {
   .header {
     top: 50px;
+
     &__logo {
       max-width: 174px;
     }
-    &__nav{
+
+    &__nav {
       top: -50px;
     }
   }

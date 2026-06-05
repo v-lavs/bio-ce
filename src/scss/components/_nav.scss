@@ -99,9 +99,6 @@
   display: none;
 }
 
-
-
-
 @include mixins.respond-to(variables.$xxl){
   .menu__link {
     padding: 15px 20px;
@@ -110,7 +107,12 @@
     font-size: 16px;
   }
 }
-
+@include mixins.respond-to(variables.$xl){
+  .menu__link {
+    padding-right: 16px;
+    padding-left: 16px;
+  }
+}
 @include mixins.respond-to(variables.$lg) {
   .menu {
     flex-direction: column;
