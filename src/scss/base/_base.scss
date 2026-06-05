@@ -74,7 +74,7 @@ body.menu-open {
       position: absolute;
       top: -3px;
       bottom: -3px;
-      right: -29px;
+      right: -28px;
       width: 34px;
       z-index: 2;
       background-image: url("../images/img/arrow-corner-title.svg");
@@ -152,7 +152,15 @@ body.menu-open {
     }
   }
 }
+/* Знаходимо контейнери з нашим атрибутом */
+[data-parallax-bg] {
+  position: relative;
+}
 
+[data-parallax-bg]::before {
+  transform: translateY(var(--parallax-y, 0px));
+  will-change: transform;
+}
 .dynamic-content {
   p {
     margin: 30px 0;

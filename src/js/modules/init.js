@@ -566,7 +566,56 @@ export function init() {
             );
         }
     }
+//==========================
+//    LOGO-BG-PARALLAX
+//    ======================
+ function LogoBgParallax()  {  // Шукаємо саме контейнери з атрибутом
+     const parallaxContainers = gsap.utils.toArray('[data-parallax-bg]');
 
+     parallaxContainers.forEach(container => {
+         // Напрямок вгору: задайте в HTML мінусове значення, наприклад -0.2
+         const speedCoeff = parseFloat(container.getAttribute('data-parallax-speed')) || -0.2;
+         const getDistance = () => container.offsetHeight * speedCoeff;
+
+         // Шукаємо, чи є всередині контейнера тег <img> з класом .parallax-img
+         const innerImg = container.querySelector('.parallax-img');
+
+         if (innerImg) {
+             // ВАРІАНТ ДЛЯ КАРТИНКИ: анімуємо її напряму через 'y' (це чистий translateY в GSAP)
+             // Для цього варіанту в CSS взагалі нічого писати не треба!
+             gsap.fromTo(innerImg,
+                 { y: () => -getDistance() / 2 },
+                 {
+                     y: () => getDistance(),
+                     ease: 'none',
+                     scrollTrigger: {
+                         trigger: container,
+                         start: 'top bottom',
+                         end: 'bottom top',
+                         scrub: true,
+                         invalidateOnRefresh: true
+                     }
+                 }
+             );
+         } else {
+             // ВАРІАНТ ДЛЯ ::BEFORE: продовжує крутити CSS-змінну, як і раніше
+             gsap.fromTo(container,
+                 { '--parallax-y': () => `${-getDistance() / 2}px` },
+                 {
+                     '--parallax-y': () => `${getDistance()}px`,
+                     ease: 'none',
+                     scrollTrigger: {
+                         trigger: container,
+                         start: 'top bottom',
+                         end: 'bottom top',
+                         scrub: true,
+                         invalidateOnRefresh: true
+                     }
+                 }
+             );
+         }
+     });
+    }
 // =========================
 // PINNED STORY
 // =========================
@@ -1151,7 +1200,7 @@ export function init() {
     initTabs();
     initLiquidButtons();
     initCategorySlider();
-
+    LogoBgParallax();
     window.addEventListener("load", () => {
         initHeroAnimation();
         initPinnedStory();

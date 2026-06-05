@@ -8,7 +8,7 @@
   position: relative;
   color: #fff;
   background-color: #FFFFFF;
-  margin-bottom: 100px;
+  //margin-bottom: 100px;
   z-index: 1;
 
   .container {
@@ -51,7 +51,9 @@
     }
   }
 }
-
+.home .section-banner{
+  margin-bottom: 0;
+}
 /* =========================
    REVEAL SYSTEM
 ========================= */
@@ -87,7 +89,6 @@
 
 @include mixins.respond-to(variables.$xs) {
   .section-banner {
-    margin-bottom: 50px;
     .container{
       padding-bottom: 32px;
     }
