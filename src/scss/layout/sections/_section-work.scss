@@ -38,8 +38,8 @@
     padding-bottom: 0;
 
     .parallax-img {
+      top:  0;
       left: 0;
-      right: 0;
     }
   }
 }
@@ -47,9 +47,5 @@
 @include mixins.respond-to(variables.$xs) {
   .section-work {
     padding-top: 50px;
-
-    .parallax-img {
-      top: 150px;
-    }
   }
 }
