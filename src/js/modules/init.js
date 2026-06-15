@@ -505,7 +505,7 @@ export function init() {
             // Прив'язуємо його до ScrollTrigger, щоб він спрацьовував при доскролюванні
             ScrollTrigger.create({
                 trigger: element,
-                start: "top 85%", // Анімація почнеться, коли верх блоку перетне 85% висоти екрана
+                start: "top 85%",
                 animation: revealTL,
                 toggleActions: "play none none none" // Програти один раз і не ховати назад
             });
@@ -725,7 +725,7 @@ export function init() {
                 trigger: stickyTrigger,
                 start: "top top",
                 end: "bottom bottom",
-                scrub: isMobile ? 1.5 : 2.4, // На мобільних менший scrub прибирає "желейність" при гортанні пальцем
+                scrub: isMobile ? 1.5 : 1.2,
                 animation: masterTL,
                 invalidateOnRefresh: true,
                 onUpdate: (self) => {
@@ -1091,6 +1091,12 @@ export function init() {
 
                 // Якщо слайдер ще не створений — ініціалізуємо його
                 if (!sliderCategoryInstance) {
+
+                    // Рахуємо кількість слайдів у контейнері
+                    const totalSlides = sliderCatEl.querySelectorAll('.splide__slide').length;
+                    // Стрілки потрібні лише якщо слайдів більше 7 (тобто 8 і більше)
+                    const showArrows = totalSlides >= 8;
+
                     sliderCategoryInstance = new Splide('.slider-category', {
                         direction: 'ttb',
                         height: '416px',
@@ -1103,7 +1109,8 @@ export function init() {
                         omitEnd: true,
                         pagination: false,
                         updateOnMove: true,
-                        arrows: true,
+                        // arrows: true,
+                        arrows: showArrows,
                         gap: '6px',
                         wheel: true,
                         releaseWheel: true,
