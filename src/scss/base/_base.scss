@@ -160,6 +160,7 @@ body.menu-open {
 [data-parallax-bg]::before {
   transform: translateY(var(--parallax-y, 0px));
   will-change: transform;
+  //transition: none !important;
 }
 .dynamic-content {
   p {
@@ -303,9 +304,27 @@ body.menu-open {
   backface-visibility: hidden;
 }
 
-@include mixins.respond-to(variables.$xl) {
-
+.pulse-anim {
+  transform-origin: center center;
+  transform-box: fill-box;
+  animation: pulse-effect 1.2s infinite ease-in-out;
 }
+
+@keyframes pulse-effect {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(0.8);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
 
 @include mixins.respond-to(variables.$lg) {
   .section__title-gb {

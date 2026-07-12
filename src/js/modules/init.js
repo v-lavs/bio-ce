@@ -39,25 +39,54 @@ export function init() {
 // ========================================================
     function initActiveMenuItem() {
         const currentPath = window.location.pathname;
+        let foundActiveLink = null;
 
-        links.forEach(link => {
-            const linkPath = link.getAttribute("href");
+        links.forEach((l) => l.classList.remove("active"));
 
-            // Перевіряємо, чи збігається шлях у браузері з href посилання
-            // Додаткова перевірка на головну сторінку (корінь або index.html)
-            if (currentPath === linkPath ||
-                (currentPath === "/" && linkPath === "/index.html") ||
-                (currentPath.includes(linkPath) && linkPath !== "/")) {
+        links.forEach((link) => {
+            let linkHref = link.getAttribute("href");
+            if (!linkHref) return;
+            let linkPath;
+            try {
+                linkPath = new URL(linkHref, window.location.origin).pathname;
+            } catch (e) {
+                linkPath = linkHref;
+            }
 
-                // Знімаємо active з першого пункту та вішаємо на поточний
-                links.forEach(l => l.classList.remove("active"));
+
+            const cleanCurrent = currentPath.replace(/\/$/, "");
+            const cleanLink = linkPath.replace(/\/$/, "");
+            const isExactMatch = cleanCurrent === cleanLink || (cleanLink !== "" && cleanCurrent.endsWith(cleanLink));
+            const isHomeMatch = cleanCurrent.endsWith("/index.html") && (cleanLink === "/index.html" || cleanLink === "/" || cleanLink === "");
+            const isParentMatch = cleanCurrent.includes(cleanLink) && cleanLink !== "/" && cleanLink !== "/index.html" && cleanLink !== "";
+
+            if (isExactMatch || isHomeMatch || isParentMatch) {
                 link.classList.add("active");
+                foundActiveLink = link;
+            }
+        });
+
+        if (foundActiveLink) {
+            moveBlob(foundActiveLink);
+        } else {
+            gsap.to(activeBg, {width: 0, duration: 0.35, ease: "power2.out"});
+        }
+    }
+
+    // Запуск при завантаженні сторінки
+    initActiveMenuItem();
+
+    // Повернення блобу на місце після ховеру
+    if (nav) {
+        nav.addEventListener("mouseleave", () => {
+            const activeLink = document.querySelector(".menu__link.active");
+            if (activeLink) {
+                moveBlob(activeLink);
+            } else {
+                gsap.to(activeBg, {width: 0, duration: 0.35, ease: "power2.out"});
             }
         });
     }
-
-// Запускаємо пошук активної сторінки відразу при завантаженні скрипта
-    initActiveMenuItem();
 
     function toggleLenisScroll(disable) {
         if (window.lenis) {
@@ -539,8 +568,12 @@ export function init() {
 
         // 2. Поява хедера
         heroTL.to(header,
-            {y: 0, opacity: 1, duration: 1.4},
-            "-=1.4"
+            {
+                y: 0, opacity: 1,
+                duration: 0.8,
+                ease: "power2.out"
+            },
+            "+=0.1"
         );
 
         // 3. ПЕРЕВИКОРИСТАННЯ: Отримуємо таймлайн ліній для Hero і додаємо його в основний
@@ -566,56 +599,57 @@ export function init() {
             );
         }
     }
+
 //==========================
 //    LOGO-BG-PARALLAX
 //    ======================
- function LogoBgParallax()  {  // Шукаємо саме контейнери з атрибутом
-     const parallaxContainers = gsap.utils.toArray('[data-parallax-bg]');
+    function LogoBgParallax() {  // Шукаємо саме контейнери з атрибутом
+        const parallaxContainers = gsap.utils.toArray('[data-parallax-bg]');
 
-     parallaxContainers.forEach(container => {
-         // Напрямок вгору: задайте в HTML мінусове значення, наприклад -0.2
-         const speedCoeff = parseFloat(container.getAttribute('data-parallax-speed')) || -0.2;
-         const getDistance = () => container.offsetHeight * speedCoeff;
+        parallaxContainers.forEach(container => {
+            // Напрямок вгору: задайте в HTML мінусове значення, наприклад -0.2
+            const speedCoeff = parseFloat(container.getAttribute('data-parallax-speed')) || -0.2;
+            const getDistance = () => container.offsetHeight * speedCoeff;
+            // Шукаємо, чи є всередині контейнера тег <img> з класом .parallax-img
+            const innerImg = container.querySelector('.parallax-img');
 
-         // Шукаємо, чи є всередині контейнера тег <img> з класом .parallax-img
-         const innerImg = container.querySelector('.parallax-img');
-
-         if (innerImg) {
-             // ВАРІАНТ ДЛЯ КАРТИНКИ: анімуємо її напряму через 'y' (це чистий translateY в GSAP)
-             // Для цього варіанту в CSS взагалі нічого писати не треба!
-             gsap.fromTo(innerImg,
-                 { y: () => -getDistance() / 2 },
-                 {
-                     y: () => getDistance(),
-                     ease: 'none',
-                     scrollTrigger: {
-                         trigger: container,
-                         start: 'top bottom',
-                         end: 'bottom top',
-                         scrub: true,
-                         invalidateOnRefresh: true
-                     }
-                 }
-             );
-         } else {
-             // ВАРІАНТ ДЛЯ ::BEFORE: продовжує крутити CSS-змінну, як і раніше
-             gsap.fromTo(container,
-                 { '--parallax-y': () => `${-getDistance() / 2}px` },
-                 {
-                     '--parallax-y': () => `${getDistance()}px`,
-                     ease: 'none',
-                     scrollTrigger: {
-                         trigger: container,
-                         start: 'top bottom',
-                         end: 'bottom top',
-                         scrub: true,
-                         invalidateOnRefresh: true
-                     }
-                 }
-             );
-         }
-     });
+            if (innerImg) {
+                // ВАРІАНТ ДЛЯ КАРТИНКИ: анімуємо її напряму через 'y' (це чистий translateY в GSAP)
+                // Для цього варіанту в CSS взагалі нічого писати не треба!
+                gsap.fromTo(innerImg,
+                    {y: () => -getDistance() / 2},
+                    {
+                        y: () => getDistance(),
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: container,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: true,
+                            invalidateOnRefresh: true
+                        }
+                    }
+                );
+            } else {
+                // ВАРІАНТ ДЛЯ ::BEFORE: продовжує крутити CSS-змінну, як і раніше
+                gsap.fromTo(container,
+                    {'--parallax-y': () => `${-getDistance() / 2}px`},
+                    {
+                        '--parallax-y': () => `${getDistance()}px`,
+                        ease: 'none',
+                        scrollTrigger: {
+                            trigger: container,
+                            start: 'top bottom',
+                            end: 'bottom top',
+                            scrub: true,
+                            invalidateOnRefresh: true
+                        }
+                    }
+                );
+            }
+        });
     }
+
 // =========================
 // PINNED STORY
 // =========================
@@ -750,7 +784,68 @@ export function init() {
             buildAnimation();
         });
     }
-
+//     function initStory() {
+//         const story = document.querySelector("[data-story]");
+//         if (!story) return;
+//
+//         const slides = gsap.utils.toArray(story.querySelectorAll(".story-slide"));
+//         const progressBar = story.querySelector(".story-progress__bar");
+//         const currentEl = story.querySelector(".story-current");
+//         const totalEl = story.querySelector(".story-total");
+//
+//         if (slides.length < 2) return;
+//
+//         totalEl.textContent = String(slides.length).padStart(2, "0");
+//
+//         gsap.set(progressBar, {
+//             scaleX: 0,
+//             transformOrigin: "left center"
+//         });
+//
+//         gsap.set(slides[0], {
+//             autoAlpha: 1,
+//             y: 0
+//         });
+//
+//         gsap.set(slides[1], {
+//             autoAlpha: 0,
+//             y: 30
+//         });
+//
+//         ScrollTrigger.create({
+//             trigger: story,
+//             start: "top 70%",
+//             end: "bottom 30%",
+//             scrub: true,
+//
+//             onUpdate: ({ progress }) => {
+//
+//                 gsap.set(progressBar, {
+//                     scaleX: progress
+//                 });
+//
+//                 // ----- Slide 1 -----
+//                 let out = gsap.utils.mapRange(0.40, 0.50, 0, 1, progress);
+//                 out = gsap.utils.clamp(0, 1, out);
+//
+//                 gsap.set(slides[0], {
+//                     autoAlpha: 1 - out,
+//                     y: -30 * out
+//                 });
+//
+//                 // ----- Slide 2 -----
+//                 let incoming = gsap.utils.mapRange(0.50, 0.60, 0, 1, progress);
+//                 incoming = gsap.utils.clamp(0, 1, incoming);
+//
+//                 gsap.set(slides[1], {
+//                     autoAlpha: incoming,
+//                     y: 30 * (1 - incoming)
+//                 });
+//
+//                 currentEl.textContent = progress < 0.55 ? "01" : "02";
+//             }
+//         });
+//     }
 // =========================
 // SLIDER ADVANTAGE
 // =========================
@@ -1151,7 +1246,7 @@ export function init() {
 
         // Відстежуємо зміну розміру екрана (resize)
         let resizeTimeout;
-        window.addEventListener('resize', function() {
+        window.addEventListener('resize', function () {
             clearTimeout(resizeTimeout);
             resizeTimeout = setTimeout(handleSliderResponsive, 150);
         });
@@ -1192,15 +1287,15 @@ export function init() {
         if (headerElement) headerElement.style.zIndex = '3';
     }
 
-  if(btnOpenFilter && sidebarFilter && backdrop)  {
-      btnOpenFilter.addEventListener('click',  () => {
-          sidebarFilter.classList.add('open');
-          backdrop.classList.add('is-visible');
-          if (headerElement) headerElement.style.zIndex = '2';
-      });
+    if (btnOpenFilter && sidebarFilter && backdrop) {
+        btnOpenFilter.addEventListener('click', () => {
+            sidebarFilter.classList.add('open');
+            backdrop.classList.add('is-visible');
+            if (headerElement) headerElement.style.zIndex = '2';
+        });
 
-      backdrop.addEventListener('click', closeSidebarFilter);
-  }
+        backdrop.addEventListener('click', closeSidebarFilter);
+    }
 
 
     initAccordion();
@@ -1211,6 +1306,7 @@ export function init() {
     window.addEventListener("load", () => {
         initHeroAnimation();
         initPinnedStory();
+        // initStory();
         initScrollReveals();
         initAdvantageSlider();
 

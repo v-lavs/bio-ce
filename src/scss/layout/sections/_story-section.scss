@@ -2,13 +2,15 @@
 @use "../../base/variables";
 
 .sticky-trigger {
-  position: relative;
+  //position: relative;
   width: 100%;
 }
 
 .story-section {
   position: sticky;
   top: 0;
+
+
   width: 100%;
   height: 90vh;
   display: flex;
@@ -16,25 +18,26 @@
   overflow: hidden;
   background-color: inherit;
   color: #000000;
+
 }
 
-.story-scroll-track {
-  position: relative;
-  width: 100%;
-}
+//.story-scroll-track {
+//  position: relative;
+//  width: 100%;
+//}
 
 .story-pin-wrap {
   position: relative;
   height: 70vh;
   width: 100%;
   overflow: hidden;
-
 }
 
 .story-slides {
   position: relative;
   width: 100%;
   height: 100%;
+
 }
 
 .story-slide {
@@ -46,6 +49,8 @@
   padding: 8vw 0 8vw 43.30%;
   opacity: 0;
   visibility: hidden;
+
+  will-change: opacity;
 }
 
 //=== anim ===========
