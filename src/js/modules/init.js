@@ -37,42 +37,52 @@ export function init() {
 // ========================================================
 // 0. АВТОМАТИЧНЕ ВИЗНАЧЕННЯ АКТИВНОЇ СТОРІНКИ ПРИ СТАРТІ
 // ========================================================
+//     function initActiveMenuItem() {
+//         const currentPath = window.location.pathname;
+//         let foundActiveLink = null;
+//
+//         links.forEach((l) => l.classList.remove("active"));
+//
+//         links.forEach((link) => {
+//             let linkHref = link.getAttribute("href");
+//             if (!linkHref) return;
+//             let linkPath;
+//             try {
+//                 linkPath = new URL(linkHref, window.location.origin).pathname;
+//             } catch (e) {
+//                 linkPath = linkHref;
+//             }
+//
+//
+//             const cleanCurrent = currentPath.replace(/\/$/, "");
+//             const cleanLink = linkPath.replace(/\/$/, "");
+//             const isExactMatch = cleanCurrent === cleanLink || (cleanLink !== "" && cleanCurrent.endsWith(cleanLink));
+//             const isHomeMatch = cleanCurrent.endsWith("/index.html") && (cleanLink === "/index.html" || cleanLink === "/" || cleanLink === "");
+//             const isParentMatch = cleanCurrent.includes(cleanLink) && cleanLink !== "/" && cleanLink !== "/index.html" && cleanLink !== "";
+//
+//             if (isExactMatch || isHomeMatch || isParentMatch) {
+//                 link.classList.add("active");
+//                 foundActiveLink = link;
+//             }
+//         });
+//
+//         if (foundActiveLink) {
+//             moveBlob(foundActiveLink);
+//         } else {
+//             gsap.to(activeBg, {width: 0, duration: 0.35, ease: "power2.out"});
+//         }
+//     }
     function initActiveMenuItem() {
         const currentPath = window.location.pathname;
-        let foundActiveLink = null;
-
-        links.forEach((l) => l.classList.remove("active"));
-
-        links.forEach((link) => {
-            let linkHref = link.getAttribute("href");
-            if (!linkHref) return;
-            let linkPath;
-            try {
-                linkPath = new URL(linkHref, window.location.origin).pathname;
-            } catch (e) {
-                linkPath = linkHref;
+        links.forEach( (link) => {
+                const linkPath = link.getAttribute("href");
+                if (currentPath === linkPath || currentPath === "/" && linkPath === "/index.html" || currentPath.includes(linkPath) && linkPath !== "/") {
+                    links.forEach( (l) => l.classList.remove("active"));
+                    link.classList.add("active");
+                }
             }
-
-
-            const cleanCurrent = currentPath.replace(/\/$/, "");
-            const cleanLink = linkPath.replace(/\/$/, "");
-            const isExactMatch = cleanCurrent === cleanLink || (cleanLink !== "" && cleanCurrent.endsWith(cleanLink));
-            const isHomeMatch = cleanCurrent.endsWith("/index.html") && (cleanLink === "/index.html" || cleanLink === "/" || cleanLink === "");
-            const isParentMatch = cleanCurrent.includes(cleanLink) && cleanLink !== "/" && cleanLink !== "/index.html" && cleanLink !== "";
-
-            if (isExactMatch || isHomeMatch || isParentMatch) {
-                link.classList.add("active");
-                foundActiveLink = link;
-            }
-        });
-
-        if (foundActiveLink) {
-            moveBlob(foundActiveLink);
-        } else {
-            gsap.to(activeBg, {width: 0, duration: 0.35, ease: "power2.out"});
-        }
+        );
     }
-
     // Запуск при завантаженні сторінки
     initActiveMenuItem();
 
