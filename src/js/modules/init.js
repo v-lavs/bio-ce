@@ -663,202 +663,204 @@ export function init() {
 // =========================
 // PINNED STORY
 // =========================
-    function initPinnedStory() {
-        const stickyTrigger = document.querySelector('[data-story-trigger]');
-        if (!stickyTrigger) return;
-
-        const storySection = stickyTrigger.querySelector('[data-story]');
-        const slides = gsap.utils.toArray('.story-slide');
-        const progressBar = storySection.querySelector('.story-progress__bar');
-        const currentEl = storySection.querySelector('.story-current');
-        const totalEl = storySection.querySelector('.story-total');
-
-        totalEl.textContent = String(slides.length).padStart(2, '0');
-        if (currentEl) currentEl.textContent = "01";
-
-        let masterTL;
-        let ST;
-        let allSplits = []; // Тут зберігатимемо спліти, щоб скидати їх при ресайзі
-
-        function buildAnimation() {
-            // 1. Повне очищення перед кожним перерахунком (ресайзом)
-            if (ST) ST.kill();
-            if (masterTL) masterTL.kill();
-            allSplits.forEach(split => split.revert());
-            allSplits = [];
-            gsap.set([stickyTrigger, storySection, slides, '.story-line', '.story-char'], {clearProps: "all"});
-
-            // 2. Розрахунок висоти (для мобільних робимо трохи менший скрол-фактор, щоб не затягувати)
-            const isMobile = window.innerWidth < 768;
-            const scrollFactor = isMobile ? 1.6 : 1.2;
-            const scrollDistance = window.innerHeight * slides.length * scrollFactor;
-
-            gsap.set(stickyTrigger, {height: `${scrollDistance}px`});
-
-            masterTL = gsap.timeline();
-
-            slides.forEach((slide, index) => {
-                const textElements = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
-                if (!textElements.length) return;
-
-                // Створюємо новий SplitText
-                const split = new SplitText(textElements, {
-                    type: "lines,chars",
-                    linesClass: "story-line",
-                    charsClass: "story-char"
-                });
-                allSplits.push(split); // Запам'ятовуємо його
-
-                const lines = gsap.utils.toArray(split.lines);
-                const chars = gsap.utils.toArray(split.chars);
-
-                const isFirst = index === 0;
-                const isLast = index === slides.length - 1;
-
-                // Стартові стани
-                gsap.set(slide, {autoAlpha: isFirst ? 1 : 0});
-                gsap.set(lines, {yPercent: isFirst ? 0 : 120});
-                gsap.set(chars, {opacity: 0.3});
-
-                const blockTL = gsap.timeline();
-
-                blockTL.call(() => {
-                    if (currentEl) currentEl.textContent = String(index + 1).padStart(2, '0');
-                }, null, isFirst ? 0 : ">-50%");
-
-                // Анімація появи слайду (пропускаємо для першого)
-                if (!isFirst) {
-                    blockTL.set(slides[index - 1], {autoAlpha: 0})
-                        .set(slide, {autoAlpha: 1})
-                        .to(lines, {
-                            yPercent: 0,
-                            stagger: 0.14,
-                            duration: 1.8,
-                            ease: "power1.out"
-                        }, "-=0.2");
-                }
-
-                // Проявлення літер (однаково для всіх екранів)
-                blockTL.to(chars, {
-                    opacity: 1,
-                    stagger: {each: 0.06, from: "start", ease: "power2.out"},
-                    duration: 3.4,
-                    ease: "none"
-                });
-
-                // Пауза
-                blockTL.to({}, {duration: 1.4});
-
-                // Анімація зникнення (крім останнього)
-                if (!isLast) {
-                    blockTL.to(lines, {
-                        yPercent: -110,
-                        opacity: 0,
-                        stagger: 0.16,
-                        duration: 1.6,
-                        ease: "power1.out"
-                    });
-                }
-
-                // Додаємо в головний таймлайн
-                masterTL.add(blockTL, index === 0 ? 0 : "+=0.8");
-            });
-
-            // Створення ScrollTrigger з урахуванням тач-скрінів
-            ST = ScrollTrigger.create({
-                trigger: stickyTrigger,
-                start: "top top",
-                end: "bottom bottom",
-                scrub: isMobile ? 1.5 : 1.2,
-                animation: masterTL,
-                invalidateOnRefresh: true,
-                onUpdate: (self) => {
-                    gsap.set(progressBar, {
-                        scaleX: self.progress,
-                        transformOrigin: "left center"
-                    });
-                }
-            });
-        }
-
-        // Ініціалізація першого запуску
-        buildAnimation();
-
-        // Головний фікс для ресайзу: при кожному оновленні ScrollTrigger робимо реверт тексту
-        ScrollTrigger.addEventListener("refreshInit", () => {
-            allSplits.forEach(split => split.revert());
-        });
-
-        // Після того, як ScrollTrigger перерахував координати, будуємо анімацію на основі нових розмірів
-        ScrollTrigger.addEventListener("refresh", () => {
-            buildAnimation();
-        });
-    }
-//     function initStory() {
-//         const story = document.querySelector("[data-story]");
-//         if (!story) return;
+//     function initPinnedStory() {
+//         const stickyTrigger = document.querySelector('[data-story-trigger]');
+//         if (!stickyTrigger) return;
 //
-//         const slides = gsap.utils.toArray(story.querySelectorAll(".story-slide"));
-//         const progressBar = story.querySelector(".story-progress__bar");
-//         const currentEl = story.querySelector(".story-current");
-//         const totalEl = story.querySelector(".story-total");
+//         const storySection = stickyTrigger.querySelector('[data-story]');
+//         const slides = gsap.utils.toArray('.story-slide');
+//         const progressBar = storySection.querySelector('.story-progress__bar');
+//         const currentEl = storySection.querySelector('.story-current');
+//         const totalEl = storySection.querySelector('.story-total');
 //
-//         if (slides.length < 2) return;
+//         totalEl.textContent = String(slides.length).padStart(2, '0');
+//         if (currentEl) currentEl.textContent = "01";
 //
-//         totalEl.textContent = String(slides.length).padStart(2, "0");
+//         let masterTL;
+//         let ST;
+//         let allSplits = []; // Тут зберігатимемо спліти, щоб скидати їх при ресайзі
 //
-//         gsap.set(progressBar, {
-//             scaleX: 0,
-//             transformOrigin: "left center"
-//         });
+//         function buildAnimation() {
+//             // 1. Повне очищення перед кожним перерахунком (ресайзом)
+//             if (ST) ST.kill();
+//             if (masterTL) masterTL.kill();
+//             allSplits.forEach(split => split.revert());
+//             allSplits = [];
+//             gsap.set([stickyTrigger, storySection, slides, '.story-line', '.story-char'], {clearProps: "all"});
 //
-//         gsap.set(slides[0], {
-//             autoAlpha: 1,
-//             y: 0
-//         });
+//             // 2. Розрахунок висоти (для мобільних робимо трохи менший скрол-фактор, щоб не затягувати)
+//             const isMobile = window.innerWidth < 768;
+//             const scrollFactor = isMobile ? 1.6 : 1.2;
+//             const scrollDistance = window.innerHeight * slides.length * scrollFactor;
 //
-//         gsap.set(slides[1], {
-//             autoAlpha: 0,
-//             y: 30
-//         });
+//             gsap.set(stickyTrigger, {height: `${scrollDistance}px`});
 //
-//         ScrollTrigger.create({
-//             trigger: story,
-//             start: "top 70%",
-//             end: "bottom 30%",
-//             scrub: true,
+//             masterTL = gsap.timeline();
 //
-//             onUpdate: ({ progress }) => {
+//             slides.forEach((slide, index) => {
+//                 const textElements = gsap.utils.toArray(slide.querySelectorAll('[data-story-text]'));
+//                 if (!textElements.length) return;
 //
-//                 gsap.set(progressBar, {
-//                     scaleX: progress
+//                 // Створюємо новий SplitText
+//                 const split = new SplitText(textElements, {
+//                     type: "lines,chars",
+//                     linesClass: "story-line",
+//                     charsClass: "story-char"
+//                 });
+//                 allSplits.push(split); // Запам'ятовуємо його
+//
+//                 const lines = gsap.utils.toArray(split.lines);
+//                 const chars = gsap.utils.toArray(split.chars);
+//
+//                 const isFirst = index === 0;
+//                 const isLast = index === slides.length - 1;
+//
+//                 // Стартові стани
+//                 gsap.set(slide, {autoAlpha: isFirst ? 1 : 0});
+//                 gsap.set(lines, {yPercent: isFirst ? 0 : 120});
+//                 gsap.set(chars, {opacity: 0.3});
+//
+//                 const blockTL = gsap.timeline();
+//
+//                 blockTL.call(() => {
+//                     if (currentEl) currentEl.textContent = String(index + 1).padStart(2, '0');
+//                 }, null, isFirst ? 0 : ">-50%");
+//
+//                 // Анімація появи слайду (пропускаємо для першого)
+//                 if (!isFirst) {
+//                     blockTL.set(slides[index - 1], {autoAlpha: 0})
+//                         .set(slide, {autoAlpha: 1})
+//                         .to(lines, {
+//                             yPercent: 0,
+//                             stagger: 0.14,
+//                             duration: 1.8,
+//                             ease: "power1.out"
+//                         }, "-=0.2");
+//                 }
+//
+//                 // Проявлення літер (однаково для всіх екранів)
+//                 blockTL.to(chars, {
+//                     opacity: 1,
+//                     stagger: {each: 0.06, from: "start", ease: "power2.out"},
+//                     duration: 3.4,
+//                     ease: "none"
 //                 });
 //
-//                 // ----- Slide 1 -----
-//                 let out = gsap.utils.mapRange(0.40, 0.50, 0, 1, progress);
-//                 out = gsap.utils.clamp(0, 1, out);
+//                 // Пауза
+//                 blockTL.to({}, {duration: 1.4});
 //
-//                 gsap.set(slides[0], {
-//                     autoAlpha: 1 - out,
-//                     y: -30 * out
-//                 });
+//                 // Анімація зникнення (крім останнього)
+//                 if (!isLast) {
+//                     blockTL.to(lines, {
+//                         yPercent: -110,
+//                         opacity: 0,
+//                         stagger: 0.16,
+//                         duration: 1.6,
+//                         ease: "power1.out"
+//                     });
+//                 }
 //
-//                 // ----- Slide 2 -----
-//                 let incoming = gsap.utils.mapRange(0.50, 0.60, 0, 1, progress);
-//                 incoming = gsap.utils.clamp(0, 1, incoming);
+//                 // Додаємо в головний таймлайн
+//                 masterTL.add(blockTL, index === 0 ? 0 : "+=0.8");
+//             });
 //
-//                 gsap.set(slides[1], {
-//                     autoAlpha: incoming,
-//                     y: 30 * (1 - incoming)
-//                 });
+//             // Створення ScrollTrigger з урахуванням тач-скрінів
+//             ST = ScrollTrigger.create({
+//                 trigger: stickyTrigger,
+//                 start: "top top",
+//                 end: "bottom bottom",
+//                 scrub: isMobile ? 1.5 : 1.2,
+//                 animation: masterTL,
+//                 invalidateOnRefresh: true,
+//                 onUpdate: (self) => {
+//                     gsap.set(progressBar, {
+//                         scaleX: self.progress,
+//                         transformOrigin: "left center"
+//                     });
+//                 }
+//             });
+//         }
 //
-//                 currentEl.textContent = progress < 0.55 ? "01" : "02";
-//             }
+//         // Ініціалізація першого запуску
+//         buildAnimation();
+//
+//         // Головний фікс для ресайзу: при кожному оновленні ScrollTrigger робимо реверт тексту
+//         ScrollTrigger.addEventListener("refreshInit", () => {
+//             allSplits.forEach(split => split.revert());
+//         });
+//
+//         // Після того, як ScrollTrigger перерахував координати, будуємо анімацію на основі нових розмірів
+//         ScrollTrigger.addEventListener("refresh", () => {
+//             buildAnimation();
 //         });
 //     }
-// =========================
-// SLIDER ADVANTAGE
-// =========================
+
+    function initStory() {
+
+        const story = document.querySelector('[data-story]');
+        if (!story) return;
+
+        const slides = gsap.utils.toArray(story.querySelectorAll('.story-slide'));
+
+        const progressBar = story.querySelector('.story-progress__bar');
+        const currentEl = story.querySelector('.story-current');
+        const totalEl = story.querySelector('.story-total');
+
+        totalEl.textContent = String(slides.length).padStart(2, '0');
+
+        currentEl.textContent = '01';
+
+        gsap.set(progressBar,{
+            scaleX:0,
+            transformOrigin:'left center'
+        });
+
+        // Прогрес по всій секції
+        gsap.to(progressBar,{
+            scaleX:1,
+            ease:'none',
+            scrollTrigger:{
+                trigger:story,
+                start:'top 70%',
+                end:'bottom 30%',
+                scrub:true
+            }
+        });
+
+        slides.forEach((slide,index)=>{
+
+            ScrollTrigger.create({
+
+                trigger:slide,
+
+                start:'top center',
+
+                end:'bottom center',
+
+                onEnter:()=>activate(index),
+
+                onEnterBack:()=>activate(index)
+
+            });
+
+        });
+
+        function activate(index){
+
+            slides.forEach((slide,i)=>{
+
+                slide.classList.toggle('is-active',i===index);
+
+            });
+
+            currentEl.textContent =
+                String(index+1).padStart(2,'0');
+
+        }
+
+        activate(0);
+
+    }
     function initAdvantageSlider() {
         const sliderAdvantage = document.querySelector('.slider-advantages');
         if (!sliderAdvantage) return;
@@ -1315,8 +1317,8 @@ export function init() {
     LogoBgParallax();
     window.addEventListener("load", () => {
         initHeroAnimation();
-        initPinnedStory();
-        // initStory();
+        // initPinnedStory();
+        initStory();
         initScrollReveals();
         initAdvantageSlider();
 
