@@ -797,69 +797,32 @@ export function init() {
 
     function initStory() {
 
-        const story = document.querySelector('[data-story]');
-        if (!story) return;
+        const slides = gsap.utils.toArray('.story-slide');
 
-        const slides = gsap.utils.toArray(story.querySelectorAll('.story-slide'));
+        if (!slides.length) return;
 
-        const progressBar = story.querySelector('.story-progress__bar');
-        const currentEl = story.querySelector('.story-current');
-        const totalEl = story.querySelector('.story-total');
+        slides.forEach(slide => {
 
-        totalEl.textContent = String(slides.length).padStart(2, '0');
+            gsap.fromTo(slide,
+                {
+                    opacity: 0,
+                    y: 50
+                },
+                {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    ease: "power2.out",
 
-        currentEl.textContent = '01';
-
-        gsap.set(progressBar,{
-            scaleX:0,
-            transformOrigin:'left center'
-        });
-
-        // Прогрес по всій секції
-        gsap.to(progressBar,{
-            scaleX:1,
-            ease:'none',
-            scrollTrigger:{
-                trigger:story,
-                start:'top 70%',
-                end:'bottom 30%',
-                scrub:true
-            }
-        });
-
-        slides.forEach((slide,index)=>{
-
-            ScrollTrigger.create({
-
-                trigger:slide,
-
-                start:'top center',
-
-                end:'bottom center',
-
-                onEnter:()=>activate(index),
-
-                onEnterBack:()=>activate(index)
-
-            });
+                    scrollTrigger: {
+                        trigger: slide,
+                        start: "top 80%",
+                        toggleActions: "play none none reverse"
+                    }
+                }
+            );
 
         });
-
-        function activate(index){
-
-            slides.forEach((slide,i)=>{
-
-                slide.classList.toggle('is-active',i===index);
-
-            });
-
-            currentEl.textContent =
-                String(index+1).padStart(2,'0');
-
-        }
-
-        activate(0);
-
     }
     function initAdvantageSlider() {
         const sliderAdvantage = document.querySelector('.slider-advantages');
