@@ -116,7 +116,6 @@
 
   @include mixins.respond-to(variables.$sm) {
     .story-section {
-      min-height: 100vh;
       padding: 60px 0 180px;
       .text_xl {
         font-size: 20px;
@@ -133,10 +132,16 @@
     //}
   }
 
-  //@include mixins.respond-to(variables.$xs) {
-  //  .story-fraction {
-  //    font-size: 18px;
-  //  }
-  //}
+  @include mixins.respond-to(variables.$xs) {
+    //.story-fraction {
+    //  font-size: 18px;
+    //}
+    .story-section {
+      padding-bottom: 100px;
+    }
+    .story-slides {
+      gap: 32px;
+    }
+  }
 
 
