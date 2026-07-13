@@ -806,16 +806,18 @@ export function init() {
         // прогрес
         gsap.fromTo(progressBar,
             {
-                scaleX: 0.5
+                scaleX: 0
             },
             {
                 scaleX: 1,
                 ease: "none",
                 scrollTrigger: {
                     trigger: story,
-                    start: "top bottom",
-                    end: "bottom top",
-                    scrub: true
+                    start: "top 80%",
+                    endTrigger: slides[1],
+                    end: "top 85%",
+                    scrub: true,
+                    // markers: true
                 }
             }
         );
