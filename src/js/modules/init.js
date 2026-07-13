@@ -797,33 +797,48 @@ export function init() {
 
     function initStory() {
 
-        const slides = gsap.utils.toArray('.story-slide');
+        const story = document.querySelector('[data-story]');
+        if (!story) return;
 
-        if (!slides.length) return;
+        const slides = gsap.utils.toArray(story.querySelectorAll('.story-slide'));
+        const progressBar = story.querySelector('.story-progress__bar');
 
+        // прогрес
+        gsap.fromTo(progressBar,
+            {
+                scaleX: 0.5
+            },
+            {
+                scaleX: 1,
+                ease: "none",
+                scrollTrigger: {
+                    trigger: story,
+                    start: "top bottom",
+                    end: "bottom top",
+                    scrub: true
+                }
+            }
+        );
+
+        // анімація карток
         slides.forEach(slide => {
 
-            gsap.fromTo(slide,
-                {
-                    opacity: 0,
-                    y: 50
-                },
-                {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.8,
-                    ease: "power2.out",
-
-                    scrollTrigger: {
-                        trigger: slide,
-                        start: "top 80%",
-                        toggleActions: "play none none reverse"
-                    }
+            gsap.from(slide, {
+                opacity: 0,
+                y: 40,
+                duration: 0.8,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: slide,
+                    start: "top 80%",
+                    toggleActions: "play none none reverse"
                 }
-            );
+            });
 
         });
+
     }
+
     function initAdvantageSlider() {
         const sliderAdvantage = document.querySelector('.slider-advantages');
         if (!sliderAdvantage) return;

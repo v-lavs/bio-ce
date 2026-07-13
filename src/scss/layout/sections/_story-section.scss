@@ -9,20 +9,32 @@
   position: relative;
   padding: 120px 0 240px;
   overflow: hidden;
+  .parallax-img {
+    display: block;
+    position: absolute;
+    left: 50px;
+    //top: -130px;
+    bottom: -25%;
+    width: 100%;
+    max-width: 687px;
+    height: auto;
+    z-index: -1;
+  }
 }
 
-//.story-pin-wrap {
-//  position: relative;
-//}
-//
-//.story-top {
-//  position: sticky;
-//  top: 40px;
-//  left: 0;
-//  z-index: 20;
-//  margin: 0 50px 80px;
-//  background: inherit;
-//}
+.story-pin-wrap {
+  position: relative;
+}
+
+.story-top {
+  position: sticky;
+  //top: 40px;
+  top: 0;
+  left: 0;
+  z-index: 20;
+  margin: 0 50px 80px;
+  background: inherit;
+}
 
 .story-slides {
   display: flex;
@@ -32,18 +44,18 @@
 
 .story-slide {
   padding-left: 43.3%;
-  opacity: 0;
-  transform: translateY(50px);
+  //opacity: 0;
+  //transform: translateY(50px);
 
   transition:
           opacity .45s ease,
           transform .45s ease;
 }
 
-.story-slide.is-active {
-  opacity: 1;
-  transform: translateY(0);
-}
+//.story-slide.is-active {
+//  opacity: 1;
+//  transform: translateY(0);
+//}
 
 .story-slide .heading_xl {
   color: #990B6E;
@@ -51,20 +63,20 @@
   font-weight: 500;
 }
 
-//.story-progress {
-//  position: relative;
-//  width: 100%;
-//  height: 2px;
-//  background: rgba(231,241,255,.4);
-//
-//  &__bar{
-//    position:absolute;
-//    inset:0;
-//    background:#990B6E;
-//    transform:scaleX(0);
-//    transform-origin:left center;
-//  }
-//}
+.story-progress {
+  position: relative;
+  width: 100%;
+  height: 2px;
+  background: rgba(231,241,255,.4);
+
+  &__bar{
+    position:absolute;
+    inset:0;
+    background:#990B6E;
+    transform:scaleX(0);
+    transform-origin:left center;
+  }
+}
 
 //.story-meta{
 //  margin-top:32px;
@@ -81,11 +93,11 @@
 //}
 
 @include mixins.respond-to(variables.$sm){
-  //
-  //.story-top{
-  //  margin:0 40px 60px;
-  //  top:20px;
-  //}
+
+  .story-top{
+    margin:0 40px 60px;
+    top:20px;
+  }
 
   .story-slide{
     padding:0 40px;
@@ -105,7 +117,7 @@
   @include mixins.respond-to(variables.$sm) {
     .story-section {
       min-height: 100vh;
-
+      padding: 60px 0 180px;
       .text_xl {
         font-size: 20px;
       }
@@ -113,18 +125,18 @@
     .story-slide {
       padding: 20px 40px;
     }
-    //.story-top {
-    //  top: 0;
-    //}
+    .story-top {
+      top: 0;
+    }
     //.story-meta {
     //  margin-top: 10px;
     //}
   }
 
-  @include mixins.respond-to(variables.$xs) {
-    .story-fraction {
-      font-size: 18px;
-    }
-  }
+  //@include mixins.respond-to(variables.$xs) {
+  //  .story-fraction {
+  //    font-size: 18px;
+  //  }
+  //}
 
 
