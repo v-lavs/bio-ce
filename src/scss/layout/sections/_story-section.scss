@@ -7,7 +7,7 @@
 
 .story-section {
   position: relative;
-  padding: 120px 0;
+  padding: 120px 0 240px;
   overflow: hidden;
 }
 
@@ -32,7 +32,6 @@
 
 .story-slide {
   padding-left: 43.3%;
-
   opacity: .3;
   transform: translateY(24px);
 
@@ -52,20 +51,20 @@
   font-weight: 500;
 }
 
-.story-progress {
-  position: relative;
-  width: 100%;
-  height: 2px;
-  background: rgba(231,241,255,.4);
-
-  &__bar{
-    position:absolute;
-    inset:0;
-    background:#990B6E;
-    transform:scaleX(0);
-    transform-origin:left center;
-  }
-}
+//.story-progress {
+//  position: relative;
+//  width: 100%;
+//  height: 2px;
+//  background: rgba(231,241,255,.4);
+//
+//  &__bar{
+//    position:absolute;
+//    inset:0;
+//    background:#990B6E;
+//    transform:scaleX(0);
+//    transform-origin:left center;
+//  }
+//}
 
 .story-meta{
   margin-top:32px;
@@ -105,7 +104,7 @@
 
   @include mixins.respond-to(variables.$sm) {
     .story-section {
-      height: 100vh;
+      min-height: 100vh;
 
       .text_xl {
         font-size: 20px;
